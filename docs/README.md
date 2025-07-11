@@ -32,3 +32,8 @@ history.add_message("How are you?")
 print(history.last_message())  # -> "How are you?"
 ```
 
+## Further reading
+
+See [tutorial.md](tutorial.md) for a walkthrough on loading the sample dataset
+and computing averages.
+

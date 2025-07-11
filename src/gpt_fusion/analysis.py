@@ -1,0 +1,18 @@
+from __future__ import annotations
+
+import csv
+from statistics import mean
+from pathlib import Path
+
+
+def load_numbers_from_csv(path: str | Path) -> list[float]:
+    """Load numbers from a CSV file with a ``value`` column."""
+    with open(path, newline="") as f:
+        reader = csv.DictReader(f)
+        return [float(row["value"]) for row in reader]
+
+
+def average_from_csv(path: str | Path) -> float:
+    """Return the average of the ``value`` column in *path*."""
+    values = load_numbers_from_csv(path)
+    return mean(values) if values else 0.0
