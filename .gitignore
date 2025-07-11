@@ -11,3 +11,4 @@ htmlcov/
 
 # Misc
 *.log
+docs/assets/*.png
