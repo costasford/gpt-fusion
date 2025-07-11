@@ -1,14 +1,9 @@
 """Top-level package for gpt-fusion."""
 
+from .analysis import average_from_csv, load_numbers_from_csv
 from .core import greet
-from .utils import (
-    ChatHistory,
-    add_numbers,
-    multiply_numbers,
-    subtract_numbers,
-    divide_numbers,
-)
-from .analysis import load_numbers_from_csv, average_from_csv
+from .utils import (ChatHistory, add_numbers, divide_numbers, multiply_numbers,
+                    subtract_numbers)
 
 __all__ = [
     "greet",

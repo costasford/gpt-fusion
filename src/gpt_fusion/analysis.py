@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import csv
-from statistics import mean
 from pathlib import Path
+from statistics import mean
 
 
 def load_numbers_from_csv(path: str | Path) -> list[float]:

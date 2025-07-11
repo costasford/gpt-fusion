@@ -1,7 +1,6 @@
 from pathlib import Path
 
-from gpt_fusion.analysis import load_numbers_from_csv, average_from_csv
-
+from gpt_fusion.analysis import average_from_csv, load_numbers_from_csv
 
 DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "numbers.csv"
 

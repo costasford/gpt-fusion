@@ -1,12 +1,7 @@
 import pytest
 
-from gpt_fusion.utils import (
-    add_numbers,
-    multiply_numbers,
-    subtract_numbers,
-    divide_numbers,
-    ChatHistory,
-)
+from gpt_fusion.utils import (ChatHistory, add_numbers, divide_numbers,
+                              multiply_numbers, subtract_numbers)
 
 
 def test_add_numbers():
