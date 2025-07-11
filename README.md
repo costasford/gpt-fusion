@@ -27,10 +27,11 @@ data/           # sample data
 ## Development workflow
 
 1. **Environment**: Use Python 3.8+.
-2. **Style**: Format code with [black](https://github.com/psf/black) and lint with [flake8](https://github.com/PyCQA/flake8).
-3. **Tests**: Run `pytest` before submitting changes.
-4. **CI**: GitHub Actions runs formatting checks and the test suite on every pull request.
-5. **Contributions**: Please open issues and pull requests via GitHub. Keep commits clear and focused.
+2. **Dependencies**: The project relies only on the Python standard library, so there are no runtime packages to install.
+3. **Style**: Format code with [black](https://github.com/psf/black) and lint with [flake8](https://github.com/PyCQA/flake8).
+4. **Tests**: Run `pytest` before submitting changes.
+5. **CI**: GitHub Actions runs formatting checks and the test suite on every pull request.
+6. **Contributions**: Please open issues and pull requests via GitHub. Keep commits clear and focused.
 
 Enjoy fusing ideas with code!
 

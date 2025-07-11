@@ -4,12 +4,14 @@ We welcome contributions! To keep things tidy, please follow these guidelines.
 
 ## Setup
 
-1. Create a virtual environment and install dependencies:
+1. Create a virtual environment and install development dependencies:
    ```bash
    python -m venv .venv
    source .venv/bin/activate
-   pip install -e .[dev]
+   pip install -r requirements-dev.txt
    ```
+   There are no third-party runtime packages, so installing the dev
+   requirements is all you need.
 
 ## Coding standards
 
