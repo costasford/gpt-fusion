@@ -14,11 +14,12 @@ This repository is a playful collaboration between Costas and ChatGPT. We mix co
 ```
 src/            # Python package source
   gpt_fusion/   # package implementation
-    core.py     # initial greeting helper
+    core.py     # greeting helper
+    utils.py    # math helpers and chat history container
 
 tests/          # pytest-based unit tests
 
-docs/           # documentation (future)
+docs/           # documentation with examples
  data/           # sample data (future)
 ```
 
@@ -31,3 +32,7 @@ docs/           # documentation (future)
 5. **Contributions**: Please open issues and pull requests via GitHub. Keep commits clear and focused.
 
 Enjoy fusing ideas with code!
+
+## Sample apps
+
+Check out `auth-ui-kit/` for a simple web login example and `unity-prototype/` for a basic Unity setup.
