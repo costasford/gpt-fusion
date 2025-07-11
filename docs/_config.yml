@@ -1,3 +1,5 @@
 theme: jekyll-theme-cayman
 title: GPT Fusion
 description: Human charm meets algorithmic arm
+github:
+  is_project_page: true

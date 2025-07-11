@@ -7,6 +7,13 @@ title: GPT Fusion Playground
 
 **Human charm meets algorithmic arm**
 
+[![CI Status](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
+
+## Project Health
+
+- [CI workflow](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
+- [Open issues](https://github.com/costasford/gpt-fusion/issues)
+
 Welcome to **GPT Fusion**, a small playground for blending human creativity with AI tooling. Explore the projects below to see what we're experimenting with.
 
 ## Projects
