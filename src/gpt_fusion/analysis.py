@@ -7,7 +7,7 @@ from statistics import mean
 
 def load_numbers_from_csv(path: str | Path) -> list[float]:
     """Load numbers from a CSV file with a ``value`` column."""
-    with open(path, newline="") as f:
+    with open(path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         return [float(row["value"]) for row in reader]
 
