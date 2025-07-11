@@ -2,8 +2,13 @@
 
 from .analysis import average_from_csv, load_numbers_from_csv
 from .core import greet
-from .utils import (ChatHistory, add_numbers, divide_numbers, multiply_numbers,
-                    subtract_numbers)
+from .utils import (
+    ChatHistory,
+    add_numbers,
+    divide_numbers,
+    multiply_numbers,
+    subtract_numbers,
+)
 
 __all__ = [
     "greet",
