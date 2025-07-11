@@ -8,9 +8,21 @@ def add_numbers(a: float, b: float) -> float:
     return a + b
 
 
+def subtract_numbers(a: float, b: float) -> float:
+    """Return the difference of *a* and *b*."""
+    return a - b
+
+
 def multiply_numbers(a: float, b: float) -> float:
     """Return the product of *a* and *b*."""
     return a * b
+
+
+def divide_numbers(a: float, b: float) -> float:
+    """Return the quotient of *a* and *b*."""
+    if b == 0:
+        raise ZeroDivisionError("Cannot divide by zero")
+    return a / b
 
 
 @dataclass

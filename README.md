@@ -16,11 +16,12 @@ src/            # Python package source
   gpt_fusion/   # package implementation
     core.py     # greeting helper
     utils.py    # math helpers and chat history container
+    analysis.py # simple CSV helpers
 
 tests/          # pytest-based unit tests
 
-docs/           # documentation with examples
- data/           # sample data (future)
+docs/           # documentation with examples and tutorials
+data/           # sample data
 ```
 
 ## Development workflow
@@ -28,7 +29,7 @@ docs/           # documentation with examples
 1. **Environment**: Use Python 3.8+.
 2. **Style**: Format code with [black](https://github.com/psf/black) and lint with [flake8](https://github.com/PyCQA/flake8).
 3. **Tests**: Run `pytest` before submitting changes.
-4. **CI**: When the project grows, GitHub Actions will automatically run the test suite on pull requests.
+4. **CI**: GitHub Actions runs formatting checks and the test suite on every pull request.
 5. **Contributions**: Please open issues and pull requests via GitHub. Keep commits clear and focused.
 
 Enjoy fusing ideas with code!
@@ -36,3 +37,9 @@ Enjoy fusing ideas with code!
 ## Sample apps
 
 Check out `auth-ui-kit/` for a simple web login example and `unity-prototype/` for a basic Unity setup.
+
+## Data
+
+The `data/` directory contains a small `numbers.csv` file used in tutorials and
+tests. Feel free to replace it with your own datasets when experimenting with
+the CSV utilities.
