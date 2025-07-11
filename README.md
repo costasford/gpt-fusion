@@ -28,10 +28,11 @@ data/           # sample data
 
 1. **Environment**: Use Python 3.8+.
 2. **Dependencies**: The project relies only on the Python standard library, so there are no runtime packages to install.
-3. **Style**: Format code with [black](https://github.com/psf/black) and lint with [flake8](https://github.com/PyCQA/flake8).
+3. **Style**: Format code with [black](https://github.com/psf/black) and lint with [flake8](https://github.com/PyCQA/flake8). A [pre-commit](https://pre-commit.com) hook runs these automatically.
 4. **Tests**: Run `pytest` before submitting changes.
-5. **CI**: GitHub Actions runs formatting checks and the test suite on every pull request.
-6. **Contributions**: Please open issues and pull requests via GitHub. Keep commits clear and focused.
+5. **Hooks**: After installing dependencies, run `pre-commit install` so formatting and linting run on each commit.
+6. **CI**: GitHub Actions runs formatting checks and the test suite on every pull request.
+7. **Contributions**: Please open issues and pull requests via GitHub. Keep commits clear and focused.
 
 Enjoy fusing ideas with code!
 
