@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gpt-fusion"
+version = "0.1.0"
+description = "Experimenting with human-AI collaboration"
+authors = [{name="Costas Ford", email="costasford@yahoo.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra"
+
+[tool.black]
+line-length = 88
