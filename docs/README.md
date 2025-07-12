@@ -46,6 +46,8 @@ history = ChatHistory(messages=[])
 history.add_message("Hello")
 history.add_message("How are you?")
 print(history.last_message())  # -> "How are you?"
+history.clear()
+print(history.messages)  # -> []
 ```
 
 ## Quickstart

@@ -1,6 +1,6 @@
 """Top-level package for gpt-fusion."""
 
-from .analysis import average_from_csv, load_numbers_from_csv
+from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .core import greet
 from .web_scraper import scrape
 from .utils import (
@@ -21,4 +21,5 @@ __all__ = [
     "load_numbers_from_csv",
     "average_from_csv",
     "scrape",
+    "median_from_csv",
 ]

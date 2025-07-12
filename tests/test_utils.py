@@ -37,6 +37,13 @@ def test_chat_history():
     assert history.last_message() == "world"
 
 
+def test_clear_chat_history():
+    history = ChatHistory(messages=["hello", "world"])
+    history.clear()
+    assert history.messages == []
+    assert history.last_message() is None
+
+
 def test_last_message_empty_returns_none():
     history = ChatHistory(messages=[])
     assert history.last_message() is None
