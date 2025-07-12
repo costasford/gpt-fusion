@@ -19,7 +19,71 @@
     </label>
     <button id="login" class="bg-blue-500 text-white px-4 py-2 w-full rounded">Login</button>
     <p id="message" class="text-red-500 mt-2 text-center"></p>
-    <p class="text-center text-sm mt-2">Don't have an account? <a href="#" class="text-blue-500 underline">Sign up</a></p>
+    <p class="text-center text-sm mt-2">
+      <a href="#" id="forgot" class="text-blue-500 underline">Forgot password?</a>
+    </p>
+    <p class="text-center text-sm mt-2">
+      Don't have an account?
+      <a href="#" id="show-signup" class="text-blue-500 underline">Sign up</a>
+    </p>
+  </div>
+
+  <!-- Sign up modal -->
+  <div
+    id="signup-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+  >
+    <div class="bg-white p-6 rounded shadow w-80">
+      <h1 class="text-xl font-bold mb-4 text-center">Sign Up</h1>
+      <input
+        id="signup-email"
+        class="border p-2 w-full mb-2"
+        type="email"
+        placeholder="Email"
+      />
+      <input
+        id="signup-password"
+        class="border p-2 w-full mb-2"
+        type="password"
+        placeholder="Password"
+      />
+      <input
+        id="signup-confirm"
+        class="border p-2 w-full mb-2"
+        type="password"
+        placeholder="Confirm Password"
+      />
+      <button id="signup-btn" class="bg-blue-500 text-white px-4 py-2 w-full rounded">
+        Sign Up
+      </button>
+      <p id="signup-message" class="text-red-500 mt-2 text-center"></p>
+      <button id="signup-close" class="text-sm text-blue-500 underline mt-2 w-full">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <!-- Reset password modal -->
+  <div
+    id="reset-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+  >
+    <div class="bg-white p-6 rounded shadow w-80">
+      <h1 class="text-xl font-bold mb-4 text-center">Reset Password</h1>
+      <input
+        id="reset-email"
+        class="border p-2 w-full mb-2"
+        type="email"
+        placeholder="Email"
+      />
+      <button id="reset-btn" class="bg-blue-500 text-white px-4 py-2 w-full rounded">
+        Send reset email
+      </button>
+      <p id="reset-message" class="text-red-500 mt-2 text-center"></p>
+      <button id="reset-close" class="text-sm text-blue-500 underline mt-2 w-full">
+        Cancel
+      </button>
+    </div>
   </div>
 </body>
 </html>
