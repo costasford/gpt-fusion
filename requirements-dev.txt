@@ -6,3 +6,5 @@ pre-commit
 requests
 beautifulsoup4
 tweepy
+fastapi
+httpx<0.25
