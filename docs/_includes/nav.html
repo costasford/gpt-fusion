@@ -1,0 +1,6 @@
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active" aria-current="page"{% endif %}>Home</a>
+  <a href="{{ '/README.html' | relative_url }}"{% if page.url == '/README.html' %} class="active" aria-current="page"{% endif %}>Overview</a>
+  <a href="{{ '/tutorial.html' | relative_url }}"{% if page.url == '/tutorial.html' %} class="active" aria-current="page"{% endif %}>Tutorial</a>
+  <a href="https://github.com/costasford/gpt-fusion" target="_blank" rel="noopener noreferrer">GitHub</a>
+</nav>

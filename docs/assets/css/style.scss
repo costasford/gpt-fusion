@@ -15,10 +15,43 @@ $section-headings-color: #ec7d0b;
   transition: opacity 0.2s;
 }
 
+
+.navbar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+.navbar a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 h2:hover .anchor-link,
 h3:hover .anchor-link,
 h4:hover .anchor-link,
 h5:hover .anchor-link,
 h6:hover .anchor-link {
   opacity: 1;
+}
+
+#toc {
+  margin-bottom: 1rem;
+}
+
+#toc ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#toc li {
+  margin: 0.25rem 0;
+}
+
+#toc a {
+  text-decoration: none;
 }

@@ -1,5 +1,9 @@
 # Documentation
 
+{% include nav.html %}
+
+<div id="toc"></div>
+
 This project demonstrates small utilities for blending human and AI workflows.
 
 ## Project overview
@@ -76,3 +80,4 @@ and computing averages.
 <script src="assets/js/external-links.js"></script>
 
 <script src="assets/js/anchor-links.js"></script>
+<script src="assets/js/toc.js"></script>
