@@ -29,7 +29,7 @@ data/           # sample data
 ## Development workflow
 
 1. **Environment**: Use Python 3.8+.
-2. **Dependencies**: The project relies only on the Python standard library, so there are no runtime packages to install.
+2. **Dependencies**: The core library uses only the Python standard library. The optional Twitter bot requires [tweepy](https://www.tweepy.org/).
 3. **Style**: Format code with [black](https://github.com/psf/black) and lint with [flake8](https://github.com/PyCQA/flake8). A [pre-commit](https://pre-commit.com) hook runs these automatically.
 4. **Tests**: Run `pytest` before submitting changes.
 5. **Hooks**: After installing dependencies, run `pre-commit install` so formatting and linting run on each commit.
@@ -40,7 +40,7 @@ Enjoy fusing ideas with code!
 
 ## Sample apps
 
-Check out `auth-ui-kit/` for a simple web login example and `unity-prototype/` for a basic Unity setup.
+Check out `auth-ui-kit/` for a simple web login example, `twitter_bot.py` for posting project updates to Twitter, and `unity-prototype/` for a basic Unity setup.
 
 ## Data
 

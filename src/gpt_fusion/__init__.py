@@ -3,6 +3,7 @@
 from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .core import greet
 from .web_scraper import scrape
+from .twitter_bot import TwitterBot
 from .utils import (
     ChatHistory,
     add_numbers,
@@ -22,4 +23,5 @@ __all__ = [
     "average_from_csv",
     "scrape",
     "median_from_csv",
+    "TwitterBot",
 ]

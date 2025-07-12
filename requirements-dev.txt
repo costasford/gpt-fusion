@@ -5,3 +5,4 @@ pytest
 pre-commit
 requests
 beautifulsoup4
+tweepy
