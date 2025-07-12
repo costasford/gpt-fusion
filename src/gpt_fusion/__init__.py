@@ -11,6 +11,16 @@ from .utils import (
     multiply_numbers,
     subtract_numbers,
 )
+from .text_utils import (
+    is_palindrome,
+    most_common_word,
+    remove_punctuation,
+    reverse_words,
+    to_title_case,
+    unique_words,
+    word_count,
+    count_characters,
+)
 
 __all__ = [
     "greet",
@@ -23,5 +33,13 @@ __all__ = [
     "average_from_csv",
     "scrape",
     "median_from_csv",
+    "word_count",
+    "unique_words",
+    "reverse_words",
+    "count_characters",
+    "remove_punctuation",
+    "most_common_word",
+    "to_title_case",
+    "is_palindrome",
     "TwitterBot",
 ]
