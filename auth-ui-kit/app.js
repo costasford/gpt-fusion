@@ -5,6 +5,8 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -62,6 +64,19 @@ document.getElementById("login").addEventListener("click", async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       showMessage("message", "Logged in!");
+    } catch (err) {
+      showMessage("message", err.message);
+    }
+  });
+});
+
+// Google login handler
+document.getElementById("google-login").addEventListener("click", async () => {
+  await withLoading("google-login", async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      showMessage("message", "Logged in with Google!");
     } catch (err) {
       showMessage("message", err.message);
     }
