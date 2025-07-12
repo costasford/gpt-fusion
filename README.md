@@ -49,3 +49,13 @@ updates to Twitter, and `unity-prototype/` for a basic Unity setup.
 The `data/` directory contains a small `numbers.csv` file used in tutorials and
 tests. Feel free to replace it with your own datasets when experimenting with
 the CSV utilities.
+
+## Documentation
+
+Comprehensive guides and examples live in the [`docs/`](docs) folder. The
+markdown files there are rendered with [Jekyll](https://jekyllrb.com/). To preview
+the site locally:
+
+1. Install Ruby and the Jekyll gem: `gem install jekyll`.
+2. Run `jekyll serve` from the `docs/` directory.
+3. Open <http://localhost:4000> in your browser to explore the docs.
