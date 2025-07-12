@@ -47,4 +47,7 @@ class TwitterBot:
 
     def post_tweet(self, message: str) -> None:
         """Post *message* to Twitter."""
+        if len(message) > 280:
+            raise ValueError("Tweet exceeds 280 characters")
+
         self.client.update_status(message)

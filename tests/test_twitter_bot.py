@@ -1,5 +1,7 @@
 from unittest.mock import patch
 
+import pytest
+
 from gpt_fusion.twitter_bot import TwitterBot
 
 
@@ -12,3 +14,10 @@ def test_post_tweet_invokes_tweepy():
         bot.post_tweet("hello")
         api_instance.update_status.assert_called_once_with("hello")
         mock_handler.assert_called_once()
+
+
+def test_post_tweet_long_message_raises_error():
+    with patch("tweepy.OAuth1UserHandler"), patch("tweepy.API"):
+        bot = TwitterBot("k", "s", "t", "c")
+        with pytest.raises(ValueError):
+            bot.post_tweet("x" * 281)

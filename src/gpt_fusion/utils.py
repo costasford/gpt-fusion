@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 
 def add_numbers(a: float, b: float) -> float:
@@ -29,7 +29,7 @@ def divide_numbers(a: float, b: float) -> float:
 class ChatHistory:
     """Simple container for tracking conversation messages."""
 
-    messages: list[str]
+    messages: list[str] = field(default_factory=list)
 
     def add_message(self, text: str) -> None:
         """Append *text* to the history."""
