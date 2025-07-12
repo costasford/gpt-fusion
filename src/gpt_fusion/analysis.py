@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from statistics import mean
+from statistics import mean, median
 
 
 def load_numbers_from_csv(path: str | Path) -> list[float]:
@@ -16,3 +16,9 @@ def average_from_csv(path: str | Path) -> float:
     """Return the average of the ``value`` column in *path*."""
     values = load_numbers_from_csv(path)
     return mean(values) if values else 0.0
+
+
+def median_from_csv(path: str | Path) -> float:
+    """Return the median of the ``value`` column in *path*."""
+    values = load_numbers_from_csv(path)
+    return median(values) if values else 0.0
