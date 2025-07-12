@@ -3,6 +3,10 @@ layout: default
 title: GPT Fusion Playground
 ---
 
+{% include nav.html %}
+
+<div id="toc"></div>
+
 # GPT Fusion Playground
 
 **Human charm meets algorithmic arm**
@@ -54,3 +58,4 @@ Enjoy fusing ideas with code!
 
 <script src="assets/js/external-links.js"></script>
 <script src="assets/js/anchor-links.js"></script>
+<script src="assets/js/toc.js"></script>

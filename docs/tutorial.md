@@ -1,5 +1,9 @@
 # Tutorial
 
+{% include nav.html %}
+
+<div id="toc"></div>
+
 This short guide shows how to load a sample dataset and compute its average
 value using ``gpt_fusion`` utilities.
 
@@ -27,3 +31,4 @@ print(titles)
 
 <script src="assets/js/external-links.js"></script>
 <script src="assets/js/anchor-links.js"></script>
+<script src="assets/js/toc.js"></script>
