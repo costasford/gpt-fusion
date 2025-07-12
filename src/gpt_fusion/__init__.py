@@ -1,6 +1,6 @@
 """Top-level package for gpt-fusion."""
 
-from .analysis import average_from_csv, load_numbers_from_csv
+from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .core import greet
 from .utils import (
     ChatHistory,
@@ -19,4 +19,5 @@ __all__ = [
     "divide_numbers",
     "load_numbers_from_csv",
     "average_from_csv",
+    "median_from_csv",
 ]

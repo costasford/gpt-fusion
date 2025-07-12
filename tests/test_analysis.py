@@ -1,6 +1,10 @@
 from pathlib import Path
 
-from gpt_fusion.analysis import average_from_csv, load_numbers_from_csv
+from gpt_fusion.analysis import (
+    average_from_csv,
+    load_numbers_from_csv,
+    median_from_csv,
+)
 
 DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "numbers.csv"
 
@@ -12,3 +16,7 @@ def test_load_numbers_from_csv():
 
 def test_average_from_csv():
     assert average_from_csv(DATA_PATH) == 3.0
+
+
+def test_median_from_csv():
+    assert median_from_csv(DATA_PATH) == 3.0

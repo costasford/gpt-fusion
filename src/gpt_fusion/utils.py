@@ -38,3 +38,7 @@ class ChatHistory:
     def last_message(self) -> str | None:
         """Return the most recent message or ``None`` if empty."""
         return self.messages[-1] if self.messages else None
+
+    def clear(self) -> None:
+        """Remove all messages from the history."""
+        self.messages.clear()
