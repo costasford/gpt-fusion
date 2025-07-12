@@ -3,3 +3,5 @@ black
 flake8
 pytest
 pre-commit
+requests
+beautifulsoup4

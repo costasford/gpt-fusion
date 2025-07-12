@@ -2,6 +2,7 @@
 
 from .analysis import average_from_csv, load_numbers_from_csv
 from .core import greet
+from .web_scraper import scrape
 from .utils import (
     ChatHistory,
     add_numbers,
@@ -19,4 +20,5 @@ __all__ = [
     "divide_numbers",
     "load_numbers_from_csv",
     "average_from_csv",
+    "scrape",
 ]

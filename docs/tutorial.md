@@ -12,3 +12,14 @@ values = load_numbers_from_csv(csv_path)
 print(f"Loaded values: {values}")
 print(f"Average: {average_from_csv(csv_path)}")
 ```
+
+### Web scraping
+
+Use the ``scrape`` helper to pull text from any page using a CSS selector:
+
+```python
+from gpt_fusion import scrape
+
+titles = scrape("https://example.com", "h1")
+print(titles)
+```
