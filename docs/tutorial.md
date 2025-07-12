@@ -24,3 +24,5 @@ from gpt_fusion import scrape
 titles = scrape("https://example.com", "h1")
 print(titles)
 ```
+
+<script src="assets/js/external-links.js"></script>

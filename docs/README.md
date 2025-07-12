@@ -66,3 +66,5 @@ back to the [main README](https://github.com/costasford/gpt-fusion#readme) for m
 See [tutorial.md](tutorial.md) for a walkthrough on loading the sample dataset
 and computing averages.
 
+<script src="assets/js/external-links.js"></script>
+
