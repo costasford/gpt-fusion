@@ -47,3 +47,10 @@ def test_clear_chat_history():
 def test_last_message_empty_returns_none():
     history = ChatHistory(messages=[])
     assert history.last_message() is None
+
+
+def test_chathistory_defaults_to_empty_list():
+    history = ChatHistory()
+    assert history.messages == []
+    history.add_message("hi")
+    assert history.last_message() == "hi"

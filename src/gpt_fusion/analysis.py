@@ -9,7 +9,17 @@ def load_numbers_from_csv(path: str | Path) -> list[float]:
     """Load numbers from a CSV file with a ``value`` column."""
     with open(path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        return [float(row["value"]) for row in reader]
+        values: list[float] = []
+        for row in reader:
+            value = row.get("value")
+            if value is None:
+                continue
+            try:
+                values.append(float(value))
+            except ValueError:
+                # Ignore rows that cannot be converted to float
+                continue
+        return values
 
 
 def average_from_csv(path: str | Path) -> float:
