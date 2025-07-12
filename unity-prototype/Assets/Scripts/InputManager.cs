@@ -34,4 +34,9 @@ public class InputManager : MonoBehaviour
     {
         return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
+
+    public bool GetPause()
+    {
+        return Input.GetKeyDown(KeyCode.Escape);
+    }
 }

@@ -8,4 +8,17 @@ To use this code:
 2. Copy the `Assets` folder from this directory into your Unity project.
 3. Open the project in Unity to continue development.
 
-The included `PlayerController` script shows a basic example of handling keyboard input to move a player character.
+The included scripts demonstrate small gameplay systems:
+
+- `PlayerController` – moves the player using WASD/arrow keys.
+- `CameraController` – smooth follow with zoom and rotation.
+- `GameManager` – tracks score and handles scene changes.
+- `EnemyAI` – moves enemies toward the player when in range.
+- `ItemPickup` and `Inventory` – collectable items and a simple coin counter.
+- `Health` – manages hit points with events on death.
+- `AudioManager` – plays music and sound effects.
+- `UIController` – updates on‑screen score and health.
+- `SpawnManager` – periodically spawns prefabs from spawn points.
+- `InputManager` – central input queries, including a pause action.
+- `SceneLoader` – loads scenes asynchronously.
+- **New:** `Projectile`, `PowerUp`, and `PauseMenu` scripts for shooting, temporary boosts, and pausing the game.
