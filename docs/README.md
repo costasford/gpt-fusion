@@ -68,3 +68,4 @@ and computing averages.
 
 <script src="assets/js/external-links.js"></script>
 
+<script src="assets/js/anchor-links.js"></script>
