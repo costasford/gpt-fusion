@@ -34,7 +34,9 @@ Reusable helpers for greetings, math and simple CSV analysis. [Read the docs](RE
 
 ### Auth UI Kit
 
-Tailwind CSS login form using Firebase. [View the demo](https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit).
+Tailwind CSS login form using Firebase with email/password, Google sign in,
+sign‑up, and password reset flows.
+[View the demo](https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit).
 
 ![Auth UI screenshot](assets/auth-ui-screenshot.png)
 

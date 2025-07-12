@@ -58,7 +58,8 @@ back to the [main README](https://github.com/costasford/gpt-fusion#readme) for m
 1. Clone this repository.
 2. Run `pytest` from the project root to ensure the utilities work as expected.
 3. Serve the login demo with `python -m http.server --directory auth-ui-kit` and
-   open `http://localhost:8000` in your browser.
+   open `http://localhost:8000` in your browser. Use email/password, Google sign
+   in, or the sign‑up and reset links to test authentication.
 4. Open the `unity-prototype` folder in Unity to explore the 3D example.
 
 ## Further reading
