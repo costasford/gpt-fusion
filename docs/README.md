@@ -51,7 +51,7 @@ print(history.last_message())  # -> "How are you?"
 ## Quickstart
 
 If you just want to see everything working, follow these steps and then head
-back to the [main README](../README.md) for more detail:
+back to the [main README](https://github.com/costasford/gpt-fusion#readme) for more detail:
 
 1. Clone this repository.
 2. Run `pytest` from the project root to ensure the utilities work as expected.

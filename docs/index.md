@@ -18,7 +18,7 @@ Welcome to **GPT Fusion**, a small playground for blending human creativity with
 
 ## Quickstart
 
-New to the repo? See the [main README](../README.md) for setup details. In
+New to the repo? See the [main README](https://github.com/costasford/gpt-fusion#readme) for setup details. In
 short, clone the project, run `pytest` to verify the Python utilities and then
 open the demos described below.
 
@@ -34,13 +34,13 @@ Reusable helpers for greetings, math and simple CSV analysis. [Read the docs](RE
 
 ### Auth UI Kit
 
-Tailwind CSS login form using Firebase. [View the demo](../auth-ui-kit/index.html).
+Tailwind CSS login form using Firebase. [View the demo](https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit).
 
 ![Auth UI screenshot](assets/auth-ui-screenshot.png)
 
 ### Unity prototype
 
-A basic Unity setup for AI experiments. [Check the repo](../unity-prototype/).
+A basic Unity setup for AI experiments. [Check the repo](https://github.com/costasford/gpt-fusion/tree/main/unity-prototype).
 
 ![Unity demo](assets/unity-demo.png)
 
