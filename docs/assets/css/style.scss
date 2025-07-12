@@ -6,3 +6,19 @@ $header-bg-color-secondary: #cf6c0a;
 $section-headings-color: #ec7d0b;
 
 @import "{{ site.theme }}";
+
+.anchor-link {
+  margin-left: 0.25rem;
+  font-size: 0.8em;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  opacity: 1;
+}
