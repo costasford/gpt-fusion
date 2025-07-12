@@ -62,6 +62,12 @@ back to the [main README](https://github.com/costasford/gpt-fusion#readme) for m
    in, or the sign‑up and reset links to test authentication.
 4. Open the `unity-prototype` folder in Unity to explore the 3D example.
 
+### Serving the docs locally
+
+The documentation is built with [Jekyll](https://jekyllrb.com/). After
+installing the Jekyll gem, run `jekyll serve` from this folder and open
+<http://localhost:4000> in your browser.
+
 ## Further reading
 
 See [tutorial.md](tutorial.md) for a walkthrough on loading the sample dataset
