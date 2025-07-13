@@ -1,7 +1,7 @@
 # gpt-fusion
 [![CI Status](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
 [![Coverage Status](https://img.shields.io/coveralls/github/costasford/gpt-fusion?branch=main)](https://coveralls.io/github/costasford/gpt-fusion?branch=main)
-[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/github/license/costasford/gpt-fusion)](LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
 
