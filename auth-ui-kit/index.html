@@ -10,16 +10,18 @@
   <script type="module" src="app.js"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div class="bg-white p-6 rounded shadow w-80">
-    <h1 class="text-xl font-bold mb-4 text-center">Login</h1>
+  <main class="bg-white p-6 rounded shadow w-80" aria-labelledby="login-title">
+    <h1 id="login-title" class="text-xl font-bold mb-4 text-center">Login</h1>
+    <label for="email" class="sr-only">Email</label>
     <input id="email" class="border p-2 w-full mb-2" type="email" placeholder="Email" />
+    <label for="password" class="sr-only">Password</label>
     <input id="password" class="border p-2 w-full mb-2" type="password" placeholder="Password" />
-    <label class="flex items-center mb-4 text-sm">
+    <label for="remember" class="flex items-center mb-4 text-sm">
       <input id="remember" type="checkbox" class="mr-2" /> Remember me
     </label>
-    <button id="login" class="bg-blue-500 text-white px-4 py-2 w-full rounded">Login</button>
-    <button id="google-login" class="bg-red-500 text-white px-4 py-2 w-full rounded mt-2">Login with Google</button>
-    <p id="message" class="text-red-500 mt-2 text-center"></p>
+    <button id="login" class="bg-blue-600 text-white px-4 py-2 w-full rounded" aria-label="Log in with email and password">Login</button>
+    <button id="google-login" class="bg-red-600 text-white px-4 py-2 w-full rounded mt-2" aria-label="Log in with Google">Login with Google</button>
+    <p id="message" class="text-red-500 mt-2 text-center" aria-live="polite"></p>
     <p class="text-center text-sm mt-2">
       <a href="#" id="forgot" class="text-blue-500 underline">Forgot password?</a>
     </p>
@@ -27,38 +29,44 @@
       Don't have an account?
       <a href="#" id="show-signup" class="text-blue-500 underline">Sign up</a>
     </p>
-  </div>
+  </main>
 
   <!-- Sign up modal -->
   <div
     id="signup-modal"
     class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="signup-title"
   >
     <div class="bg-white p-6 rounded shadow w-80">
-      <h1 class="text-xl font-bold mb-4 text-center">Sign Up</h1>
+      <h1 id="signup-title" class="text-xl font-bold mb-4 text-center">Sign Up</h1>
+      <label for="signup-email" class="sr-only">Email</label>
       <input
         id="signup-email"
         class="border p-2 w-full mb-2"
         type="email"
         placeholder="Email"
       />
+      <label for="signup-password" class="sr-only">Password</label>
       <input
         id="signup-password"
         class="border p-2 w-full mb-2"
         type="password"
         placeholder="Password"
       />
+      <label for="signup-confirm" class="sr-only">Confirm Password</label>
       <input
         id="signup-confirm"
         class="border p-2 w-full mb-2"
         type="password"
         placeholder="Confirm Password"
       />
-      <button id="signup-btn" class="bg-blue-500 text-white px-4 py-2 w-full rounded">
+      <button id="signup-btn" class="bg-blue-600 text-white px-4 py-2 w-full rounded" aria-label="Create account">
         Sign Up
       </button>
-      <p id="signup-message" class="text-red-500 mt-2 text-center"></p>
-      <button id="signup-close" class="text-sm text-blue-500 underline mt-2 w-full">
+      <p id="signup-message" class="text-red-500 mt-2 text-center" aria-live="polite"></p>
+      <button id="signup-close" class="text-sm text-blue-500 underline mt-2 w-full" aria-label="Close sign up form">
         Cancel
       </button>
     </div>
@@ -68,20 +76,24 @@
   <div
     id="reset-modal"
     class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="reset-title"
   >
     <div class="bg-white p-6 rounded shadow w-80">
-      <h1 class="text-xl font-bold mb-4 text-center">Reset Password</h1>
+      <h1 id="reset-title" class="text-xl font-bold mb-4 text-center">Reset Password</h1>
+      <label for="reset-email" class="sr-only">Email</label>
       <input
         id="reset-email"
         class="border p-2 w-full mb-2"
         type="email"
         placeholder="Email"
       />
-      <button id="reset-btn" class="bg-blue-500 text-white px-4 py-2 w-full rounded">
+      <button id="reset-btn" class="bg-blue-600 text-white px-4 py-2 w-full rounded" aria-label="Send password reset email">
         Send reset email
       </button>
-      <p id="reset-message" class="text-red-500 mt-2 text-center"></p>
-      <button id="reset-close" class="text-sm text-blue-500 underline mt-2 w-full">
+      <p id="reset-message" class="text-red-500 mt-2 text-center" aria-live="polite"></p>
+      <button id="reset-close" class="text-sm text-blue-500 underline mt-2 w-full" aria-label="Close reset password form">
         Cancel
       </button>
     </div>
