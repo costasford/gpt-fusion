@@ -17,12 +17,24 @@ We welcome contributions! To keep things tidy, please follow these guidelines.
 
 ## Coding standards
 
-- Format code using `black`.
-- Run `flake8` for linting.
-- Include unit tests with `pytest`.
+We follow standard Python conventions inspired by [PEP 8](https://peps.python.org/pep-0008/).
+
+- Format code with `black`.
+- Lint using `flake8`.
+- Run `pre-commit run --all-files` before committing.
+- Include unit tests with `pytest` for any new functionality.
+
+Commit messages should use the `feat:`, `fix:`, or `docs:` prefixes so GitHub
+Actions and reviewers can quickly understand the intent of the change.
 
 ## Pull requests
 
 - Keep PRs focused and reference related issues.
-- Ensure all tests pass with `pytest`.
-- We use GitHub Actions to verify builds automatically.
+- Run `pytest` locally and ensure all tests pass.
+- Verify that `pre-commit` checks succeed.
+- Update documentation when behavior changes.
+- PR titles should match the commit style noted above.
+- GitHub Actions will verify builds and linting automatically.
+
+See the [Code of Conduct](CODE_OF_CONDUCT.md) for expectations around respectful
+communication. Good discussions lead to better code!
