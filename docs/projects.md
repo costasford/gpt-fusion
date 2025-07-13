@@ -11,7 +11,7 @@ title: Projects
 
 # Projects
 
-The repository hosts a few small demos showcasing different aspects of human‑AI collaboration. This page summarises each component and links to further details. The optional API server exposes these entries at the `/projects` route so you can fetch them programmatically. To make things easier for newcomers following along at events like Codemotion, the sections below embed live previews or short recordings wherever possible.
+This repository hosts several small demos that showcase different aspects of human‑AI collaboration. This page summarises each component and links to further details. The optional API server exposes these entries at the `/projects` route so you can fetch them programmatically. To simplify the experience for newcomers attending events such as Codemotion, the sections below embed live previews or short recordings wherever possible.
 
 ## Python utilities
 

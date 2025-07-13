@@ -55,4 +55,4 @@ This page mirrors the instructions in [AGENTS.md](../AGENTS.md) for AI-based con
 - Combine and bundle CSS and JS assets. The docs use `assets/js/bundle.js` so only one script is loaded.
 - GitHub Pages serves files over HTTP/2, allowing multiple requests to multiplex efficiently.
 
-If this page diverges from [AGENTS.md](../AGENTS.md), please update both files so the instructions stay consistent.
+If this page diverges from [AGENTS.md](../AGENTS.md), please update both files to keep the instructions consistent.
