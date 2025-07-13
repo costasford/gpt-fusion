@@ -25,6 +25,12 @@ A Tailwind‑styled login form powered by Firebase. Update `auth-ui-kit/app.js` 
 
 A basic 3D scene demonstrating player movement, item pickups and simple enemy AI. Copy the `Assets` directory from `unity-prototype/` into a new Unity project (Unity 2021 or later).
 
+## Top Viewer Games
+
+Live view of the most popular Twitch channels and games. Configure your Twitch
+client credentials and run `viewer.py` from the `top-viewer-games` folder to see
+current statistics.
+
 ## Tutorial
 
 Walk through loading the sample dataset and computing averages in [tutorial.md](tutorial.md).

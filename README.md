@@ -65,7 +65,8 @@ Google sign in flows as well as links for new account creation and password
 reset.
 
 You can also explore `twitter_bot.py` for posting project updates to Twitter,
-and `unity-prototype/` for a basic Unity setup. Copy the `Assets` directory into
+`top-viewer-games/` for a snapshot of Twitch's current leaders, and
+`unity-prototype/` for a basic Unity setup. Copy the `Assets` directory into
 a new Unity project (tested with Unity&nbsp;2021 or later) to experiment with the
 included movement and interaction scripts.
 
