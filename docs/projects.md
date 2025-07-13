@@ -15,7 +15,7 @@ The repository hosts a few small demos showcasing different aspects of human‑A
 
 ## Python utilities
 
-The `gpt_fusion` package provides greeting helpers, math functions and simple CSV readers used throughout the tutorials. See the [package README](../README.md#project-layout) for an overview.
+The `gpt_fusion` package bundles greeting helpers, math functions, text utilities and a small CSV reader. It also exposes a web scraper, a Twitter bot and an optional FastAPI backend. See the [package README](../README.md#project-layout) for an overview.
 
 ## Auth UI Kit
 
@@ -28,6 +28,8 @@ A basic 3D scene demonstrating player movement, item pickups and simple enemy AI
 ## Tutorial
 
 Walk through loading the sample dataset and computing averages in [tutorial.md](tutorial.md).
+
+For development instructions see the [Guidelines](guidelines.md).
 
 <script src="assets/js/external-links.js"></script>
 <script src="assets/js/anchor-links.js"></script>

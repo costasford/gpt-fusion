@@ -8,21 +8,21 @@ Codex must follow these steps when contributing to this repository.
 - Install development dependencies:
   ```bash
   pip install -r requirements-dev.txt
-  pre-commit install
+  pre-commit install  # sets up hooks to run formatting and linting automatically
   ```
 
 ## Testing and quality checks
 
-1. Format and lint the project:
+1. Format and lint the project. The `pre-commit` hook will run these checks:
    ```bash
-   black .
-   flake8
+   pre-commit run --all-files
    ```
+   You can also run `black .` and `flake8` directly.
 2. Run the unit tests:
    ```bash
    pytest -q
    ```
-3. Build the documentation to verify pages render:
+3. Build the documentation from the `docs/` directory:
    ```bash
    jekyll build
    ```
