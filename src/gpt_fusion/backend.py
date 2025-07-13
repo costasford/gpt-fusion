@@ -3,6 +3,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+from .projects import PROJECTS, Project
+
 app = FastAPI()
 
 
@@ -18,5 +20,12 @@ def read_root() -> dict[str, str]:
 
 
 @app.get("/profile/{uid}", response_model=Profile)
-def get_profile(uid: str):
+def get_profile(uid: str) -> Profile:
+    """Return a basic profile for the given user id."""
     return Profile(uid=uid, display_name=f"User {uid}")
+
+
+@app.get("/projects", response_model=list[Project])
+def list_projects() -> list[Project]:
+    """Return the sample projects bundled with the repo."""
+    return PROJECTS

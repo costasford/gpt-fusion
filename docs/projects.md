@@ -11,7 +11,7 @@ title: Projects
 
 # Projects
 
-The repository hosts a few small demos showcasing different aspects of human‑AI collaboration. This page summarises each component and links to further details.
+The repository hosts a few small demos showcasing different aspects of human‑AI collaboration. This page summarises each component and links to further details. The optional API server exposes these entries at the `/projects` route so you can fetch them programmatically.
 
 ## Python utilities
 
