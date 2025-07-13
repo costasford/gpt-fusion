@@ -1,5 +1,10 @@
 theme: jekyll-theme-cayman
 title: GPT Fusion
 description: Practical demos of human-AI collaboration
+url: "https://costasford.github.io"
+baseurl: "/gpt-fusion"
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
 github:
   is_project_page: false
