@@ -1,5 +1,12 @@
-from fastapi.testclient import TestClient
-from gpt_fusion.backend import app
+import pytest
+
+"""Backend tests that require FastAPI and httpx optional deps."""
+
+pytest.importorskip("fastapi")
+pytest.importorskip("httpx")
+
+from fastapi.testclient import TestClient  # noqa: E402
+from gpt_fusion.backend import app  # noqa: E402
 
 client = TestClient(app)
 

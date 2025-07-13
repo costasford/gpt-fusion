@@ -1,8 +1,15 @@
 from unittest.mock import Mock, patch
 
-import requests
+"""Web scraper tests requiring requests and BeautifulSoup."""
 
-from gpt_fusion.web_scraper import scrape
+import pytest
+
+pytest.importorskip("requests")
+pytest.importorskip("bs4")
+
+import requests  # noqa: E402
+
+from gpt_fusion.web_scraper import scrape  # noqa: E402
 
 
 def test_scrape_parses_text():

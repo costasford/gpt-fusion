@@ -1,8 +1,12 @@
 from unittest.mock import Mock, patch
 
+"""Twitch client tests requiring the requests library."""
+
 import pytest
 
-from gpt_fusion.twitch import TwitchClient
+pytest.importorskip("requests")
+
+from gpt_fusion.twitch import TwitchClient  # noqa: E402
 
 
 def mock_auth(mock_post: Mock) -> None:
