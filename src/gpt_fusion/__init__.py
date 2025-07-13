@@ -5,6 +5,7 @@ from .core import greet
 from .web_scraper import scrape
 from .backend import app as backend_app
 from .twitter_bot import TwitterBot
+from .twitch import TwitchClient
 from .utils import (
     ChatHistory,
     add_numbers,
@@ -43,5 +44,6 @@ __all__ = [
     "to_title_case",
     "is_palindrome",
     "TwitterBot",
+    "TwitchClient",
     "backend_app",
 ]
