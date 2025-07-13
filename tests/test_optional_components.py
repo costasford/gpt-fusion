@@ -35,3 +35,16 @@ def test_unity_prototype_scripts_exist():
     }
     found = {p.name for p in scripts_dir.iterdir() if p.is_file()}
     assert expected <= found
+
+
+def test_unity_recommended_files_exist():
+    base = Path("unity-prototype")
+    files = [
+        ".gitignore",
+        ".gitattributes",
+        ".editorconfig",
+        "Packages/manifest.json",
+        "ProjectSettings/ProjectVersion.txt",
+    ]
+    for name in files:
+        assert (base / name).exists(), f"Missing {name}"

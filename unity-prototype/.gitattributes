@@ -1,0 +1,10 @@
+# Unity text assets
+*.cs text eol=crlf
+*.shader text eol=lf
+*.cginc text eol=lf
+*.json text eol=lf
+*.asmdef text eol=lf
+*.meta text eol=lf
+*.prefab merge=unityyamlmerge eol=lf
+*.unity merge=unityyamlmerge eol=lf
+*.mat merge=unityyamlmerge eol=lf
