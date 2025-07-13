@@ -12,3 +12,7 @@ htmlcov/
 # Misc
 *.log
 docs/assets/*.png
+
+docs/_site/
+docs/.jekyll-cache/
+.jekyll-cache/
