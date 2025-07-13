@@ -1,8 +1,12 @@
 from unittest.mock import patch
 
+"""Twitter bot tests that depend on Tweepy."""
+
 import pytest
 
-from gpt_fusion.twitter_bot import TwitterBot
+pytest.importorskip("tweepy")
+
+from gpt_fusion.twitter_bot import TwitterBot  # noqa: E402
 
 
 def test_post_tweet_invokes_tweepy():

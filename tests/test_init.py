@@ -1,3 +1,12 @@
+import pytest
+
+"""Test optional imports are lazy-loaded when deps installed."""
+
+pytest.importorskip("requests")
+pytest.importorskip("bs4")
+pytest.importorskip("tweepy")
+
+
 def test_optional_modules_lazy_loaded():
     import gpt_fusion
 
