@@ -9,7 +9,7 @@ image: /auth-ui-screenshot.png
 <div class="hero">
   <h1>GPT Fusion Playground</h1>
   <p><strong>Practical demos of human-AI collaboration</strong></p>
-  <p><a href="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml"><img src="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a></p>
+  <p><a href="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml"><img src="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg" alt="CI Status" loading="lazy"></a></p>
 </div>
 
 <section>
@@ -30,7 +30,7 @@ image: /auth-ui-screenshot.png
       <h3>Auth UI Kit</h3>
       <p>Tailwind CSS login form using Firebase. Replace the config in <code>app.js</code> with your project credentials and serve the directory locally to try out email/password and Google sign in flows.</p>
       <p><a href="https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit">View the demo</a></p>
-      <img src="/auth-ui-screenshot.png" alt="Auth UI screenshot">
+      <img src="/auth-ui-screenshot.png" alt="Auth UI screenshot" loading="lazy">
     </div>
     <div class="project-card">
       <h3>Unity prototype</h3>
