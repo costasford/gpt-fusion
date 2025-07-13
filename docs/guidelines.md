@@ -9,19 +9,38 @@ title: Agent Guidelines
   <p class="toc-title">Quick links</p>
 </div>
 
-This page summarizes the instructions in [AGENTS.md](../AGENTS.md) for AI-based contributors.
+This page mirrors the instructions in [AGENTS.md](../AGENTS.md) for AI-based contributors.
 
-## Testing
+## Setup
 
-Always run `pytest -q` before committing changes.
+- Use Python 3.8 or newer.
+- Install development dependencies:
+  ```bash
+  pip install -r requirements-dev.txt
+  pre-commit install
+  ```
 
-## Formatting and linting
+## Testing and quality checks
 
-Run `black .` to format code and `flake8` to lint. Fix any issues before committing.
+1. Format and lint the project:
+   ```bash
+   black .
+   flake8
+   ```
+2. Run the unit tests:
+   ```bash
+   pytest -q
+   ```
+3. Build the docs to verify pages render:
+   ```bash
+   jekyll build
+   ```
+   Fix any issues before committing.
 
 ## Pull requests
 
-Summaries should describe the high level goal of the change and include a short **Testing** section listing the commands run and whether they succeeded.
+- Summaries should describe the high level goal of the change.
+- Include a **Testing** section listing the commands run and whether they succeeded.
 
 ## Project direction
 
@@ -30,4 +49,3 @@ Summaries should describe the high level goal of the change and include a short 
 - Maintain cross-platform compatibility where reasonable.
 - Expand the test suite for new functionality.
 - Write helpful commit messages and PR summaries explaining the intent of your changes.
-
