@@ -1,5 +1,4 @@
 import gzip
-from pathlib import Path
 
 from gpt_fusion.build_utils import minify_dir
 
