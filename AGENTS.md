@@ -1,47 +1,170 @@
-# Agent guidelines for gpt-fusion
+1. Project Overview
 
-Codex must follow these steps when contributing to this repository.
+    Repo name: gpt-fusion
 
-## Setup
+    Goal: A playground for human–AI collaboration—reusable modules, simple CLI/API/demos, and multi-agent orchestration.
 
-- Use Python 3.8 or newer.
-- Install development dependencies:
-  ```bash
-  pip install -r requirements-dev.txt
-  npm install  # install JS tooling
-  pre-commit install  # sets up hooks to run formatting and linting automatically
-  ```
+Layout:
 
-## Testing and quality checks
+src/gpt_fusion/
+  ├─ core.py       # greeting helper
+  ├─ utils.py      # math, chat-history container
+  ├─ analysis.py   # CSV utilities
+tests/             # pytest suite
+data/              # sample numbers.csv
+docs/              # Jekyll-powered tutorials & demos
 
-1. Format and lint the project. The `pre-commit` hook will run these checks:
-   ```bash
-   pre-commit run --all-files
-   ```
-   You can also run `black .`, `flake8`, or `npm run lint` directly.
-2. Run the unit tests:
-   ```bash
-   pytest -q
-   ```
-3. Build the documentation from the `docs/` directory:
-   ```bash
-   jekyll build
-   ```
-   Fix any issues before committing.
+2. Agent Roles & Responsibilities
+Human vs AI
 
-## Pull requests
+    Core Library: small, deterministic, standard-library–only (unless extras are installed)
 
-- Summaries should describe the high level goal of the change.
-- Include a **Testing** section listing the commands run and whether they succeeded.
+    backend & twitter extras: require FastAPI and Tweepy—AI can scaffold endpoints or bot logic.
 
-## Project direction
+    Sample apps (auth-ui-kit/, twitter_bot.py, top-viewer-games/, unity-prototype/): AI may generate code but humans must insert keys/configs.
 
-- Keep modules small and focused so others can easily reuse them.
-- Document new interfaces with docstrings and practical examples.
-- Maintain cross-platform compatibility where reasonable.
-- Expand the test suite for any new functionality.
-- Write helpful commit messages and PR summaries explaining the intent of your changes.
+Agent Objectives
 
-If you modify this file, update [docs/guidelines.md](docs/guidelines.md) to keep the website in sync.
+    Analyze CSV via analysis.py
 
-A copy of these guidelines is available at [docs/guidelines.md](docs/guidelines.md).
+    Update greeting logic in core.py
+
+    Extend math/chat tools in utils.py
+
+    Scaffold or improve demo apps under human guidance
+
+3. Coding Conventions
+
+    Use Python 3.8+
+
+    Adhere to PEP8 formatting
+
+    Comments required where logic is non-obvious
+
+    Use pre-commit for linting: pre-commit run --all-files
+
+    Run pytest for any code change
+
+4. Testing
+
+    Always include unit tests for new code in tests/
+
+    Tests use pytest
+
+    Code coverage should improve or stay stable
+
+    Agent must:
+
+        Create focused test cases (assert input/output)
+
+        Pass them with CI
+
+5. CI & Hooks
+
+    pre-commit auto-runs formatting/linting
+
+    GitHub Actions runs on PRs:
+
+        Format checks
+
+        pytest suite
+
+    Agent must fail fast and tell user when tests or format checks fail.
+
+6. Multi-Agent Patterns
+
+    Use "agent-as-tool" orchestration (OpenAI Agents SDK pattern)
+    Agents.md Guide for OpenAI Codex
+    OpenAI Cookbook
+    vibecoding.com
+
+        Example: one orchestrator calls core/math/CSV agents.
+
+    Ensure state (chat history) is passed through utils.ChatHistory.
+
+    Favor modular agents: e.g., a greeting enhancer, CSV summarizer, math calculator.
+
+7. Tool Integration
+
+    Register tools with clear JSON output patterns
+
+    Provide examples and error handling
+
+    Example:
+
+    def summarize_csv(path: str) -> dict:
+        """Reads CSV and returns { 'rows': int, 'cols': int, 'summary': {...}}"""
+
+    Tests ensure stability.
+
+8. Human–AI Collaboration Workflow
+
+Derived from SmythOS and DragonScale best practices:
+
+    Assign repetitive or data-heavy tasks to AI (formatting, basic utils)
+    SmythOS+1SmythOS+1
+
+    Keep humans in loop for review, architecture, config, secrets
+
+    Maintain transparency: AI-generated code should include docstrings/warnings
+
+    Provide feedback loops: update prompts or behavior based on test failure or review
+    Agents.md Guide for OpenAI Codex+1vibecoding.com+1
+
+9. Orchestration Example
+
+from openai_agents_sdk import AgentManager
+from gpt_fusion import core, utils, analysis
+
+def main_agent(input):
+    greeting = core.greet(input.user)
+    math_result = utils.calculate(input.math_expr)
+    csv_summary = analysis.summarize_csv("data/numbers.csv")
+    return {
+      "greeting": greeting,
+      "math": math_result,
+      "csv": csv_summary
+    }
+
+Agents should orchestrate using this transparent structure.
+10. Contribution & PR Guidelines
+
+    Keep PRs concise—single change per PR
+
+    Include test updates with feature changes
+
+    PR title must start with feat:, fix:, or docs:
+
+    AI-generated code flagged with # GENERATED comment and reviewed before merge
+
+11. Troubleshooting & FAQs
+
+    Tests failing? Rerun pytest locally and fix errors.
+
+    Formatting issues? Run pre-commit run --all-files and commit before PR.
+
+    Secrets missing? Skip Twitter or backend demos if no credentials configured.
+
+    Agent is hallucinating? Add guardrails: fallback to error or human review.
+
+12. Agent Configuration
+
+To tune Codex or OpenAI agents, reference:
+
+    File structure & nested agents rules
+    Agents.md Guide for OpenAI Codex
+    Agents.md Guide for OpenAI Codex+2vibecoding.com+2OpenAI Cookbook+2
+    OpenAI
+
+    Codex configuration hierarchy: root-level → dir-level overrides
+
+    Keep doc concise; add nested AGENTS.md in subfolders if specialized behavior needed
+
+Summary Table
+Area	Agent Instructions
+Structure	Use folder comments to detect agents in src/, tests/
+Style	PEP8, docstrings, pre-commit enforced
+Testing	Use pytest, new tests for new features
+Orchestration	Agent-as-tool pattern, modular agents
+Human oversight	Always flag AI-generated code, human reviews required
+CI	Ensure code passes lint & tests in GitHub Actions
