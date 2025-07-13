@@ -113,6 +113,8 @@ Interested in helping out? Check the [contributing guide](contributing.md) for
 instructions on formatting, linting, and running tests before submitting a
 pull request.
 
+For ongoing maintenance tips, see the [Sustainability Guide](sustainability.md).
+
 <script src="assets/js/external-links.js"></script>
 
 <script src="assets/js/anchor-links.js"></script>

@@ -92,3 +92,7 @@ the site locally:
 
 Development guidelines for Codex are recorded in [AGENTS.md](AGENTS.md).
 You can also read them on the website at [docs/guidelines.md](docs/guidelines.md).
+
+## Sustainability
+
+For tips on keeping the repository healthy over time, see the [Sustainability Guide](docs/sustainability.md). It covers routine dependency updates, security checks, and best practices for maintaining the docs and tests.
