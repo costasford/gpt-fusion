@@ -13,7 +13,7 @@ This page mirrors the instructions in [AGENTS.md](../AGENTS.md) for AI-based con
 
 ## Setup
 
-- Use Python 3.8 or newer.
+- Use Python 3.9 or newer.
 - Install development dependencies:
   ```bash
   pip install -r requirements-dev.txt
