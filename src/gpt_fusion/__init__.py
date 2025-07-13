@@ -7,6 +7,7 @@ from typing import Any
 
 from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .core import greet
+from .build_utils import minify_dir
 from .utils import (
     ChatHistory,
     add_numbers,
@@ -65,6 +66,7 @@ __all__ = [
     "most_common_word",
     "to_title_case",
     "is_palindrome",
+    "minify_dir",
     "TwitterBot",
     "TwitchClient",
     "backend_app",

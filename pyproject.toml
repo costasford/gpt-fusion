@@ -24,6 +24,12 @@ web = [
     "requests",
     "beautifulsoup4",
 ]
+build = [
+    "htmlmin",
+    "csscompressor",
+    "jsmin",
+    "brotli",
+]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
