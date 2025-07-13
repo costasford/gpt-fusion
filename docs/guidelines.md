@@ -17,21 +17,21 @@ This page mirrors the instructions in [AGENTS.md](../AGENTS.md) for AI-based con
 - Install development dependencies:
   ```bash
   pip install -r requirements-dev.txt
-  pre-commit install
+  pre-commit install  # sets up hooks to run formatting and linting automatically
   ```
 
 ## Testing and quality checks
 
-1. Format and lint the project:
+1. Format and lint the project using the `pre-commit` hook:
    ```bash
-   black .
-   flake8
+   pre-commit run --all-files
    ```
+   You can also run `black .` and `flake8` directly.
 2. Run the unit tests:
    ```bash
    pytest -q
    ```
-3. Build the docs to verify pages render:
+3. Build the docs from the `docs/` directory to verify pages render:
    ```bash
    jekyll build
    ```

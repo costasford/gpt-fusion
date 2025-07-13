@@ -39,7 +39,7 @@ More information about each demo lives on the [Projects page](projects.md).
 
 ### Python utilities
 
-Reusable helpers for greetings, math and simple CSV analysis. [Read the docs](README.md).
+Reusable helpers for greetings, math, text processing and simple CSV analysis. The package also ships with a web scraper and optional Twitter and FastAPI extras. [Read the docs](README.md).
 
 ### Auth UI Kit
 
