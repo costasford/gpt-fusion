@@ -1,6 +1,7 @@
 ---
 layout: default
 title: GPT Fusion Playground
+image: /auth-ui-screenshot.png
 ---
 
 {% include nav.html %}
