@@ -92,6 +92,10 @@ from `unity-prototype`. The included scripts handle basic movement, camera
 control, item pickups and pausing the game. Play the scene to explore how these
 pieces interact.
 
+### Project API
+
+Run `uvicorn gpt_fusion.backend:app` to start the example FastAPI server. It exposes a `/projects` route that returns the demo list in JSON form.
+
 ### Serving the docs locally
 
 The documentation is built with [Jekyll](https://jekyllrb.com/). After

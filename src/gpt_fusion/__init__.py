@@ -4,6 +4,7 @@ from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .core import greet
 from .web_scraper import scrape
 from .backend import app as backend_app
+from .projects import PROJECTS, Project
 from .twitter_bot import TwitterBot
 from .twitch import TwitchClient
 from .utils import (
@@ -46,4 +47,6 @@ __all__ = [
     "TwitterBot",
     "TwitchClient",
     "backend_app",
+    "Project",
+    "PROJECTS",
 ]
