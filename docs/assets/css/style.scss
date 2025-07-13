@@ -65,3 +65,20 @@ h6:hover .anchor-link {
   text-decoration: none;
   color: inherit;
 }
+
+.scroller {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.scroller section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
