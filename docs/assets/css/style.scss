@@ -18,17 +18,36 @@ $section-headings-color: #ec7d0b;
 
 .navbar {
   display: flex;
+  align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient($header-bg-color, $header-bg-color-secondary);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
   text-decoration: none;
+  color: #fff;
 }
 
 .navbar a.active {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.navbar-brand {
+  margin-right: auto;
+  font-weight: bold;
+  color: #fff;
 }
 
 h2:hover .anchor-link,
