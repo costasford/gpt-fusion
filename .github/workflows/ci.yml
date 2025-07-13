@@ -25,7 +25,7 @@ jobs:
           ruby-version: '3.2'
       - name: Install Ruby gems
         run: |
-          gem install jekyll jekyll-theme-cayman --no-document
+          gem install jekyll jekyll-theme-cayman jekyll-seo-tag jekyll-sitemap --no-document
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
