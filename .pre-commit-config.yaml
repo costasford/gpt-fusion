@@ -7,3 +7,11 @@ repos:
     rev: 7.3.0
     hooks:
       - id: flake8
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        language: node
+        entry: npm run lint
+        types: [javascript]
+        pass_filenames: false
