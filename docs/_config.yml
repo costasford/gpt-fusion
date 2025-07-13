@@ -2,4 +2,4 @@ theme: jekyll-theme-cayman
 title: GPT Fusion
 description: Practical demos of human-AI collaboration
 github:
-  is_project_page: true
+  is_project_page: false
