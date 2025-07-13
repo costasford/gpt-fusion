@@ -7,7 +7,9 @@ title: Tutorial
 
 {% include nav.html %}
 
-<div id="toc"></div>
+<div id="toc">
+  <p class="toc-title">Quick links</p>
+</div>
 
 This short guide shows how to load a sample dataset and compute its average
 value using ``gpt_fusion`` utilities.

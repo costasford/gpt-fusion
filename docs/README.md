@@ -7,7 +7,9 @@ title: Overview
 
 {% include nav.html %}
 
-<div id="toc"></div>
+<div id="toc">
+  <p class="toc-title">Quick links</p>
+</div>
 
 This project demonstrates small utilities for blending human and AI workflows.
 
