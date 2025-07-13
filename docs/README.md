@@ -113,6 +113,13 @@ If you need custom caching behaviour, create a `_headers` file in this
 See [tutorial.md](tutorial.md) for a walkthrough on loading the sample dataset
 and computing averages.
 
+## Analytics
+
+This documentation site uses [Plausible Analytics](https://plausible.io/) to collect
+anonymous visit metrics and track uptime. The small snippet in
+`_includes/head-custom.html` loads the script with `defer` so page performance
+remains unaffected.
+
 ## Contributing
 
 Interested in helping out? Check the [contributing guide](contributing.md) for
