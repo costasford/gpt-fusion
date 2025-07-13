@@ -17,7 +17,7 @@ on the examples in the main README with step‑by‑step instructions.
 
 ## Setup
 
-Ensure Python&nbsp;3.8 or newer is installed and clone the repository:
+Ensure Python&nbsp;3.9 or newer is installed and clone the repository:
 
 ```bash
 git clone https://github.com/costasford/gpt-fusion.git
