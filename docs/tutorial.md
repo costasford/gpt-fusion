@@ -11,8 +11,8 @@ title: Tutorial
   <p class="toc-title">Quick links</p>
 </div>
 
-This guide walks through installing the project, loading the bundled
-dataset and calling a few helper functions from ``gpt_fusion``. It expands
+This guide walks through how to install the project, load the bundled
+dataset and call a few helper functions from ``gpt_fusion``. It expands
 on the examples in the main README with step‑by‑step instructions.
 
 ## Setup

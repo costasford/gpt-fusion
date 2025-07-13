@@ -19,8 +19,8 @@ image: /auth-ui-screenshot.png
 
 <section class="container">
   <h2>Quickstart</h2>
-  <p>New to the repo? See the <a href="https://github.com/costasford/gpt-fusion#readme">main README</a> for setup details. In short, clone the project, run <code>pytest</code> to verify the Python utilities and then open the demos described below.</p>
-  <p>These small examples feed into one another. The Python helpers can power the login form or provide data for the Unity prototype. Throughout the docs you'll see how tests and tutorials tie the components together.</p>
+  <p>New to the repository? See the <a href="https://github.com/costasford/gpt-fusion#readme">main README</a> for setup details. Clone the project, run <code>pytest</code> to verify the Python utilities and then explore the demos described below.</p>
+  <p>These concise examples build on one another. The Python helpers can power the login form or provide data for the Unity prototype. Throughout the documentation you will see how tests and tutorials connect the components.</p>
 </section>
 
 <section class="container">
@@ -39,7 +39,7 @@ image: /auth-ui-screenshot.png
     </div>
     <div class="project-card">
       <h3>Unity prototype</h3>
-      <p>A small 3D demo showcasing simple movement and item pickups. Copy the <code>Assets</code> folder into a new Unity project (tested with Unity&nbsp;2021 or later) and run the scene to explore. <a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype">Check the repo</a>.</p>
+      <p>A small 3D demo showcasing simple movement and item pickups. Copy the <code>Assets</code> folder into a new Unity project (tested with Unity&nbsp;2021 or later) and run the scene to explore. <a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype">View the repository</a>.</p>
     </div>
     <div class="project-card">
       <h3>Tutorial</h3>

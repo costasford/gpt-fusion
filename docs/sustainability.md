@@ -12,7 +12,7 @@ Keeping the repository healthy ensures others can reuse these examples far into 
 ## Regular upkeep
 
 - **Keep dependencies current**. Run `pip list --outdated` and update packages in `requirements-dev.txt` when new versions are released.
-- **Check for security issues**. Tools like `pip-audit` or GitHub's Dependabot can highlight vulnerabilities.
+- **Check for security issues**. Tools like `pip-audit` or GitHub's Dependabot can highlight potential vulnerabilities.
 - **Verify builds**. Always run `pre-commit run --all-files`, `pytest -q`, and `jekyll build` before merging changes.
 - **Document significant changes**. Update the relevant markdown files and docstrings so new contributors understand the latest behaviour.
 

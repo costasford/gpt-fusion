@@ -11,7 +11,7 @@ title: Overview
   <p class="toc-title">Quick links</p>
 </div>
 
-This project demonstrates small utilities for blending human and AI workflows.
+This project demonstrates a collection of utilities that blend human and AI workflows.
 
 ## Project overview
 
@@ -65,8 +65,7 @@ print(history.messages)  # -> []
 
 ## Quickstart
 
-If you just want to see everything working, follow these steps and then head
-back to the [main README](https://github.com/costasford/gpt-fusion#readme) for more detail:
+To quickly validate the project, follow these steps and then return to the [main README](https://github.com/costasford/gpt-fusion#readme) for more detail:
 
 1. Clone this repository.
 2. Run `pytest` from the project root to ensure the utilities work as expected.
