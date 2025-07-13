@@ -7,6 +7,9 @@ from statistics import mean, median
 
 def load_numbers_from_csv(path: str | Path) -> list[float]:
     """Load numbers from a CSV file with a ``value`` column."""
+    path = Path(path)
+    if not path.is_file():
+        raise FileNotFoundError(f"CSV file not found: {path}")
     with open(path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         values: list[float] = []
