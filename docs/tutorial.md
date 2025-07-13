@@ -25,10 +25,10 @@ cd gpt-fusion
 pip install -e .
 ```
 
-To explore the optional API server and Twitter helpers install the extras:
+To explore the optional API server, web scraper and Twitter helpers install the extras:
 
 ```bash
-pip install "gpt-fusion[backend,twitter]"
+pip install "gpt-fusion[backend,twitter,web]"
 ```
 
 ## Loading sample data

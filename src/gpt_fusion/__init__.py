@@ -1,12 +1,12 @@
 """Top-level package for gpt-fusion."""
 
+from __future__ import annotations
+
+import importlib
+from typing import Any
+
 from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .core import greet
-from .web_scraper import scrape
-from .backend import app as backend_app
-from .projects import PROJECTS, Project
-from .twitter_bot import TwitterBot
-from .twitch import TwitchClient
 from .utils import (
     ChatHistory,
     add_numbers,
@@ -24,6 +24,27 @@ from .text_utils import (
     word_count,
     count_characters,
 )
+
+_OPTIONAL_ATTRS: dict[str, tuple[str, str]] = {
+    "scrape": ("web_scraper", "scrape"),
+    "backend_app": ("backend", "app"),
+    "TwitterBot": ("twitter_bot", "TwitterBot"),
+    "TwitchClient": ("twitch", "TwitchClient"),
+    "Project": ("projects", "Project"),
+    "PROJECTS": ("projects", "PROJECTS"),
+}
+
+
+def __getattr__(name: str) -> Any:
+    """Lazily import optional components."""
+    if name in _OPTIONAL_ATTRS:
+        module_name, attr_name = _OPTIONAL_ATTRS[name]
+        module = importlib.import_module(f".{module_name}", __name__)
+        value = getattr(module, attr_name)
+        globals()[name] = value
+        return value
+    raise AttributeError(f"module {__name__!r} has no attribute {name}")
+
 
 __all__ = [
     "greet",
