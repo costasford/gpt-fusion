@@ -7,6 +7,10 @@ $section-headings-color: #ec7d0b;
 
 @import "{{ site.theme }}";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .anchor-link {
   margin-left: 0.25rem;
   font-size: 0.8em;
