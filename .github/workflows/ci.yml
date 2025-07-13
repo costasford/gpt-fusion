@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # Tweepy requires Python 3.9+, so drop 3.8 from the matrix
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        # Tweepy requires Python 3.10+, so drop 3.9 from the matrix
+        python-version: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4

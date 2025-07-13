@@ -42,7 +42,7 @@ docs/              # Jekyll-powered tutorials & demos
 
 ## 3. Coding Conventions
 
-* Use **Python 3.9+**
+* Use **Python 3.10+**
 * Adhere to **PEP8 formatting**
 * Comments required where logic is non-obvious
 * Use **pre-commit** for linting: `pre-commit run --all-files`
