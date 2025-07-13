@@ -87,6 +87,16 @@ jekyll serve
 
 and open <http://localhost:4000> to browse the tutorials.
 
+## Local workflow automation
+
+Run the helper script to replicate the CI checks locally:
+
+```bash
+python scripts/run_checks.py
+```
+
+The script formats the code, runs the tests, and builds the documentation.
+
 ## Contributing
 
 Development guidelines are recorded in [AGENTS.md](AGENTS.md).
