@@ -33,6 +33,7 @@ image: /auth-ui-screenshot.png
     <p>Learn how to load sample data and compute averages. <a href="tutorial.md">Follow the tutorial</a>.</p>
     <h3>Contribute</h3>
     <p>Want to get involved? Read the <a href="contributing.md">contributing guide</a> to learn how we format code, lint, and run tests. The detailed rules used by Codex are listed on the <a href="guidelines.md">Guidelines page</a>.</p>
+    <p>For ongoing care of the project, consult the <a href="sustainability.md">Sustainability Guide</a> which covers dependency updates and general maintenance tips.</p>
     <p>Enjoy fusing ideas with code!</p>
   </section>
 </div>
