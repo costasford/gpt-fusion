@@ -12,7 +12,7 @@ image: /auth-ui-screenshot.png
 
 # GPT Fusion Playground
 
-**Human charm meets algorithmic arm**
+**Practical demos of human-AI collaboration**
 
 [![CI Status](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
 
