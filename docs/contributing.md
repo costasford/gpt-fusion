@@ -26,6 +26,7 @@ things consistent. The full instructions used by Codex are listed on the
 - Run `pre-commit install` so formatting and linting trigger on each commit.
 - Format code with `black .` and lint with `flake8`.
 - Execute the test suite using `pytest -q` before committing.
+- Build the docs with `jekyll build` to ensure pages render.
 
 ## Pull requests
 
