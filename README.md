@@ -81,6 +81,13 @@ and open <http://localhost:4000> to browse the tutorials.
 Development guidelines are recorded in [AGENTS.md](AGENTS.md).
 Please open issues and pull requests via GitHub.
 
+## Repository topics and labels
+
+To help others discover this project, tag the repository with relevant topics
+such as `ai`, `tailwindcss`, `pytest` and `unity3d`.  Issues should use
+standard labels like `bug`, `enhancement` and `help wanted` so contributors can
+quickly triage requests.
+
 ## License & Contact
 
 This project is licensed under the [MIT License](LICENSE).
