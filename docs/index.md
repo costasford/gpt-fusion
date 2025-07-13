@@ -60,7 +60,8 @@ Learn how to load sample data and compute averages. [Follow the tutorial](tutori
 ### Contribute
 
 Want to get involved? Read the [contributing guide](contributing.md) to learn
-how we format code, lint, and run tests.
+how we format code, lint, and run tests. The detailed rules used by Codex are
+listed on the [Guidelines](guidelines.md) page.
 
 Enjoy fusing ideas with code!
 

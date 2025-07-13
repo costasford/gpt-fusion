@@ -12,7 +12,8 @@ title: Contribute
 # Contributing
 
 We welcome improvements to **gpt-fusion**! Please follow these guidelines to keep
-things consistent.
+things consistent. The full instructions used by Codex are listed on the
+[Guidelines](guidelines.md) page.
 
 ## Development workflow
 

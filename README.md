@@ -71,3 +71,8 @@ the site locally:
 1. Install Ruby and the Jekyll gem: `gem install jekyll`.
 2. Run `jekyll serve` from the `docs/` directory.
 3. Open <http://localhost:4000> in your browser to explore the docs.
+
+## Contributing
+
+Development guidelines for Codex are recorded in [AGENTS.md](AGENTS.md).
+You can also read them on the website at [docs/guidelines.md](docs/guidelines.md).
