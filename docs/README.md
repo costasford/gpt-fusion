@@ -73,6 +73,23 @@ back to the [main README](https://github.com/costasford/gpt-fusion#readme) for m
    in, or the sign‑up and reset links to test authentication.
 4. Open the `unity-prototype` folder in Unity to explore the 3D example.
 
+## Auth UI Kit details
+
+The authentication demo relies on Firebase. Replace the placeholders in
+`auth-ui-kit/app.js` with your Firebase project configuration. Start a local
+server with `python -m http.server --directory auth-ui-kit` and open the page in
+your browser to test email/password and Google sign in flows. The UI includes
+sign-up and password reset dialogs so you can experiment without writing any
+backend code.
+
+## Unity prototype details
+
+The Unity sample is entirely optional but demonstrates how the Python helpers can
+feed data into a game. Create a new Unity project and copy the `Assets` folder
+from `unity-prototype`. The included scripts handle basic movement, camera
+control, item pickups and pausing the game. Play the scene to explore how these
+pieces interact.
+
 ### Serving the docs locally
 
 The documentation is built with [Jekyll](https://jekyllrb.com/). After
