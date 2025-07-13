@@ -17,6 +17,19 @@ body {
   background-color: $background-color;
   color: #333;
   line-height: 1.6;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .anchor-link {
@@ -57,6 +70,16 @@ h6 {
   text-decoration: none;
   color: #fff;
   font-weight: 500;
+}
+
+.navbar a.cta {
+  background-color: $header-bg-color-secondary;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+}
+
+.navbar a.cta.active {
+  background-color: lighten($header-bg-color-secondary, 10%);
 }
 
 .navbar a.active {
@@ -146,6 +169,12 @@ h6:hover .anchor-link {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
+}
+
+@media (min-width: 600px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }
 
 .project-card {

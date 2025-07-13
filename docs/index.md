@@ -6,19 +6,19 @@ image: /auth-ui-screenshot.png
 
 {% include nav.html %}
 
-<div class="hero">
+<div class="hero container">
   <h1>GPT Fusion Playground</h1>
   <p><strong>Practical demos of human-AI collaboration</strong></p>
   <p><a href="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml"><img src="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg" alt="CI Status" loading="lazy"></a></p>
 </div>
 
-<section>
+<section class="container">
   <h2>Quickstart</h2>
   <p>New to the repo? See the <a href="https://github.com/costasford/gpt-fusion#readme">main README</a> for setup details. In short, clone the project, run <code>pytest</code> to verify the Python utilities and then open the demos described below.</p>
   <p>These small examples feed into one another. The Python helpers can power the login form or provide data for the Unity prototype. Throughout the docs you'll see how tests and tutorials tie the components together.</p>
 </section>
 
-<section>
+<section class="container">
   <h2>Projects</h2>
   <p>More information about each demo lives on the <a href="projects.md">Projects page</a>.</p>
   <div class="projects-grid">
