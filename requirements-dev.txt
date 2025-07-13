@@ -8,3 +8,7 @@ beautifulsoup4
 tweepy
 fastapi
 httpx<0.25
+htmlmin
+csscompressor
+jsmin
+brotli
