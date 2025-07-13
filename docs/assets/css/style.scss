@@ -129,3 +129,38 @@ h6:hover .anchor-link {
   margin: 0 auto;
 }
 
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, $header-bg-color-secondary, $header-bg-color);
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.project-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.project-card img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
