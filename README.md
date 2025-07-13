@@ -69,6 +69,8 @@ and `unity-prototype/` for a basic Unity setup. Copy the `Assets` directory into
 a new Unity project (tested with Unity&nbsp;2021 or later) to experiment with the
 included movement and interaction scripts.
 
+A summary of these demos is available in [docs/projects.md](docs/projects.md).
+
 ## Data
 
 The `data/` directory contains a small `numbers.csv` file used in tutorials and

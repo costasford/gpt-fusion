@@ -49,3 +49,5 @@ This page mirrors the instructions in [AGENTS.md](../AGENTS.md) for AI-based con
 - Maintain cross-platform compatibility where reasonable.
 - Expand the test suite for new functionality.
 - Write helpful commit messages and PR summaries explaining the intent of your changes.
+
+If this page diverges from [AGENTS.md](../AGENTS.md), please update both files so the instructions stay consistent.
