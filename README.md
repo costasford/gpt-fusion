@@ -26,10 +26,22 @@ docs/           # documentation with examples and tutorials
 data/           # sample data
 ```
 
+## Installation
+
+Install the library with the optional backend and Twitter extras:
+
+```bash
+pip install "gpt-fusion[backend,twitter]"
+```
+
+These extras pull in FastAPI for the example API server and Tweepy for the
+Twitter bot utilities.
+
 ## Development workflow
 
 1. **Environment**: Use Python 3.8+.
 2. **Dependencies**: Install the development requirements with `pip install -r requirements-dev.txt`. The core library uses only the Python standard library, but the optional Twitter bot requires [tweepy](https://www.tweepy.org/).
+   Runtime extras can be installed with `pip install gpt-fusion[backend,twitter]`.
 3. **Style**: Format code with [black](https://github.com/psf/black) and lint with [flake8](https://github.com/PyCQA/flake8). A [pre-commit](https://pre-commit.com) hook runs these automatically.
 4. **Tests**: Run `pytest` before submitting changes.
 5. **Hooks**: After installing dependencies, run `pre-commit install` so formatting and linting run on each commit.

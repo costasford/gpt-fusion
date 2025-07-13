@@ -10,6 +10,19 @@ authors = [{name="Costas Ford", email="costasford@yahoo.com"}]
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.8"
+dependencies = [
+    "requests",
+    "beautifulsoup4",
+]
+
+[project.optional-dependencies]
+backend = [
+    "fastapi",
+    "httpx<0.25",
+]
+twitter = [
+    "tweepy",
+]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
