@@ -17,9 +17,12 @@ def mock_auth(mock_post: Mock) -> None:
 
 
 def test_get_top_games_returns_data():
-    with patch("requests.post") as mock_post, patch(
-        "requests.get",
-    ) as mock_get:
+    with (
+        patch("requests.post") as mock_post,
+        patch(
+            "requests.get",
+        ) as mock_get,
+    ):
         mock_auth(mock_post)
         get_response = Mock()
         get_response.json.return_value = {"data": [{"name": "Game"}]}
