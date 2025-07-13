@@ -26,6 +26,8 @@ matched:
   scripts. Useful for exploring AI behaviour in a 3D environment.
 - **Documentation** – these markdown files, rendered using Jekyll.
 
+See [projects.md](projects.md) for a concise overview of each sample.
+
 Each component is small on its own, but together they highlight different ways
 to fuse code written by humans and AI tools.
 

@@ -41,4 +41,6 @@ Codex must follow these steps when contributing to this repository.
 - Expand the test suite for any new functionality.
 - Write helpful commit messages and PR summaries explaining the intent of your changes.
 
+If you modify this file, update [docs/guidelines.md](docs/guidelines.md) to keep the website in sync.
+
 A copy of these guidelines is available at [docs/guidelines.md](docs/guidelines.md).

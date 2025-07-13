@@ -35,6 +35,8 @@ see how tests and tutorials tie the components together.
 
 ## Projects
 
+More information about each demo lives on the [Projects page](projects.md).
+
 ### Python utilities
 
 Reusable helpers for greetings, math and simple CSV analysis. [Read the docs](README.md).
@@ -47,7 +49,7 @@ and Google sign in flows. The UI also includes sign-up and password reset
 dialogs for quick experimentation.
 [View the demo](https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit).
 
-![Auth UI screenshot](assets/auth-ui-screenshot.png)
+![Auth UI screenshot](/auth-ui-screenshot.png)
 
 ### Unity prototype
 
@@ -55,7 +57,6 @@ A small 3D demo showcasing simple movement and item pickups. Copy the `Assets`
 folder into a new Unity project (tested with Unity&nbsp;2021 or later) and run the
 scene to explore. [Check the repo](https://github.com/costasford/gpt-fusion/tree/main/unity-prototype).
 
-![Unity demo](assets/unity-demo.png)
 
 ### Tutorial
 
