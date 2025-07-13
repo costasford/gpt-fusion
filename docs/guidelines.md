@@ -17,6 +17,7 @@ This page mirrors the instructions in [AGENTS.md](../AGENTS.md) for AI-based con
 - Install development dependencies:
   ```bash
   pip install -r requirements-dev.txt
+  npm install  # install JS tooling
   pre-commit install  # sets up hooks to run formatting and linting automatically
   ```
 
@@ -26,7 +27,7 @@ This page mirrors the instructions in [AGENTS.md](../AGENTS.md) for AI-based con
    ```bash
    pre-commit run --all-files
    ```
-   You can also run `black .` and `flake8` directly.
+   You can also run `black .`, `flake8`, or `npm run lint` directly.
 2. Run the unit tests:
    ```bash
    pytest -q

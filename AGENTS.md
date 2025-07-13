@@ -8,6 +8,7 @@ Codex must follow these steps when contributing to this repository.
 - Install development dependencies:
   ```bash
   pip install -r requirements-dev.txt
+  npm install  # install JS tooling
   pre-commit install  # sets up hooks to run formatting and linting automatically
   ```
 
@@ -17,7 +18,7 @@ Codex must follow these steps when contributing to this repository.
    ```bash
    pre-commit run --all-files
    ```
-   You can also run `black .` and `flake8` directly.
+   You can also run `black .`, `flake8`, or `npm run lint` directly.
 2. Run the unit tests:
    ```bash
    pytest -q
