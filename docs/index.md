@@ -47,5 +47,4 @@ image: /auth-ui-screenshot.png
   </div>
 </section>
 
-<script src="assets/js/external-links.js"></script>
-<script src="assets/js/anchor-links.js"></script>
+<script src="assets/js/bundle.js"></script>

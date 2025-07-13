@@ -34,6 +34,4 @@ Keep changes focused and document your intent. Passing tests and clean linting
 are required before a PR is merged. Summaries should explain the high level goal
 and mention the commands you ran.
 
-<script src="assets/js/external-links.js"></script>
-<script src="assets/js/anchor-links.js"></script>
-<script src="assets/js/toc.js"></script>
+<script src="assets/js/bundle.js"></script>
