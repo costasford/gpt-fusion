@@ -22,3 +22,12 @@ The included scripts demonstrate small gameplay systems:
 - `InputManager` – central input queries, including a pause action.
 - `SceneLoader` – loads scenes asynchronously.
 - **New:** `Projectile`, `PowerUp`, and `PauseMenu` scripts for shooting, temporary boosts, and pausing the game.
+
+## Recommended project files
+
+This prototype now includes common Unity setup files:
+- `.gitignore` for generated folders
+- `.gitattributes` with merge settings
+- `.editorconfig` to enforce C# style
+- `Packages/manifest.json` with minimal dependencies
+- `ProjectSettings/ProjectVersion.txt` noting the editor version
