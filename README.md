@@ -49,7 +49,9 @@ You can also preview the auth UI demo by serving the `auth-ui-kit` folder:
 python -m http.server --directory auth-ui-kit
 ```
 
-![Auth UI screenshot](auth-ui-screenshot.png)
+<img src="auth-ui-screenshot.png" alt="Auth UI screenshot" loading="lazy">
+
+_Tip: convert screenshots to WebP for a smaller footprint._
 
 ## Project layout
 
