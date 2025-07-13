@@ -1,0 +1,4 @@
+# Example caching rules for GitHub Pages
+# Adjust max-age values to control how long assets are cached
+/assets/*
+  Cache-Control: public, max-age=3600

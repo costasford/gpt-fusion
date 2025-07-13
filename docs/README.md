@@ -102,6 +102,12 @@ The documentation is built with [Jekyll](https://jekyllrb.com/). After
 installing the Jekyll gem, run `jekyll serve` from this folder and open
 <http://localhost:4000> in your browser.
 
+### Deploying to GitHub Pages
+
+GitHub Pages serves these files from a global CDN so delivery is fast worldwide.
+If you need custom caching behaviour, create a `_headers` file in this
+`docs/` directory and specify `Cache-Control` rules as required.
+
 ## Further reading
 
 See [tutorial.md](tutorial.md) for a walkthrough on loading the sample dataset
