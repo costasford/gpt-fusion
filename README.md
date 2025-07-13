@@ -31,6 +31,14 @@ cd gpt-fusion
 pip install -r requirements-dev.txt
 ```
 
+The optional packages in `requirements-dev.txt` (such as FastAPI and Tweepy)
+are required for some of the tests. Make sure to install them before running
+the full suite:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
 Run the test suite to confirm everything works:
 
 ```bash
