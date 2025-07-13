@@ -57,6 +57,11 @@ A basic Unity setup for AI experiments. [Check the repo](https://github.com/cost
 
 Learn how to load sample data and compute averages. [Follow the tutorial](tutorial.md).
 
+### Contribute
+
+Want to get involved? Read the [contributing guide](contributing.md) to learn
+how we format code, lint, and run tests.
+
 Enjoy fusing ideas with code!
 
 <script src="assets/js/external-links.js"></script>

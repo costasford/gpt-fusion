@@ -84,6 +84,12 @@ installing the Jekyll gem, run `jekyll serve` from this folder and open
 See [tutorial.md](tutorial.md) for a walkthrough on loading the sample dataset
 and computing averages.
 
+## Contributing
+
+Interested in helping out? Check the [contributing guide](contributing.md) for
+instructions on formatting, linting, and running tests before submitting a
+pull request.
+
 <script src="assets/js/external-links.js"></script>
 
 <script src="assets/js/anchor-links.js"></script>
