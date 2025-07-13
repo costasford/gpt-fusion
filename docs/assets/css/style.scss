@@ -1,14 +1,22 @@
 ---
 ---
 
-$header-bg-color: #ec7d0b;
-$header-bg-color-secondary: #cf6c0a;
-$section-headings-color: #ec7d0b;
+$header-bg-color: #0d47a1; // corporate navy
+$header-bg-color-secondary: #1565c0;
+$section-headings-color: #0d47a1;
+$background-color: #f4f7fa;
 
 @import "{{ site.theme }}";
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: $background-color;
+  color: #333;
+  line-height: 1.6;
 }
 
 .anchor-link {
@@ -19,24 +27,36 @@ html {
   transition: opacity 0.2s;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $section-headings-color;
+  margin-top: 1.5rem;
+}
+
 
 .navbar {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   position: sticky;
   top: 0;
   z-index: 1000;
   background: linear-gradient($header-bg-color, $header-bg-color-secondary);
-  border-radius: 4px;
+  border-bottom: 4px solid darken($header-bg-color, 10%);
+  border-radius: 0 0 4px 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
   text-decoration: none;
   color: #fff;
+  font-weight: 500;
 }
 
 .navbar a.active {
@@ -52,6 +72,8 @@ html {
   margin-right: auto;
   font-weight: bold;
   color: #fff;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
 }
 
 h2:hover .anchor-link,
@@ -103,5 +125,7 @@ h6:hover .anchor-link {
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
