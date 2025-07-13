@@ -37,6 +37,4 @@ Walk through loading the sample dataset and computing averages in [tutorial.md](
 
 For development instructions see the [Guidelines](guidelines.md).
 
-<script src="assets/js/external-links.js"></script>
-<script src="assets/js/anchor-links.js"></script>
-<script src="assets/js/toc.js"></script>
+<script src="assets/js/bundle.js"></script>
