@@ -53,8 +53,21 @@ Enjoy fusing ideas with code!
 ## Sample apps
 
 Check out `auth-ui-kit/` for a Firebase-based login demo with sign-up, password reset,
-and Google authentication. You can also explore `twitter_bot.py` for posting project
-updates to Twitter, and `unity-prototype/` for a basic Unity setup.
+and Google authentication. Replace the placeholder Firebase configuration in
+`app.js` with your own project details, then run
+
+```bash
+python -m http.server --directory auth-ui-kit
+```
+
+to serve the page locally at <http://localhost:8000>. The UI exposes email and
+Google sign in flows as well as links for new account creation and password
+reset.
+
+You can also explore `twitter_bot.py` for posting project updates to Twitter,
+and `unity-prototype/` for a basic Unity setup. Copy the `Assets` directory into
+a new Unity project (tested with Unity&nbsp;2021 or later) to experiment with the
+included movement and interaction scripts.
 
 ## Data
 

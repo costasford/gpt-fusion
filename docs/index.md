@@ -41,15 +41,19 @@ Reusable helpers for greetings, math and simple CSV analysis. [Read the docs](RE
 
 ### Auth UI Kit
 
-Tailwind CSS login form using Firebase with email/password, Google sign in,
-sign‑up, and password reset flows.
+Tailwind CSS login form using Firebase. Replace the config in `app.js` with your
+project credentials and serve the directory locally to try out email/password
+and Google sign in flows. The UI also includes sign-up and password reset
+dialogs for quick experimentation.
 [View the demo](https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit).
 
 ![Auth UI screenshot](assets/auth-ui-screenshot.png)
 
 ### Unity prototype
 
-A basic Unity setup for AI experiments. [Check the repo](https://github.com/costasford/gpt-fusion/tree/main/unity-prototype).
+A small 3D demo showcasing simple movement and item pickups. Copy the `Assets`
+folder into a new Unity project (tested with Unity&nbsp;2021 or later) and run the
+scene to explore. [Check the repo](https://github.com/costasford/gpt-fusion/tree/main/unity-prototype).
 
 ![Unity demo](assets/unity-demo.png)
 
