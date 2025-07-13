@@ -1,15 +1,55 @@
 # gpt-fusion
 [![CI Status](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
+[![Coverage Status](https://img.shields.io/coveralls/github/costasford/gpt-fusion?branch=main)](https://coveralls.io/github/costasford/gpt-fusion?branch=main)
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/github/license/costasford/gpt-fusion)](LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
 
 "Practical demos of human-AI collaboration"
 
-This repository is a playful collaboration between Costas and ChatGPT. We mix code and conversation to explore how human ingenuity and AI assistance can fuse into something greater than either alone. Stick around as we experiment with new ideas, tools, and witty back-and-forth.
+GPT Fusion is a small sandbox for developers curious about mixing traditional
+programming with AI assistance. It bundles CSV analysis utilities, a sample
+FastAPI backend, web scraping helpers and demo apps like a Firebase auth UI and
+a Unity prototype. The project targets tinkerers who want clear examples of how
+humans and ChatGPT can iteratively build software together.
 
-## Goals
+## Features
 
-- Provide a small playground for exploring human–AI collaboration.
-- Offer simple, reusable modules that demonstrate practical uses of AI-assisted tooling.
-- Maintain code quality and encourage contributions through clear guidelines and tests.
+- Python utilities for math and CSV summaries
+- Simple web scraper and text helpers
+- Optional FastAPI backend and Twitter bot modules
+- Demo front-end with Firebase authentication
+- Unity project showcasing basic movement scripts
+
+## Installation & Usage
+
+Clone the repo and install the development dependencies:
+
+```bash
+git clone https://github.com/costasford/gpt-fusion.git
+cd gpt-fusion
+pip install -r requirements-dev.txt
+```
+
+Run the test suite to confirm everything works:
+
+```bash
+pytest
+```
+
+Try the example script which loads numbers from `data/numbers.csv`:
+
+```bash
+python examples/tutorial.py
+```
+
+You can also preview the auth UI demo by serving the `auth-ui-kit` folder:
+
+```bash
+python -m http.server --directory auth-ui-kit
+```
+
+![Auth UI screenshot](auth-ui-screenshot.png)
 
 ## Project layout
 
@@ -21,78 +61,29 @@ src/            # Python package source
     analysis.py # simple CSV helpers
 
 tests/          # pytest-based unit tests
-
 docs/           # documentation with examples and tutorials
 data/           # sample data
 ```
 
-## Installation
-
-Install the library with the optional backend, Twitter and web scraping extras:
-
-```bash
-pip install "gpt-fusion[backend,twitter,web]"
-```
-
-These extras pull in FastAPI for the example API server, Tweepy for the
-Twitter bot utilities, and Requests/BeautifulSoup for the scraping helpers.
-
-## Development workflow
-
-1. **Environment**: Use Python 3.8+.
-2. **Dependencies**: Install the development requirements with `pip install -r requirements-dev.txt`. The core modules rely only on the Python standard library, while optional components require extra packages.
-   Runtime extras can be installed with `pip install gpt-fusion[backend,twitter,web]`.
-3. **Style**: Run `pre-commit run --all-files` to format and lint the code. A [pre-commit](https://pre-commit.com) hook runs these checks automatically.
-4. **Tests**: Run `pytest` before submitting changes.
-5. **Hooks**: After installing dependencies, run `pre-commit install` so formatting and linting run on each commit.
-6. **CI**: GitHub Actions runs formatting checks and the test suite on every pull request.
-7. **Contributions**: Please open issues and pull requests via GitHub. Keep commits clear and focused.
-
-Enjoy fusing ideas with code!
-
-## Sample apps
-
-Check out `auth-ui-kit/` for a Firebase-based login demo with sign-up, password reset,
-and Google authentication. Replace the placeholder Firebase configuration in
-`app.js` with your own project details, then run
-
-```bash
-python -m http.server --directory auth-ui-kit
-```
-
-to serve the page locally at <http://localhost:8000>. The UI exposes email and
-Google sign in flows as well as links for new account creation and password
-reset.
-
-You can also explore `twitter_bot.py` for posting project updates to Twitter,
-`top-viewer-games/` for a snapshot of Twitch's current leaders, and
-`unity-prototype/` for a basic Unity setup. Copy the `Assets` directory into
-a new Unity project (tested with Unity&nbsp;2021 or later) to experiment with the
-included movement and interaction scripts.
-
-A summary of these demos is available in [docs/projects.md](docs/projects.md).
-
-## Data
-
-The `data/` directory contains a small `numbers.csv` file used in tutorials and
-tests. Feel free to replace it with your own datasets when experimenting with
-the CSV utilities.
-
 ## Documentation
 
-Comprehensive guides and examples live in the [`docs/`](docs) folder. The
-markdown files there are rendered with [Jekyll](https://jekyllrb.com/). To preview
-the site locally:
+Detailed guides live in [`docs/`](docs). Build the site locally with
 
-1. Install Ruby and the Jekyll gem: `gem install jekyll`.
-2. Run `jekyll serve` from the `docs/` directory.
-3. Open <http://localhost:4000> in your browser to explore the docs.
+```bash
+cd docs
+jekyll serve
+```
+
+and open <http://localhost:4000> to browse the tutorials.
 
 ## Contributing
 
-Development guidelines for Codex are recorded in [AGENTS.md](AGENTS.md).
-You can also read them on the website at [docs/guidelines.md](docs/guidelines.md).
+Development guidelines are recorded in [AGENTS.md](AGENTS.md).
+Please open issues and pull requests via GitHub.
 
-## Sustainability
+## License & Contact
 
-For tips on keeping the repository healthy over time, see the [Sustainability Guide](docs/sustainability.md). It covers routine dependency updates, security checks, and best practices for maintaining the docs and tests.
+This project is licensed under the [MIT License](LICENSE).
+For questions or support, open an issue or reach the maintainer at
+[costasford@yahoo.com](mailto:costasford@yahoo.com).
+
