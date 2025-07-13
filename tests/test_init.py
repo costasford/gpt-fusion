@@ -1,6 +1,3 @@
-import importlib
-
-
 def test_optional_modules_lazy_loaded():
     import gpt_fusion
 
@@ -12,4 +9,3 @@ def test_optional_modules_lazy_loaded():
 
     assert "scrape" in gpt_fusion.__dict__
     assert "TwitterBot" in gpt_fusion.__dict__
-
