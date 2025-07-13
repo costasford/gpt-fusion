@@ -1,3 +1,5 @@
+"""Load sample data and display basic statistics."""
+
 from pathlib import Path
 from gpt_fusion import load_numbers_from_csv, average_from_csv, median_from_csv
 
