@@ -24,7 +24,7 @@ things consistent. The full instructions used by Codex are listed on the
   pip install -r requirements-dev.txt
   ```
 - Run `pre-commit install` so formatting and linting trigger on each commit.
-- Format code with `black .` and lint with `flake8`.
+- Run `pre-commit run --all-files` to format and lint the code.
 - Execute the test suite using `pytest -q` before committing.
 - Build the docs with `jekyll build` to ensure pages render.
 
