@@ -1,5 +1,7 @@
 from unittest.mock import Mock, patch
 
+import requests
+
 from gpt_fusion.web_scraper import scrape
 
 
@@ -20,3 +22,13 @@ def test_scrape_parses_text():
         mock_get.assert_called_once_with("http://example.com", timeout=10)
 
     assert result == ["Hello", "World"]
+
+
+def test_scrape_connection_error_returns_empty_list():
+    with patch(
+        "requests.get", side_effect=requests.exceptions.RequestException
+    ) as mock_get:
+        result = scrape("http://example.com", "p.msg")
+        mock_get.assert_called_once_with("http://example.com", timeout=10)
+
+    assert result == []
