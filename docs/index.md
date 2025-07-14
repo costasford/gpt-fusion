@@ -21,6 +21,7 @@ Plan:
     <a href="https://pypi.org/project/gpt-fusion/"><img src="https://img.shields.io/pypi/dm/gpt-fusion.svg" alt="PyPI Downloads" loading="lazy"></a>
     <a href="https://github.com/costasford/gpt-fusion/blob/main/LICENSE"><img src="https://img.shields.io/github/license/costasford/gpt-fusion" alt="License" loading="lazy"></a>
   </p>
+  <p>Use the search bar to jump directly to any topic in the docs.</p>
 </div>
 
 <section class="container">

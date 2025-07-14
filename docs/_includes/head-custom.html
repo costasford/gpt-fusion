@@ -21,3 +21,15 @@
 }
 </script>
 <script defer data-domain="costasford.github.io" src="https://plausible.io/js/script.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    docsearch({
+      container: '#docsearch',
+      appId: '{{ site.docsearch.appId }}',
+      apiKey: '{{ site.docsearch.apiKey }}',
+      indexName: '{{ site.docsearch.indexName }}',
+    });
+  });
+</script>
