@@ -27,6 +27,16 @@ We welcome improvements to **gpt-fusion**! Please follow these guidelines to mai
 - Execute the test suite using `pytest -q` before committing.
 - Build the docs with `jekyll build` to ensure pages render.
 
+## Issue labels
+
+We triage GitHub issues with labels so newcomers can quickly find a task that
+suits their interests. Check out these categories:
+
+- [good first issue](https://github.com/costasford/gpt-fusion/labels/good%20first%20issue) – small, self-contained tasks ideal for first-time contributors.
+- [help wanted](https://github.com/costasford/gpt-fusion/labels/help%20wanted) – features or bugs where community assistance is appreciated.
+- [documentation](https://github.com/costasford/gpt-fusion/labels/documentation) – improvements to the docs and examples.
+- [codex](https://github.com/costasford/gpt-fusion/labels/codex) – issues that explore AI-powered tooling.
+
 ## Pull requests
 
 Keep changes focused and document your intent. Passing tests and clean linting
