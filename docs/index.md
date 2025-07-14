@@ -57,6 +57,10 @@ Median: 3.0</code></pre>
       </div>
     </div>
     <div class="project-card">
+      <h3>API Playground</h3>
+      <p>Deploy the FastAPI sandbox on Render or Heroku and use <a href="api-playground.md">ReDoc</a> to test the endpoints.</p>
+    </div>
+    <div class="project-card">
       <h3>Tutorial</h3>
       <p>Learn how to load sample data and compute averages. <a href="tutorial.md">Follow the tutorial</a>.</p>
       <pre><code>$ python examples/tutorial.py
