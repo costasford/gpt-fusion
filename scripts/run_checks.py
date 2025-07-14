@@ -20,7 +20,7 @@ def run(cmd: str) -> None:
 def main() -> None:
     project_root = Path(__file__).resolve().parent.parent
     run("pre-commit run --all-files")
-    run("pytest -q")
+    run("pytest --cov=src --cov-report=xml -q")
     docs_dir = project_root / "docs"
     if docs_dir.is_dir():
         run("jekyll build -s docs -d docs/_site")

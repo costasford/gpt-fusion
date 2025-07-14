@@ -37,7 +37,9 @@ jobs:
       - name: Lint
         run: pre-commit run --all-files
       - name: Test
-        run: pytest -q
+        run: pytest --cov=src --cov-report=xml -q
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
       - name: Build documentation
         run: jekyll build -s docs -d docs/_site
 
