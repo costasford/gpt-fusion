@@ -16,12 +16,15 @@ Plan:
 
 <div class="hero container">
   <h1>GPT Fusion Playground</h1>
-  <p><strong>Practical demos of human-AI collaboration</strong></p>
+  <p class="text-xl font-semibold">Build, test & remix AI mini-apps in minutes</p>
   <p>
     <a href="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml"><img src="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg" alt="CI Status" loading="lazy"></a>
     <a href="https://codecov.io/gh/costasford/gpt-fusion"><img src="https://app.codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg" alt="Coverage Status" loading="lazy"></a>
     <a href="https://pypi.org/project/gpt-fusion/"><img src="https://img.shields.io/pypi/dm/gpt-fusion.svg" alt="PyPI Downloads" loading="lazy"></a>
     <a href="https://github.com/costasford/gpt-fusion/blob/main/LICENSE"><img src="https://img.shields.io/github/license/costasford/gpt-fusion" alt="License" loading="lazy"></a>
+  </p>
+  <p>
+    <a href="https://github.com/costasford/gpt-fusion" class="btn">Get Started on GitHub</a>
   </p>
   <p>Use the search bar to jump directly to any topic in the docs.</p>
 </div>
