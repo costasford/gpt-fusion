@@ -73,6 +73,18 @@ python -m http.server --directory auth-ui-kit
 
 _Tip: convert screenshots to WebP for a smaller footprint._
 
+## Starter kit templates
+
+Use the cookie-cutter helpers to spin up small demos:
+
+```bash
+python -m gpt_fusion.starter_kits create_csv_app my-csv-demo
+python -m gpt_fusion.starter_kits create_tailwind_ui my-ui-demo
+```
+
+Each command copies a minimal project into the given folder so you can start
+your own AI adventure right away.
+
 ## Project layout
 
 ```

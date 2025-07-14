@@ -8,6 +8,7 @@ from typing import Any
 from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .core import greet
 from .build_utils import minify_dir
+from .starter_kits import create_csv_app, create_tailwind_ui
 from .utils import (
     ChatHistory,
     add_numbers,
@@ -72,4 +73,6 @@ __all__ = [
     "backend_app",
     "Project",
     "PROJECTS",
+    "create_csv_app",
+    "create_tailwind_ui",
 ]
