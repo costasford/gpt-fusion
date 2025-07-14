@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 from .projects import PROJECTS, Project
+from .core import greet
 
 app = FastAPI()
 
@@ -31,3 +32,9 @@ def get_profile(uid: str) -> Profile:
 def list_projects() -> list[Project]:
     """Return the sample projects bundled with the repo."""
     return PROJECTS
+
+
+@app.get("/greet/{name}")
+def greet_user(name: str) -> dict[str, str]:
+    """Return a greeting for *name* using :func:`greet`."""
+    return {"message": greet(name)}

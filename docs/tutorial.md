@@ -105,4 +105,14 @@ history.add_message("How can I help?")
 print(history.messages)
 ```
 
+### Live API demo
+
+Type a name and call the `/greet` endpoint without leaving the page:
+
+<div id="playground">
+  <input id="name-input" type="text" value="Fusion" aria-label="Name">
+  <button id="greet-btn">Greet</button>
+  <pre id="greet-output"></pre>
+</div>
+
 <script src="assets/js/bundle.js"></script>
