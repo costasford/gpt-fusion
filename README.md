@@ -109,6 +109,13 @@ python scripts/run_checks.py
 
 The script formats the code, runs the tests, and builds the documentation.
 
+## Releases
+
+The `main` branch is protected so changes only merge after the CI workflow
+passes. Versions follow [Semantic Versioning](https://semver.org) and release
+notes are generated automatically using
+[Release Drafter](https://github.com/marketplace/release-drafter).
+
 ## Contributing
 
 Development guidelines are recorded in [AGENTS.md](AGENTS.md).
