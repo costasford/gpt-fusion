@@ -1,4 +1,5 @@
 # gpt-fusion
+<!-- Plan: document marketing site integration -->
 [![CI Status](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
 [![Coverage Status](https://img.shields.io/coveralls/github/costasford/gpt-fusion?branch=main)](https://coveralls.io/github/costasford/gpt-fusion?branch=main)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -86,6 +87,7 @@ jekyll serve
 ```
 
 and open <http://localhost:4000> to browse the tutorials.
+The marketing landing page is available at `docs/marketing-site/index.html` and is built alongside the documentation.
 
 ## Local workflow automation
 
