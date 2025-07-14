@@ -43,3 +43,26 @@ jobs:
       - name: Build documentation
         run: jekyll build -s docs -d docs/_site
 
+  docs:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+      - name: Install Ruby gems
+        run: |
+          gem install jekyll jekyll-theme-cayman jekyll-seo-tag jekyll-sitemap --no-document
+      - name: Build documentation
+        run: jekyll build -s docs -d docs/_site
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: docs/_site
+
