@@ -11,6 +11,10 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-minifier
+jekyll-minifier:
+  uglifier_args:
+    harmony: true
+  compress_javascript: false
 github:
   is_project_page: false
 # DocSearch credentials are placeholders

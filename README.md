@@ -111,6 +111,8 @@ jekyll serve
 ```
 
 and open <http://localhost:4000> to browse the tutorials.
+The production build uses `jekyll-minifier` to shrink CSS, JS and HTML files
+before deploying to GitHub Pages.
 The marketing landing page is available at `docs/marketing-site/index.html` and is built alongside the documentation.
 The docs are indexed by [Algolia DocSearch](https://docsearch.algolia.com/), providing instant search across all pages.
 
