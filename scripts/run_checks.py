@@ -24,6 +24,9 @@ def main() -> None:
     docs_dir = project_root / "docs"
     if docs_dir.is_dir():
         run("jekyll build -s docs -d docs/_site")
+        run("PYTHONPATH=src python -m gpt_fusion.build_utils docs/_site docs/_site_tmp")
+        run("rm -rf docs/_site")
+        run("mv docs/_site_tmp docs/_site")
     print("All checks passed.")
 
 

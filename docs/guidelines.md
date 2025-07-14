@@ -52,7 +52,8 @@ This page mirrors the instructions in [AGENTS.md](../AGENTS.md) for AI-based con
 
 ## Website performance
 
-- Combine and bundle CSS and JS assets. The docs use `assets/js/bundle.js` so only one script is loaded.
-- GitHub Pages serves files over HTTP/2, allowing multiple requests to multiplex efficiently.
+- Combine and bundle CSS and JS assets. The docs use `assets/js/bundle.js` so only one script is loaded. Files are minified after `jekyll build` using `gpt_fusion.build_utils`.
+- GitHub Pages serves files over HTTP/2, allowing multiple requests to multiplex efficiently, but bundling still reduces the total request count.
+- The Plausible Analytics script remains deferred and weighs about 1 kB, so it has minimal impact on page load.
 
 If this page diverges from [AGENTS.md](../AGENTS.md), please update both files to keep the instructions consistent.
