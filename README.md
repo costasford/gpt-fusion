@@ -2,7 +2,6 @@
 <!-- Plan:
 1. Document marketing site integration.
 2. Mention PyPI installation for the new alpha release.
-3. Update coverage badge to Codecov.
 -->
 [![CI Status](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
 [![codecov](https://app.codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg)](https://codecov.io/gh/costasford/gpt-fusion)
@@ -121,6 +120,10 @@ python scripts/run_checks.py
 ```
 
 The script formats the code, runs the tests, and builds the documentation.
+## CI & Coverage
+
+Our GitHub Actions workflow uploads test coverage to [Codecov](https://codecov.io/gh/costasford/gpt-fusion). The badge above shows the latest percentage.
+
 
 ## Releases
 

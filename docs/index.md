@@ -9,7 +9,6 @@ Plan:
 2. Use preformatted blocks for CLI output and an iframe for the Unity preview.
 3. Keep markup lightweight so existing CSS continues to work.
 4. Link to pip install instructions.
-5. Update coverage badge to Codecov.
 -->
 
 {% include nav.html %}
