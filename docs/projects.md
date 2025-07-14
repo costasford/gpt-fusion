@@ -3,6 +3,12 @@ layout: default
 title: Projects
 ---
 
+<!--
+Plan:
+1. Provide inline demo snippets for the Python utilities and tutorial sections.
+2. Keep the existing iframes for other projects.
+-->
+
 {% include nav.html %}
 
 <div id="toc">
@@ -16,6 +22,13 @@ This repository hosts several small demos that showcase different aspects of hum
 ## Python utilities
 
 The `gpt_fusion` package bundles greeting helpers, math functions, text utilities and a small CSV reader. It also exposes a web scraper, a Twitter bot and an optional FastAPI backend. See the [package README](../README.md#project-layout) for an overview.
+
+```bash
+$ python examples/tutorial.py
+Values: [1.0, 2.0, 3.0, 4.0, 5.0]
+Average: 3.0
+Median: 3.0
+```
 
 ## Auth UI Kit
 
@@ -57,6 +70,13 @@ StreamerABC playing Just Chatting with 15000 viewers
 ## Tutorial
 
 Walk through loading the sample dataset and computing averages in [tutorial.md](tutorial.md).
+
+```bash
+$ python examples/tutorial.py
+Values: [1.0, 2.0, 3.0, 4.0, 5.0]
+Average: 3.0
+Median: 3.0
+```
 
 For development instructions see the [Guidelines](guidelines.md).
 
