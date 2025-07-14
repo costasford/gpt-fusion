@@ -1,6 +1,7 @@
 # Plan:
 # 1. Keep existing Jekyll config.
 # 2. Add DocSearch placeholders for Algolia integration.
+# 3. Enable jekyll-minifier for smaller builds.
 theme: jekyll-theme-cayman
 title: GPT Fusion
 description: Practical demos of human-AI collaboration
@@ -9,6 +10,7 @@ baseurl: "/gpt-fusion"
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-minifier
 github:
   is_project_page: false
 # DocSearch credentials are placeholders
