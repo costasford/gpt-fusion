@@ -8,6 +8,8 @@ venv/
 
 # Test reports
 htmlcov/
+coverage.xml
+.coverage
 
 # Misc
 *.log
