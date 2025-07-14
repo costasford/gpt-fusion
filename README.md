@@ -3,6 +3,7 @@
 1. Document marketing site integration.
 2. Mention PyPI installation for the new alpha release.
 3. Update coverage badge to Codecov.
+4. Add note about Algolia DocSearch for docs search.
 -->
 [![CI Status](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
 [![codecov](https://app.codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg)](https://codecov.io/gh/costasford/gpt-fusion)
@@ -111,6 +112,7 @@ jekyll serve
 
 and open <http://localhost:4000> to browse the tutorials.
 The marketing landing page is available at `docs/marketing-site/index.html` and is built alongside the documentation.
+The docs are indexed by [Algolia DocSearch](https://docsearch.algolia.com/), providing instant search across all pages.
 
 ## Local workflow automation
 
