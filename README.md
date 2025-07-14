@@ -123,6 +123,10 @@ python scripts/run_checks.py
 ```
 
 The script formats the code, runs the tests, and builds the documentation.
+## CI & Coverage
+
+Our GitHub Actions workflow uploads test coverage to [Codecov](https://codecov.io/gh/costasford/gpt-fusion). The badge above shows the latest percentage.
+
 
 ## Releases
 
