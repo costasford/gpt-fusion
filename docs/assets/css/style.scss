@@ -1,5 +1,6 @@
 ---
 ---
+/* Plan: 1. Keep existing theme imports. 2. Add DocSearch container styling. */
 
 $header-bg-color: #0d47a1; // corporate navy
 $header-bg-color-secondary: #1565c0;
@@ -89,6 +90,16 @@ h6 {
 
 .navbar a:hover {
   text-decoration: underline;
+}
+
+#docsearch {
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  #docsearch {
+    display: none;
+  }
 }
 
 .navbar-brand {
