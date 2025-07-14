@@ -32,5 +32,7 @@ We welcome improvements to **gpt-fusion**! Please follow these guidelines to mai
 Keep changes focused and document your intent. Passing tests and clean linting
 are required before a PR is merged. Summaries should explain the high level goal
 and mention the commands you ran.
+- The `main` branch is protected; CI must succeed before your pull request can be merged.
+- Releases use [Release Drafter](https://github.com/marketplace/release-drafter) and follow Semantic Versioning.
 
 <script src="assets/js/bundle.js"></script>

@@ -1,0 +1,36 @@
+name-template: v$RESOLVED_VERSION
+tag-template: v$RESOLVED_VERSION
+change-template: '- $TITLE (#$NUMBER)'
+categories:
+  - title: "🚀 Features"
+    labels:
+      - feat
+  - title: "🐛 Fixes"
+    labels:
+      - fix
+  - title: "📝 Docs"
+    labels:
+      - docs
+  - title: "🧹 Chores"
+    labels:
+      - chore
+  - title: "⬆️ Dependencies"
+    labels:
+      - dependencies
+version-resolver:
+  major:
+    labels:
+      - breaking
+  minor:
+    labels:
+      - feat
+  patch:
+    labels:
+      - fix
+      - docs
+      - chore
+      - dependencies
+      - security
+template: |
+  ## Changes
+  $CHANGES
