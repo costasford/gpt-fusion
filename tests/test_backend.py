@@ -28,3 +28,9 @@ def test_list_projects():
     assert response.status_code == 200
     data = response.json()
     assert any(p["id"] == "auth-ui-kit" for p in data)
+
+
+def test_greet_user():
+    response = client.get("/greet/Fusion")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Hello, Fusion! Welcome to gpt-fusion."}
