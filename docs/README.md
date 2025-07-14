@@ -98,13 +98,16 @@ Run `uvicorn gpt_fusion.backend:app` to start the example FastAPI server. It exp
 ### Serving the docs locally
 
 The documentation is built with [Jekyll](https://jekyllrb.com/). After
-installing the Jekyll gem, run `jekyll serve` from this folder and open
-<http://localhost:4000> in your browser.
+installing the Jekyll gem and dependencies with `bundle install`, run
+`jekyll serve` from this folder and open <http://localhost:4000> in your
+browser.
 
 ### Deploying to GitHub Pages
 
 GitHub Pages serves these files from a global CDN so delivery is fast worldwide.
 The docs site is automatically published to the gh-pages branch after each merge to main.
+Assets are compressed during the build using the `jekyll-minifier` plugin to
+trim CSS, JavaScript, and HTML for faster load times.
 If you need custom caching behaviour, create a `_headers` file in this
 `docs/` directory and specify `Cache-Control` rules as required.
 
