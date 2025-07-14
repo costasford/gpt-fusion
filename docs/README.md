@@ -2,6 +2,7 @@
 layout: default
 title: Overview
 ---
+<!-- Plan: document site search with Algolia DocSearch. -->
 
 # Documentation
 
@@ -119,6 +120,13 @@ This documentation site uses [Plausible Analytics](https://plausible.io/) to col
 anonymous visit metrics and track uptime. The small snippet in
 `_includes/head-custom.html` loads the script with `defer` so page performance
 remains unaffected.
+
+## Site search
+
+The documentation is indexed by [Algolia DocSearch](https://docsearch.algolia.com/),
+which automatically crawls the Markdown files and provides instant search across
+all pages. Replace the placeholder credentials in `_config.yml` with your own
+to enable indexing on a fork.
 
 ## Contributing
 
