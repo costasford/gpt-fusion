@@ -8,6 +8,7 @@ Plan:
 1. Show a short demo inside each project card for quick context.
 2. Use preformatted blocks for CLI output and an iframe for the Unity preview.
 3. Keep markup lightweight so existing CSS continues to work.
+4. Link to pip install instructions.
 -->
 
 {% include nav.html %}
@@ -26,7 +27,7 @@ Plan:
 
 <section class="container">
   <h2>Quickstart</h2>
-  <p>New to the repository? See the <a href="https://github.com/costasford/gpt-fusion#readme">main README</a> for setup details. Clone the project, run <code>pytest</code> to verify the Python utilities and then explore the demos described below.</p>
+  <p>New to the repository? See the <a href="https://github.com/costasford/gpt-fusion#readme">main README</a> for setup details. You can also install the package with <code>pip install gpt-fusion</code> and run <code>pytest</code> to verify the utilities before exploring the demos.</p>
   <p>These concise examples build on one another. The Python helpers can power the login form or provide data for the Unity prototype. Throughout the documentation you will see how tests and tutorials connect the components.</p>
 </section>
 
