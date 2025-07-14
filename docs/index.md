@@ -51,9 +51,9 @@ Median: 3.0</code></pre>
     </div>
     <div class="project-card">
       <h3>Unity prototype</h3>
-      <p>A small 3D demo showcasing simple movement and item pickups. Copy the <code>Assets</code> folder into a new Unity project (tested with Unity&nbsp;2021 or later) and run the scene to explore. <a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype">View the repository</a>.</p>
+      <p>A small 3D demo showcasing simple movement and item pickups. Copy the <code>Assets</code> folder into a new Unity project (tested with Unity&nbsp;2021 or later) and run the scene to explore. <a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype">View the repository</a>. You can also <a href="unity-demo/">play the WebGL build</a>.</p>
       <div class="preview">
-        <iframe src="https://play.unity.com/mg/other/unity-webgl" width="100%" height="180" allowfullscreen loading="lazy" title="Unity preview"></iframe>
+        <iframe src="unity-demo/" width="100%" height="180" allowfullscreen loading="lazy" title="Unity preview"></iframe>
       </div>
     </div>
     <div class="project-card">

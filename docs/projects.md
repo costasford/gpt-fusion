@@ -45,10 +45,10 @@ A Tailwind‑styled login form powered by Firebase. Update `auth-ui-kit/app.js` 
 
 ## Unity prototype
 
-A basic 3D scene demonstrating player movement, item pickups and simple enemy AI. Copy the `Assets` directory from `unity-prototype/` into a new Unity project (Unity 2021 or later).
+A basic 3D scene demonstrating player movement, item pickups and simple enemy AI. Copy the `Assets` directory from `unity-prototype/` into a new Unity project (Unity 2021 or later). The build can be exported for WebGL and placed under `docs/unity-demo`.
 
 <div class="preview">
-  <iframe src="https://play.unity.com/mg/other/unity-webgl" width="640" height="360" allowfullscreen loading="lazy" title="Unity WebGL demo"></iframe>
+  <iframe src="unity-demo/" width="640" height="360" allowfullscreen loading="lazy" title="Unity WebGL demo"></iframe>
 </div>
 
 ## Top Viewer Games
