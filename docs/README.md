@@ -104,6 +104,7 @@ installing the Jekyll gem, run `jekyll serve` from this folder and open
 ### Deploying to GitHub Pages
 
 GitHub Pages serves these files from a global CDN so delivery is fast worldwide.
+The docs site is automatically published to the gh-pages branch after each merge to main.
 If you need custom caching behaviour, create a `_headers` file in this
 `docs/` directory and specify `Cache-Control` rules as required.
 
