@@ -1,0 +1,11 @@
+# Plan: configure Codecov thresholds and disable PR comments
+codecov:
+  require_ci_to_pass: yes
+coverage:
+  status:
+    project:
+      default:
+        target: 80%
+        threshold: 1%
+    patch: off
+comment: false

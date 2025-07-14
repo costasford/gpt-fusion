@@ -9,6 +9,7 @@ Plan:
 2. Use preformatted blocks for CLI output and an iframe for the Unity preview.
 3. Keep markup lightweight so existing CSS continues to work.
 4. Link to pip install instructions.
+5. Update coverage badge to Codecov.
 -->
 
 {% include nav.html %}
@@ -18,7 +19,7 @@ Plan:
   <p><strong>Practical demos of human-AI collaboration</strong></p>
   <p>
     <a href="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml"><img src="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg" alt="CI Status" loading="lazy"></a>
-    <a href="https://codecov.io/gh/costasford/gpt-fusion"><img src="https://codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg" alt="Coverage Status" loading="lazy"></a>
+    <a href="https://codecov.io/gh/costasford/gpt-fusion"><img src="https://app.codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg" alt="Coverage Status" loading="lazy"></a>
     <a href="https://pypi.org/project/gpt-fusion/"><img src="https://img.shields.io/pypi/dm/gpt-fusion.svg" alt="PyPI Downloads" loading="lazy"></a>
     <a href="https://github.com/costasford/gpt-fusion/blob/main/LICENSE"><img src="https://img.shields.io/github/license/costasford/gpt-fusion" alt="License" loading="lazy"></a>
   </p>
