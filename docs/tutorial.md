@@ -2,6 +2,7 @@
 layout: default
 title: Tutorial
 ---
+<!-- Plan: mention PyPI install alongside editable install -->
 
 # Tutorial
 
@@ -23,6 +24,12 @@ Ensure Python&nbsp;3.10 or newer is installed and clone the repository:
 git clone https://github.com/costasford/gpt-fusion.git
 cd gpt-fusion
 pip install -e .
+```
+
+Alternatively install the published package:
+
+```bash
+pip install gpt-fusion
 ```
 
 To explore the optional API server, web scraper and Twitter helpers install the extras:

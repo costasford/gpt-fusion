@@ -1,5 +1,8 @@
 # gpt-fusion
-<!-- Plan: document marketing site integration -->
+<!-- Plan:
+1. Document marketing site integration.
+2. Mention PyPI installation for the new alpha release.
+-->
 [![CI Status](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg)](https://codecov.io/gh/costasford/gpt-fusion)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -25,7 +28,14 @@ humans and ChatGPT can iteratively build software together.
 
 ## Installation & Usage
 
-Clone the repo and install the development dependencies:
+You can install the alpha release directly from PyPI:
+
+```bash
+pip install gpt-fusion
+```
+
+To hack on the project locally, clone the repo and install the development
+dependencies:
 
 ```bash
 git clone https://github.com/costasford/gpt-fusion.git
