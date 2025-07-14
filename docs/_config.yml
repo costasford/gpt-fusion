@@ -16,3 +16,4 @@ docsearch:
   appId: "REPLACE_WITH_APP_ID"
   apiKey: "REPLACE_WITH_API_KEY"
   indexName: "gpt-fusion"
+
