@@ -66,6 +66,10 @@ Top Streams:
 Streamer123 playing Fortnite with 20000 viewers
 StreamerABC playing Just Chatting with 15000 viewers
 ```
+## API Playground
+
+Host the FastAPI demo on Render or Heroku and open `/redoc` to experiment with the endpoints. See [api-playground.md](api-playground.md) for setup steps.
+
 
 ## Tutorial
 
