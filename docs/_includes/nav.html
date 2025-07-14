@@ -1,7 +1,8 @@
-<!-- Plan: 1. Keep navigation structure. 2. Insert DocSearch container. -->
+<!-- Plan: 1. Keep navigation structure. 2. Insert DocSearch container. 3. Add marketing page link. -->
 <nav class="navbar" role="navigation" aria-label="Main navigation">
   <span class="navbar-brand">GPT Fusion</span>
   <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} class="active" aria-current="page"{% endif %}>Home</a>
+  <a href="{{ '/marketing-site/' | relative_url }}">Marketing</a>
   <a href="{{ '/README.html' | relative_url }}" class="cta{% if page.url == '/README.html' %} active" aria-current="page"{% endif %}">Overview</a>
   <a href="{{ '/projects.html' | relative_url }}"{% if page.url == '/projects.html' %} class="active" aria-current="page"{% endif %}>Projects</a>
   <a href="{{ '/tutorial.html' | relative_url }}" class="cta{% if page.url == '/tutorial.html' %} active" aria-current="page"{% endif %}">Tutorial</a>
