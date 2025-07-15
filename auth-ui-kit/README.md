@@ -1,6 +1,10 @@
 # Auth UI Kit
 
-This simple example demonstrates a login form built with **Tailwind CSS** and **Firebase Authentication**.
+<!--
+Plan: highlight dark mode support using Tailwind's `dark:` classes.
+-->
+
+This simple example demonstrates a login form built with **Tailwind CSS** and **Firebase Authentication**. The interface automatically adapts to the user's OS preference. All badges and text use high-contrast colors so both light and dark themes meet WCAG guidelines.
 
 ## Setup
 
