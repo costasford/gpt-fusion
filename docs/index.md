@@ -35,6 +35,16 @@ Plan:
 </section>
 
 <section class="container">
+  <h2>Try the API</h2>
+  <div id="playground">
+    <input id="name-input" type="text" value="Fusion" aria-label="Name">
+    <button id="greet-btn">Greet</button>
+    <pre id="greet-output"></pre>
+  </div>
+  <p>The demo assumes a backend running at <code>/api</code> on Render.</p>
+</section>
+
+<section class="container">
   <h2>Projects</h2>
   <p>More information about each demo lives on the <a href="projects.md">Projects page</a>.</p>
   <div class="projects-grid">

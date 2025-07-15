@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: gpt-fusion-api
+    env: python
+    plan: free
+    buildCommand: pip install "gpt-fusion[backend]"
+    startCommand: uvicorn gpt_fusion.backend:app --host 0.0.0.0 --port $PORT --root-path /api
+    healthCheckPath: /api/
