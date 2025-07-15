@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   button.addEventListener('click', async () => {
     const input = document.getElementById('name-input');
     const name = input ? input.value.trim() || 'Fusion' : 'Fusion';
-    const apiBase = window.API_BASE || 'https://gpt-fusion-demo.fly.dev';
+    const apiBase = window.API_BASE || '/api';
     try {
       const res = await fetch(`${apiBase}/greet/${encodeURIComponent(name)}`);
       if (!res.ok) throw new Error('Request failed');

@@ -30,8 +30,8 @@ Open <http://localhost:8000/redoc> to explore the auto-generated ReDoc docs and 
 
 1. Create a new **Web Service** from your GitHub repo.
 2. Set the build command to `pip install "gpt-fusion[backend]"`.
-3. Use `uvicorn gpt_fusion.backend:app --host 0.0.0.0 --port $PORT` as the start command.
-4. After the service spins up, visit `<service-url>/redoc` to try the API in your browser.
+3. Use `uvicorn gpt_fusion.backend:app --host 0.0.0.0 --port $PORT --root-path /api` as the start command so all routes live under `/api`.
+4. After the service spins up, visit `<service-url>/api/redoc` to try the API in your browser or `curl <service-url>/api/greet/Fusion` for a quick test.
 
 ## Deploying to Heroku
 

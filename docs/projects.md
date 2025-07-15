@@ -68,7 +68,7 @@ StreamerABC playing Just Chatting with 15000 viewers
 ```
 ## API Playground
 
-Host the FastAPI demo on Render or Heroku and open `/redoc` to experiment with the endpoints. See [api-playground.md](api-playground.md) for setup steps.
+Host the FastAPI demo on Render or Heroku and open `/api/redoc` to experiment with the endpoints. See [api-playground.md](api-playground.md) for setup steps.
 
 
 ## Tutorial
