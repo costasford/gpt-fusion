@@ -107,6 +107,8 @@ browser.
 
 GitHub Pages serves these files from a global CDN so delivery is fast worldwide.
 The docs site is automatically published to the gh-pages branch after each merge to main.
+Every pull request also gets its own preview link using `actions/deploy-pages`,
+so reviewers can check the rendered HTML before merging.
 Assets are compressed during the build using the `jekyll-minifier` plugin to
 trim CSS, JavaScript, and HTML for faster load times.
 If you need custom caching behaviour, create a `_headers` file in this
