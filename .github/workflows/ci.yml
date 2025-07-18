@@ -1,5 +1,14 @@
 name: CI
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 on:
   push:
     branches: [ main ]
@@ -42,27 +51,21 @@ jobs:
         uses: codecov/codecov-action@v3
       - name: Build documentation
         run: JEKYLL_ENV=production jekyll build -s docs -d docs/_site
+        if: matrix.python-version == '3.12'
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        if: matrix.python-version == '3.12'
+        with:
+          path: docs/_site
 
-  docs:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
+  deploy:
     needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-      - name: Install Ruby gems
-        run: |
-          gem install jekyll jekyll-theme-cayman jekyll-seo-tag jekyll-sitemap jekyll-minifier --no-document
-      - name: Build documentation
-        run: JEKYLL_ENV=production jekyll build -s docs -d docs/_site
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: docs/_site
+        id: deployment
+        uses: actions/deploy-pages@v5
 
