@@ -34,7 +34,8 @@ jobs:
           ruby-version: '3.2'
       - name: Install Ruby gems
         run: |
-          gem install jekyll jekyll-theme-cayman jekyll-seo-tag jekyll-sitemap jekyll-minifier --no-document
+          cd docs
+          bundle install
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -51,7 +52,9 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@v3
       - name: Build documentation
-        run: JEKYLL_ENV=production jekyll build -s docs -d docs/_site
+        run: |
+          cd docs
+          JEKYLL_ENV=production bundle exec jekyll build -d _site
         if: matrix.python-version == '3.12'
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
