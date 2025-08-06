@@ -7,6 +7,14 @@ from typing import Any
 
 from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .core import greet
+from .exceptions import (
+    ConfigurationError,
+    DataError,
+    GPTFusionError,
+    SecurityError,
+    ValidationError,
+)
+
 from .starter_kits import create_csv_app, create_tailwind_ui
 from .utils import (
     ChatHistory,
@@ -50,29 +58,35 @@ def __getattr__(name: str) -> Any:
 
 __all__ = [
     "greet",
+    "create_csv_app",
+    "create_tailwind_ui",
     "ChatHistory",
     "add_numbers",
+    "divide_numbers",
     "multiply_numbers",
     "subtract_numbers",
-    "divide_numbers",
-    "load_numbers_from_csv",
     "average_from_csv",
-    "scrape",
+    "load_numbers_from_csv",
     "median_from_csv",
+    "is_palindrome",
+    "most_common_word",
     "word_count",
     "unique_words",
     "reverse_words",
     "count_characters",
     "remove_punctuation",
-    "most_common_word",
     "to_title_case",
-    "is_palindrome",
+    "scrape",
     "minify_dir",
     "TwitterBot",
     "TwitchClient",
     "backend_app",
     "Project",
     "PROJECTS",
-    "create_csv_app",
-    "create_tailwind_ui",
+    # Exceptions
+    "GPTFusionError",
+    "ValidationError",
+    "DataError",
+    "SecurityError",
+    "ConfigurationError",
 ]

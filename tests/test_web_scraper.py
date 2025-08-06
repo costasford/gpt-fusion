@@ -26,16 +26,31 @@ def test_scrape_parses_text():
 
     with patch("requests.get", return_value=mock_response) as mock_get:
         result = scrape("http://example.com", "p.msg")
-        mock_get.assert_called_once_with("http://example.com", timeout=10)
+        mock_get.assert_called_once_with(
+            "http://example.com",
+            timeout=10,
+            headers={
+                "User-Agent": (
+                    "gpt-fusion/0.0.1a0 " "(https://github.com/costasford/gpt-fusion)"
+                )
+            },
+        )
 
     assert result == ["Hello", "World"]
 
 
-def test_scrape_connection_error_returns_empty_list():
+def test_scrape_connection_error_raises_exception():
     with patch(
         "requests.get", side_effect=requests.exceptions.RequestException
     ) as mock_get:
-        result = scrape("http://example.com", "p.msg")
-        mock_get.assert_called_once_with("http://example.com", timeout=10)
-
-    assert result == []
+        with pytest.raises(requests.exceptions.RequestException):
+            scrape("http://example.com", "p.msg")
+        mock_get.assert_called_once_with(
+            "http://example.com",
+            timeout=10,
+            headers={
+                "User-Agent": (
+                    "gpt-fusion/0.0.1a0 " "(https://github.com/costasford/gpt-fusion)"
+                )
+            },
+        )
