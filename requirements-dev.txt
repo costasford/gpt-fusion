@@ -10,3 +10,6 @@ tweepy==4.14.0
 fastapi==0.109.0
 httpx==0.24.1
 brotli==1.1.0
+minify-html==0.16.4
+csscompressor==0.9.5
+jsmin==3.0.1

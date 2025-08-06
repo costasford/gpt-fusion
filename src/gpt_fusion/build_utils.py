@@ -7,7 +7,7 @@ import gzip
 import shutil
 
 import brotli
-import htmlmin
+import minify_html
 from csscompressor import compress
 from jsmin import jsmin
 
@@ -31,9 +31,7 @@ def minify_dir(src_dir: str | Path, dst_dir: str | Path) -> None:
         target.parent.mkdir(parents=True, exist_ok=True)
         text: str | bytes
         if file.suffix.lower() in {".html", ".htm"}:
-            text = htmlmin.minify(
-                file.read_text(encoding="utf-8"), remove_comments=True
-            )
+            text = minify_html.minify(file.read_text(encoding="utf-8"))
             target.write_text(text, encoding="utf-8")
         elif file.suffix.lower() == ".css":
             text = compress(file.read_text(encoding="utf-8"))
