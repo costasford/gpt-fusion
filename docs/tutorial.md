@@ -16,20 +16,20 @@ This guide walks through how to install the project, load the bundled
 dataset and call a few helper functions from ``gpt_fusion``. It expands
 on the examples in the main README with step‑by‑step instructions.
 
-## Setup
+## Installation
 
-Ensure Python&nbsp;3.10 or newer is installed and clone the repository:
+The easiest way to get started is to install from PyPI:
+
+```bash
+pip install gpt-fusion
+```
+
+For development or to access the latest features, clone and install locally:
 
 ```bash
 git clone https://github.com/costasford/gpt-fusion.git
 cd gpt-fusion
 pip install -e .
-```
-
-Alternatively install the published package:
-
-```bash
-pip install gpt-fusion
 ```
 
 To explore the optional API server, web scraper and Twitter helpers install the extras:

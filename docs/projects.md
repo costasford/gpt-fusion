@@ -21,7 +21,7 @@ This repository hosts several small demos that showcase different aspects of hum
 
 ## Python utilities
 
-The `gpt_fusion` package bundles greeting helpers, math functions, text utilities and a small CSV reader. It also exposes a web scraper, a Twitter bot and an optional FastAPI backend. See the [package README](../README.md#project-layout) for an overview.
+The `gpt_fusion` package bundles greeting helpers, math functions, text utilities and a small CSV reader. It also exposes a web scraper, a Twitter bot and an optional FastAPI backend. See the [tutorial](tutorial.html) for an overview.
 
 ```bash
 $ python examples/tutorial.py

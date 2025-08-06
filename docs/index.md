@@ -35,22 +35,22 @@ Plan:
 </section>
 
 <section class="container">
-  <h2>Try the API</h2>
-  <div id="playground">
-    <input id="name-input" type="text" value="Fusion" aria-label="Name">
-    <button id="greet-btn">Greet</button>
-    <pre id="greet-output"></pre>
-  </div>
-  <p>The demo assumes a backend running at <code>/api</code> on Render.</p>
+  <h2>Quick Start</h2>
+  <p>Install GPT Fusion and try it out in seconds:</p>
+  <pre><code>pip install gpt-fusion
+python -c "import gpt_fusion; print(gpt_fusion.greet('World'))"</code></pre>
+  <p>For advanced features with web scraping, Twitter, and FastAPI:</p>
+  <pre><code>pip install "gpt-fusion[web,twitter,backend]"</code></pre>
+  <p><a href="api-playground.html">Try the interactive API playground →</a></p>
 </section>
 
 <section class="container">
   <h2>Projects</h2>
-  <p>More information about each demo lives on the <a href="projects.md">Projects page</a>.</p>
+  <p>More information about each demo lives on the <a href="projects.html">Projects page</a>.</p>
   <div class="projects-grid">
     <div class="project-card">
       <h3>Python utilities</h3>
-      <p>Reusable helpers for greetings, math, text processing and simple CSV analysis. The package also ships with a web scraper and optional Twitter and FastAPI extras. <a href="README.md">Read the docs</a>.</p>
+      <p>Reusable helpers for greetings, math, text processing and simple CSV analysis. The package also ships with a web scraper and optional Twitter and FastAPI extras. <a href="tutorial.html">Read the tutorial</a>.</p>
       <pre><code>$ python examples/tutorial.py
 Values: [1.0, 2.0, 3.0, 4.0, 5.0]
 Average: 3.0
@@ -60,7 +60,7 @@ Median: 3.0</code></pre>
       <h3>Auth UI Kit</h3>
       <p>Tailwind CSS login form using Firebase. Replace the config in <code>app.js</code> with your project credentials and serve the directory locally to try out email/password and Google sign in flows.</p>
       <p><a href="https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit">View the demo</a></p>
-      <img src="/auth-ui-screenshot.png" alt="Auth UI screenshot" loading="lazy">
+      <img src="{{ '/assets/images/auth-ui-screenshot.png' | relative_url }}" alt="Auth UI screenshot" loading="lazy">
     </div>
     <div class="project-card">
       <h3>Unity prototype</h3>
@@ -71,11 +71,11 @@ Median: 3.0</code></pre>
     </div>
     <div class="project-card">
       <h3>API Playground</h3>
-      <p>Deploy the FastAPI sandbox on Render or Heroku and use <a href="api-playground.md">ReDoc</a> to test the endpoints.</p>
+      <p>Deploy the FastAPI sandbox on Render or Heroku and use <a href="api-playground.html">ReDoc</a> to test the endpoints.</p>
     </div>
     <div class="project-card">
       <h3>Tutorial</h3>
-      <p>Learn how to load sample data and compute averages. <a href="tutorial.md">Follow the tutorial</a>.</p>
+      <p>Learn how to load sample data and compute averages. <a href="tutorial.html">Follow the tutorial</a>.</p>
       <pre><code>$ python examples/tutorial.py
 Values: [1.0, 2.0, 3.0, 4.0, 5.0]
 Average: 3.0
@@ -83,7 +83,7 @@ Median: 3.0</code></pre>
     </div>
     <div class="project-card">
       <h3>Contribute</h3>
-      <p>Want to get involved? Read the <a href="contributing.md">contributing guide</a> to learn how we format code, lint, and run tests. For ongoing care of the project, consult the <a href="sustainability.md">Sustainability Guide</a>.</p>
+      <p>Want to get involved? Read the <a href="contributing.html">contributing guide</a> to learn how we format code, lint, and run tests. For ongoing care of the project, consult the <a href="sustainability.html">Sustainability Guide</a>.</p>
       <pre><code>$ python scripts/run_checks.py
 black..................Passed
 flake8.................Passed
