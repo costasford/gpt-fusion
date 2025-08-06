@@ -18,5 +18,8 @@
   "type": "module",
   "devDependencies": {
     "eslint": "^8.56.0"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
