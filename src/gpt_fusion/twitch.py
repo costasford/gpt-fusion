@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 import os
-from typing import Any
+from typing import Any, Optional
 
 import requests
 
 
 class TwitchClient:
-    """Simple client for the public Twitch API."""
+    """Simple client for the public Twitch API with connection pooling."""
 
     def __init__(
         self, client_id: str | None = None, client_secret: str | None = None
@@ -17,6 +17,25 @@ class TwitchClient:
         if not self.client_id or not self.client_secret:
             raise ValueError("Twitch credentials are not fully specified")
         self._token: str | None = None
+        self._session: Optional[requests.Session] = None
+
+    def _get_session(self) -> requests.Session:
+        """Get or create a requests session with connection pooling."""
+        if self._session is None:
+            self._session = requests.Session()
+            # Configure connection pooling
+            adapter = requests.adapters.HTTPAdapter(
+                pool_connections=5, pool_maxsize=10, max_retries=2, pool_block=False
+            )
+            self._session.mount("http://", adapter)
+            self._session.mount("https://", adapter)
+        return self._session
+
+    def close(self) -> None:
+        """Close the session and clean up connections."""
+        if self._session:
+            self._session.close()
+            self._session = None
 
     def _authenticate(self) -> None:
         if self._token:
@@ -27,7 +46,8 @@ class TwitchClient:
             "client_secret": self.client_secret,
             "grant_type": "client_credentials",
         }
-        response = requests.post(url, params=params, timeout=10)
+        session = self._get_session()
+        response = session.post(url, params=params, timeout=10)
         response.raise_for_status()
         self._token = response.json()["access_token"]
 
@@ -41,7 +61,8 @@ class TwitchClient:
 
     def get_top_games(self, first: int = 5) -> list[dict[str, Any]]:
         url = "https://api.twitch.tv/helix/games/top"
-        response = requests.get(
+        session = self._get_session()
+        response = session.get(
             url, headers=self._headers(), params={"first": first}, timeout=10
         )
         response.raise_for_status()
@@ -49,7 +70,8 @@ class TwitchClient:
 
     def get_top_streams(self, first: int = 5) -> list[dict[str, Any]]:
         url = "https://api.twitch.tv/helix/streams"
-        response = requests.get(
+        session = self._get_session()
+        response = session.get(
             url, headers=self._headers(), params={"first": first}, timeout=10
         )
         response.raise_for_status()

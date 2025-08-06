@@ -6,6 +6,7 @@ import importlib
 from typing import Any
 
 from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
+from .config import config, get_config, update_config
 from .core import greet
 from .exceptions import (
     ConfigurationError,
@@ -83,6 +84,10 @@ __all__ = [
     "backend_app",
     "Project",
     "PROJECTS",
+    # Configuration
+    "config",
+    "get_config",
+    "update_config",
     # Exceptions
     "GPTFusionError",
     "ValidationError",

@@ -7,6 +7,8 @@ from dataclasses import dataclass
 
 import tweepy
 
+from .config import get_config
+
 
 @dataclass
 class TwitterBot:
@@ -47,7 +49,8 @@ class TwitterBot:
 
     def post_tweet(self, message: str) -> None:
         """Post *message* to Twitter."""
-        if len(message) > 280:
-            raise ValueError("Tweet exceeds 280 characters")
+        char_limit = get_config().TWITTER_CHAR_LIMIT
+        if len(message) > char_limit:
+            raise ValueError(f"Tweet exceeds {char_limit} characters")
 
         self.client.update_status(message)

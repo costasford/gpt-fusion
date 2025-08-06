@@ -5,7 +5,7 @@ from __future__ import annotations
 import csv
 import tempfile
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import pytest
 
@@ -125,25 +125,24 @@ class TestEdgeCases:
         finally:
             Path(temp_path).unlink()
 
-    @patch("gpt_fusion.web_scraper.requests.get")
-    def test_web_scraper_with_valid_url(self, mock_get):
+    @patch("gpt_fusion.web_scraper._get_session")
+    def test_web_scraper_with_valid_url(self, mock_get_session):
         """Test web scraper with valid URL and proper headers."""
-        # Mock successful response
-        mock_response = mock_get.return_value
+        # Mock session and response
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+
+        mock_response = Mock()
         mock_response.raise_for_status.return_value = None
         mock_response.text = "<html><body><p>Test content</p></body></html>"
+        mock_session.get.return_value = mock_response
 
         gpt_fusion.scrape("https://example.com", "p")
 
-        # Verify request was made with proper headers
-        mock_get.assert_called_once_with(
+        # Verify session.get was called with proper timeout
+        mock_session.get.assert_called_once_with(
             "https://example.com",
             timeout=10,
-            headers={
-                "User-Agent": (
-                    "gpt-fusion/0.0.1a0 " "(https://github.com/costasford/gpt-fusion)"
-                )
-            },
         )
 
     def test_palindrome_edge_cases(self):

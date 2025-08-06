@@ -17,23 +17,30 @@ def mock_auth(mock_post: Mock) -> None:
 
 
 def test_get_top_games_returns_data():
-    with (
-        patch("requests.post") as mock_post,
-        patch(
-            "requests.get",
-        ) as mock_get,
-    ):
-        mock_auth(mock_post)
+    with patch("gpt_fusion.twitch.TwitchClient._get_session") as mock_get_session:
+        # Mock the session
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+
+        # Mock auth response
+        auth_response = Mock()
+        auth_response.json.return_value = {"access_token": "token"}
+        auth_response.raise_for_status = Mock()
+
+        # Mock get response
         get_response = Mock()
         get_response.json.return_value = {"data": [{"name": "Game"}]}
         get_response.raise_for_status = Mock()
-        mock_get.return_value = get_response
+
+        # Configure session to return different responses for different calls
+        mock_session.post.return_value = auth_response
+        mock_session.get.return_value = get_response
 
         client = TwitchClient("id", "secret")
         games = client.get_top_games()
 
         assert games == [{"name": "Game"}]
-        mock_get.assert_called_once()
+        mock_session.get.assert_called_once()
 
 
 def test_missing_credentials_raise_error():
