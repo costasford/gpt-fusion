@@ -15,6 +15,7 @@ coverage.xml
 *.log
 docs/assets/*.png
 
+_site/
 docs/_site/
 docs/.jekyll-cache/
 .jekyll-cache/
