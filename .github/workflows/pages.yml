@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Deploy Jekyll site to GitHub Pages
+name: Deploy Jekyll to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -39,7 +39,10 @@ jobs:
           bundler-cache: true
           
       - name: Build with Jekyll
-        run: bundle exec jekyll build
+        run: |
+          bundle exec jekyll build --verbose
+          echo "Built site contents:"
+          ls -la _site/
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -47,7 +50,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: '_site'
           
       - name: Deploy to GitHub Pages
