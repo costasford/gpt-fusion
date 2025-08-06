@@ -16,8 +16,7 @@ coverage.xml
 docs/assets/*.png
 
 _site/
-docs/_site/
-docs/.jekyll-cache/
+docs/
 .jekyll-cache/
 node_modules/
 src/gpt_fusion.egg-info/
