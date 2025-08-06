@@ -15,6 +15,7 @@ jekyll-minifier:
   uglifier_args:
     harmony: true
   compress_javascript: false
+  compress_html: false
 github:
   is_project_page: false
 # DocSearch credentials are placeholders
