@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# Plan: publish an alpha build so users can `pip install gpt-fusion`.
+name = "gpt-fusion"
+version = "0.0.1a0"
+description = "Experimenting with human-AI collaboration"
+authors = [{name="Costas Ford", email="costasford@yahoo.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+backend = [
+    "fastapi",
+    "httpx<0.25",
+]
+twitter = [
+    "tweepy",
+]
+web = [
+    "requests",
+    "beautifulsoup4",
+]
+build = [
+    "minify-html>=0.15.0",
+    "csscompressor>=0.9.5",
+    "jsmin>=3.0.0",
+    "brotli>=1.0.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra"
+
+[tool.black]
+line-length = 88

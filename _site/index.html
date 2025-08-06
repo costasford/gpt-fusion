@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>GPT Fusion - Human-AI Collaboration Toolkit | GPT Fusion</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="GPT Fusion - Human-AI Collaboration Toolkit" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Practical demos of human-AI collaboration with Python utilities, web scraping, FastAPI backend, and more" />
+<meta property="og:description" content="Practical demos of human-AI collaboration with Python utilities, web scraping, FastAPI backend, and more" />
+<link rel="canonical" href="https://costasford.github.io/gpt-fusion/" />
+<meta property="og:url" content="https://costasford.github.io/gpt-fusion/" />
+<meta property="og:site_name" content="GPT Fusion" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="GPT Fusion - Human-AI Collaboration Toolkit" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Practical demos of human-AI collaboration with Python utilities, web scraping, FastAPI backend, and more","headline":"GPT Fusion - Human-AI Collaboration Toolkit","name":"GPT Fusion","url":"https://costasford.github.io/gpt-fusion/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/gpt-fusion/assets/css/style.css?v=">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/gpt-fusion/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">GPT Fusion - Human-AI Collaboration Toolkit</h1>
+      <h2 class="project-tagline">Practical demos of human-AI collaboration with Python utilities, web scraping, FastAPI backend, and more</h2>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h1 id="gpt-fusion">GPT Fusion</h1>
+
+<p><strong>Practical demos of human-AI collaboration</strong></p>
+
+<p>A Python toolkit for building AI-assisted applications with utilities for text processing, web scraping, FastAPI backends, and interactive demos.</p>
+
+<p><a href="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml"><img src="https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+<a href="https://codecov.io/gh/costasford/gpt-fusion"><img src="https://codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg" alt="Coverage" /></a>
+<a href="https://pypi.org/project/gpt-fusion/"><img src="https://img.shields.io/pypi/dm/gpt-fusion.svg" alt="PyPI Downloads" /></a>
+<a href="https://github.com/costasford/gpt-fusion/blob/main/LICENSE"><img src="https://img.shields.io/github/license/costasford/gpt-fusion" alt="License" /></a></p>
+
+<p>📦 <strong><a href="https://pypi.org/project/gpt-fusion/">Install from PyPI</a></strong> • 🌐 <strong><a href="https://costasford.github.io/gpt-fusion/">View Documentation</a></strong></p>
+
+<h2 id="-quick-start">🚀 Quick Start</h2>
+
+<h3 id="install">Install</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>gpt-fusion
+</code></pre></div></div>
+
+<h3 id="basic-usage">Basic Usage</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">gpt_fusion</span>
+
+<span class="c1"># Text utilities
+</span><span class="nf">print</span><span class="p">(</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">greet</span><span class="p">(</span><span class="sh">'</span><span class="s">World</span><span class="sh">'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">word_count</span><span class="p">(</span><span class="sh">'</span><span class="s">Hello world</span><span class="sh">'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">reverse_words</span><span class="p">(</span><span class="sh">'</span><span class="s">Hello world</span><span class="sh">'</span><span class="p">))</span>
+
+<span class="c1"># Math helpers  
+</span><span class="n">numbers</span> <span class="o">=</span> <span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">load_numbers_from_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">data/numbers.csv</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Average: </span><span class="si">{</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">average_from_csv</span><span class="p">(</span><span class="sh">'</span><span class="s">data/numbers.csv</span><span class="sh">'</span><span class="p">)</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Generate starter projects
+</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">create_csv_app</span><span class="p">(</span><span class="sh">'</span><span class="s">my-csv-demo</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">create_tailwind_ui</span><span class="p">(</span><span class="sh">'</span><span class="s">my-ui-demo</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="advanced-features">Advanced Features</h3>
+<p>Install with optional extras for full functionality:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="s2">"gpt-fusion[web,twitter,backend,build]"</span>
+</code></pre></div></div>
+
+<h2 id="-features">✨ Features</h2>
+
+<h3 id="-python-utilities">🐍 Python Utilities</h3>
+<p>Core text processing, math helpers, and CSV analysis tools.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">gpt_fusion</span>
+
+<span class="c1"># Text processing
+</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">word_count</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello world</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># 2
+</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">reverse_words</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello world</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># "world Hello"
+</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">is_palindrome</span><span class="p">(</span><span class="sh">"</span><span class="s">racecar</span><span class="sh">"</span><span class="p">)</span>  <span class="c1"># True
+</span>
+<span class="c1"># Math &amp; CSV
+</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">average_from_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">data.csv</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">median_from_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">data.csv</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="-web-scraping">🌐 Web Scraping</h3>
+<p>Simple web scraping utilities with BeautifulSoup integration.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Install: pip install "gpt-fusion[web]"
+</span><span class="kn">import</span> <span class="n">gpt_fusion</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="n">gpt_fusion</span><span class="p">.</span><span class="nf">scrape</span><span class="p">(</span><span class="sh">"</span><span class="s">https://example.com</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># Returns clean text content
+</span></code></pre></div></div>
+
+<h3 id="-fastapi-backend">🚀 FastAPI Backend</h3>
+<p>Ready-to-deploy API server with auto-generated docs.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Install: pip install "gpt-fusion[backend]"
+</span><span class="kn">import</span> <span class="n">uvicorn</span>
+<span class="kn">import</span> <span class="n">gpt_fusion</span>
+
+<span class="c1"># Start server
+</span><span class="n">uvicorn</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">gpt_fusion</span><span class="p">.</span><span class="n">backend_app</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="-twitter-integration">🐦 Twitter Integration</h3>
+<p>Twitter bot utilities with OAuth support.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Install: pip install "gpt-fusion[twitter]"
+</span><span class="kn">from</span> <span class="n">gpt_fusion</span> <span class="kn">import</span> <span class="n">TwitterBot</span>
+
+<span class="n">bot</span> <span class="o">=</span> <span class="nc">TwitterBot</span><span class="p">(</span><span class="n">api_key</span><span class="p">,</span> <span class="n">api_secret</span><span class="p">)</span>
+<span class="n">bot</span><span class="p">.</span><span class="nf">tweet</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello from GPT Fusion!</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="-demo-projects">🎮 Demo Projects</h2>
+
+<h3 id="-auth-ui-kit">🔐 Auth UI Kit</h3>
+<p>Beautiful Tailwind CSS login form with Firebase authentication. Includes email/password and Google OAuth flows.</p>
+
+<p><a href="https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit">→ View Source</a></p>
+
+<h3 id="-unity-3d-demo">🎯 Unity 3D Demo</h3>
+<p>Interactive 3D game prototype with movement, items, and basic gameplay mechanics.</p>
+
+<p><a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype">→ View Unity Scripts</a></p>
+
+<h3 id="-csv-analysis">📊 CSV Analysis</h3>
+<p>Data processing and analysis examples with built-in sample datasets.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python examples/tutorial.py
+Loading data/numbers.csv...
+Values: <span class="o">[</span>1.0, 2.0, 3.0, 4.0, 5.0]
+Average: 3.0
+Median: 3.0
+</code></pre></div></div>
+
+<h3 id="️-starter-kit-generator">🛠️ Starter Kit Generator</h3>
+<p>Generate new projects with pre-configured templates.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create a CSV analysis app</span>
+python <span class="nt">-m</span> gpt_fusion.starter_kits create_csv_app my-app
+
+<span class="c"># Create a Tailwind UI demo  </span>
+python <span class="nt">-m</span> gpt_fusion.starter_kits create_tailwind_ui my-ui
+</code></pre></div></div>
+
+<h2 id="-api--deployment">🔌 API &amp; Deployment</h2>
+
+<h3 id="local-development">Local Development</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="s2">"gpt-fusion[backend]"</span>
+uvicorn gpt_fusion.backend:app <span class="nt">--reload</span>
+</code></pre></div></div>
+
+<p>Visit <code class="language-plaintext highlighter-rouge">http://localhost:8000/docs</code> for interactive Swagger UI documentation.</p>
+
+<h3 id="available-endpoints">Available Endpoints</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Endpoint</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GET</td>
+      <td>/</td>
+      <td>Welcome message</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/greet/{name}</td>
+      <td>Personalized greeting</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/projects</td>
+      <td>List of demo projects</td>
+    </tr>
+    <tr>
+      <td>GET</td>
+      <td>/health</td>
+      <td>Health check endpoint</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="deploy-to-render">Deploy to Render</h3>
+<ol>
+  <li>Create a new Web Service from your GitHub repo</li>
+  <li>Build Command: <code class="language-plaintext highlighter-rouge">pip install "gpt-fusion[backend]"</code></li>
+  <li>Start Command: <code class="language-plaintext highlighter-rouge">uvicorn gpt_fusion.backend:app --host 0.0.0.0 --port $PORT</code></li>
+</ol>
+
+<h3 id="deploy-to-heroku">Deploy to Heroku</h3>
+<p>Create a <code class="language-plaintext highlighter-rouge">Procfile</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web: uvicorn gpt_fusion.backend:app --host 0.0.0.0 --port $PORT
+</code></pre></div></div>
+
+<p>##
+ 🤝 Contributing</p>
+
+<h3 id="development-setup">Development Setup</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/costasford/gpt-fusion.git
+<span class="nb">cd </span>gpt-fusion
+pip <span class="nb">install</span> <span class="nt">-r</span> requirements-dev.txt
+pip <span class="nb">install</span> <span class="nt">-e</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<h3 id="run-tests">Run Tests</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pytest <span class="nt">--cov</span><span class="o">=</span>src/gpt_fusion <span class="nt">--cov-report</span><span class="o">=</span>term-missing
+</code></pre></div></div>
+
+<h3 id="code-quality">Code Quality</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python scripts/run_checks.py
+</code></pre></div></div>
+
+<p>This runs:</p>
+<ul>
+  <li><strong>Black</strong> - Code formatting</li>
+  <li><strong>Flake8</strong> - Linting</li>
+  <li><strong>Pytest</strong> - Test suite with 93% coverage</li>
+</ul>
+
+<h3 id="project-structure">Project Structure</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/gpt_fusion/     # Main package
+├── core.py         # Basic utilities  
+├── text_utils.py   # Text processing
+├── analysis.py     # CSV/data tools
+├── web_scraper.py  # Web scraping (optional)
+├── backend.py      # FastAPI server (optional)
+├── twitter_bot.py  # Twitter integration (optional)
+└── starter_kits.py # Project templates
+
+tests/              # Comprehensive test suite
+docs/               # Jekyll documentation
+examples/           # Usage examples
+</code></pre></div></div>
+
+<h3 id="links">Links</h3>
+<p>📖 <a href="https://github.com/costasford/gpt-fusion">GitHub Repository</a> • 📦 <a href="https://pypi.org/project/gpt-fusion/">PyPI Package</a> • 🐛 <a href="https://github.com/costasford/gpt-fusion/issues">Report Issues</a> • 📄 <a href="https://github.com/costasford/gpt-fusion/blob/main/LICENSE">MIT License</a></p>
+
+<hr />
+
+<p><em>GPT Fusion - Practical demos of human-AI collaboration. Built with ❤️ and Python.</em></p>
+
+
+      <footer class="site-footer">
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>

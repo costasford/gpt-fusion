@@ -1,3 +1,9 @@
+---
+layout: default
+title: GPT Fusion - Human-AI Collaboration Toolkit
+description: Practical demos of human-AI collaboration with Python utilities, web scraping, FastAPI backend, and more
+---
+
 # GPT Fusion
 
 **Practical demos of human-AI collaboration**
