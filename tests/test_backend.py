@@ -2,11 +2,14 @@ import pytest
 
 """Backend tests that require FastAPI and httpx optional deps."""
 
-pytest.importorskip("fastapi")
-pytest.importorskip("httpx")
+fastapi = pytest.importorskip("fastapi")
+httpx = pytest.importorskip("httpx")
 
-from fastapi.testclient import TestClient  # noqa: E402
-from gpt_fusion.backend import app  # noqa: E402
+try:
+    from fastapi.testclient import TestClient  # noqa: E402
+    from gpt_fusion.backend import app  # noqa: E402
+except ImportError:
+    pytest.skip("FastAPI dependencies not installed")
 
 client = TestClient(app)
 
