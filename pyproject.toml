@@ -26,10 +26,10 @@ web = [
     "beautifulsoup4",
 ]
 build = [
-    "minify-html",
-    "csscompressor",
-    "jsmin",
-    "brotli",
+    "minify-html>=0.15.0",
+    "csscompressor>=0.9.5",
+    "jsmin>=3.0.0",
+    "brotli>=1.0.0",
 ]
 
 [tool.pytest.ini_options]
