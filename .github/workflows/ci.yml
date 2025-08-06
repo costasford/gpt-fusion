@@ -53,7 +53,7 @@ jobs:
         run: JEKYLL_ENV=production jekyll build -s docs -d docs/_site
         if: matrix.python-version == '3.12'
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         if: matrix.python-version == '3.12'
         with:
           path: docs/_site
