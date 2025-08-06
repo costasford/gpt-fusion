@@ -2,12 +2,6 @@ name: CI
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 on:
   push:
@@ -52,20 +46,4 @@ jobs:
       - name: Build documentation
         run: JEKYLL_ENV=production bundle exec jekyll build
         if: matrix.python-version == '3.12'
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        if: matrix.python-version == '3.12'
-        with:
-          path: _site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
 
