@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT Fusion - Live Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .demo-card { transition: all 0.3s ease; }
+        .demo-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .code-output { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .feature-icon { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="feature-icon w-8 h-8 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🚀</span>
+                    </div>
+                    <h1 class="text-xl font-bold">GPT Fusion Demo</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://github.com/costasford/gpt-fusion" class="text-blue-600 hover:text-blue-800 font-medium">GitHub</a>
+                    <a href="https://pypi.org/project/gpt-fusion/" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Install Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    GPT Fusion
+                </span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+                The Python toolkit that makes AI integration effortless. Try our interactive demos below!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <code class="bg-gray-900 text-green-400 px-6 py-3 rounded-lg font-mono text-lg">
+                    pip install gpt-fusion
+                </code>
+                <span class="text-gray-500 hidden sm:block">or</span>
+                <code class="bg-gray-900 text-blue-400 px-6 py-3 rounded-lg font-mono text-lg">
+                    pip install "gpt-fusion[all]"
+                </code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demos -->
+    <section class="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-12">🎮 Interactive Demos</h2>
+        
+        <!-- Text Processing Demo -->
+        <div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-8">
+            <div class="flex items-center mb-6">
+                <div class="feature-icon w-12 h-12 rounded-lg flex items-center justify-center mr-4">
+                    <span class="text-white text-2xl">🔤</span>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold">Text Processing</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Smart text utilities with instant results</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Enter text to process:</label>
+                    <textarea id="text-input" 
+                              class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                              rows="4" 
+                              placeholder="Type something here...">The quick brown fox jumps over the lazy dog</textarea>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <button onclick="processText('word_count')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Count Words</button>
+                        <button onclick="processText('reverse_words')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Reverse Words</button>
+                        <button onclick="processText('palindrome')" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Check Palindrome</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Output:</label>
+                    <div id="text-output" class="code-output text-white p-4 rounded-lg min-h-32 font-mono">
+                        Click a button to see the magic! ✨
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-2">Python Code:</label>
+                        <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code class="language-python" id="text-code">import gpt_fusion
+
+# Try the functions above!
+text = "Your input here"
+gpt_fusion.word_count(text)
+gpt_fusion.reverse_words(text)  
+gpt_fusion.is_palindrome(text)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSV Analysis Demo -->
+        <div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-8">
+            <div class="flex items-center mb-6">
+                <div class="feature-icon w-12 h-12 rounded-lg flex items-center justify-center mr-4">
+                    <span class="text-white text-2xl">📊</span>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold">CSV Data Analysis</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Powerful data processing with streaming support</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Enter CSV data (comma-separated values):</label>
+                    <textarea id="csv-input" 
+                              class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                              rows="6" 
+                              placeholder="value&#10;1.5&#10;2.8&#10;3.2&#10;4.1&#10;5.7">value
+1.5
+2.8
+3.2
+4.1
+5.7</textarea>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <button onclick="analyzeCSV('average')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Calculate Average</button>
+                        <button onclick="analyzeCSV('median')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Find Median</button>
+                        <button onclick="analyzeCSV('stats')" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Full Stats</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Analysis Results:</label>
+                    <div id="csv-output" class="code-output text-white p-4 rounded-lg min-h-32 font-mono">
+                        Upload CSV data to see analysis! 📈
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-2">Python Code:</label>
+                        <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code class="language-python">import gpt_fusion
+
+# Load data from CSV file
+data = gpt_fusion.load_numbers_from_csv('data.csv')
+
+# Fast streaming for large files
+avg = gpt_fusion.average_from_csv('data.csv', use_streaming=True)
+med = gpt_fusion.median_from_csv('data.csv')
+
+print(f"Average: {avg}")
+print(f"Median: {med}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Generator Demo -->
+        <div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-8">
+            <div class="flex items-center mb-6">
+                <div class="feature-icon w-12 h-12 rounded-lg flex items-center justify-center mr-4">
+                    <span class="text-white text-2xl">🛠️</span>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold">Project Generator</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Generate production-ready projects instantly</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('csv')">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">📊</div>
+                        <h4 class="font-semibold">CSV Analytics App</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">FastAPI backend with data visualization</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('ui')">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🎨</div>
+                        <h4 class="font-semibold">Tailwind UI Kit</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Modern responsive web interface</p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('fullstack')">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🚀</div>
+                        <h4 class="font-semibold">Full-Stack App</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Complete app with auth & database</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <label class="block text-sm font-medium mb-2">Generated Command:</label>
+                <div id="project-output" class="code-output text-white p-4 rounded-lg font-mono">
+                    Click a project type above to see the generation command! 🎯
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Examples Section -->
+    <section class="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">🎮 Live Examples</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Auth UI Kit -->
+                <div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-2">🔐</div>
+                        <h3 class="font-bold text-lg">Enhanced Auth UI Kit</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Modern authentication with security features</p>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Rate limiting protection</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>WCAG 2.1 AA accessibility</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Glass-effect UI design</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <a href="auth-ui-kit/enhanced-index.html" target="_blank" class="flex-1 bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition">Try Enhanced</a>
+                        <a href="auth-ui-kit/tests.html" target="_blank" class="flex-1 bg-gray-600 text-white text-center py-2 rounded-lg hover:bg-gray-700 transition">Run Tests</a>
+                    </div>
+                </div>
+
+                <!-- Unity 3D Demo -->
+                <div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-2">🎯</div>
+                        <h3 class="font-bold text-lg">Unity 3D Integration</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Event-driven game architecture</p>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Object pooling system</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Scriptable Object configs</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Modern UI animations</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype" target="_blank" class="w-full bg-purple-600 text-white text-center py-2 rounded-lg hover:bg-purple-700 transition block">View Scripts</a>
+                    </div>
+                </div>
+
+                <!-- CSV Analysis -->
+                <div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl mb-2">📊</div>
+                        <h3 class="font-bold text-lg">Data Analysis Playground</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">High-performance CSV processing</p>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Memory-efficient streaming</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Security protections built-in</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span>Sample datasets included</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <a href="https://github.com/costasford/gpt-fusion/blob/main/examples/tutorial.py" target="_blank" class="w-full bg-green-600 text-white text-center py-2 rounded-lg hover:bg-green-700 transition block">Try Tutorial</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation & Getting Started -->
+    <section class="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-4">🚀 Get Started in Seconds</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Choose your installation method and start building AI-powered applications immediately.
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-bold mb-4">📦 Quick Install</h3>
+                <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4"><code class="language-bash">pip install gpt-fusion</code></pre>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Perfect for basic text processing and CSV analysis.</p>
+                
+                <h4 class="font-semibold mb-2">What you get:</h4>
+                <ul class="space-y-1 text-sm">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Core text utilities</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> CSV data analysis</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Project generators</li>
+                </ul>
+            </div>
+            
+            <div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-bold mb-4">🎯 Full Install</h3>
+                <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4"><code class="language-bash">pip install "gpt-fusion[all]"</code></pre>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Complete toolkit with web scraping, FastAPI backend, and more.</p>
+                
+                <h4 class="font-semibold mb-2">Everything included:</h4>
+                <ul class="space-y-1 text-sm">
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Web scraping with BeautifulSoup</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> FastAPI backend server</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Twitter integration</li>
+                    <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Asset optimization tools</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <div class="inline-flex items-center space-x-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <div class="text-2xl">🐍</div>
+                <div>
+                    <div class="font-semibold">Python Compatibility</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Supports Python 3.10, 3.11, and 3.12</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">GPT Fusion</h3>
+                    <p class="text-gray-400 text-sm">The Python toolkit that makes AI integration effortless.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/costasford/gpt-fusion" class="text-gray-400 hover:text-white transition">GitHub Repository</a></li>
+                        <li><a href="https://pypi.org/project/gpt-fusion/" class="text-gray-400 hover:text-white transition">PyPI Package</a></li>
+                        <li><a href="https://costasford.github.io/gpt-fusion/" class="text-gray-400 hover:text-white transition">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Demos</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="auth-ui-kit/enhanced-index.html" class="text-gray-400 hover:text-white transition">Auth UI Kit</a></li>
+                        <li><a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype" class="text-gray-400 hover:text-white transition">Unity 3D Scripts</a></li>
+                        <li><a href="https://github.com/costasford/gpt-fusion/blob/main/examples/tutorial.py" class="text-gray-400 hover:text-white transition">CSV Tutorial</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://github.com/costasford/gpt-fusion/issues" class="text-gray-400 hover:text-white transition">Report Issues</a></li>
+                        <li><a href="https://github.com/costasford/gpt-fusion/discussions" class="text-gray-400 hover:text-white transition">Discussions</a></li>
+                        <li><a href="mailto:costasford@yahoo.com" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 GPT Fusion. Built with ❤️ and Python. <a href="https://github.com/costasford/gpt-fusion/blob/main/LICENSE" class="hover:text-white transition">MIT License</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Text Processing Functions
+        function processText(operation) {
+            const input = document.getElementById('text-input').value;
+            const output = document.getElementById('text-output');
+            const codeElement = document.getElementById('text-code');
+            
+            let result = '';
+            let code = '';
+            
+            switch(operation) {
+                case 'word_count':
+                    result = `Word Count: ${input.trim().split(/\s+/).length}`;
+                    code = `import gpt_fusion
+
+text = "${input}"
+count = gpt_fusion.word_count(text)
+print(f"Word Count: {count}")  # ${input.trim().split(/\s+/).length}`;
+                    break;
+                    
+                case 'reverse_words':
+                    const reversed = input.trim().split(/\s+/).reverse().join(' ');
+                    result = `Reversed: "${reversed}"`;
+                    code = `import gpt_fusion
+
+text = "${input}"
+reversed_text = gpt_fusion.reverse_words(text)
+print(f"Reversed: {reversed_text}")  # "${reversed}"`;
+                    break;
+                    
+                case 'palindrome':
+                    const cleaned = input.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+                    const isPalindrome = cleaned === cleaned.split('').reverse().join('');
+                    result = `Is Palindrome: ${isPalindrome}`;
+                    code = `import gpt_fusion
+
+text = "${input}"
+is_palindrome = gpt_fusion.is_palindrome(text)
+print(f"Is Palindrome: {is_palindrome}")  # ${isPalindrome}`;
+                    break;
+            }
+            
+            output.innerHTML = `<div class="font-mono">${result}</div>`;
+            codeElement.textContent = code;
+        }
+        
+        // CSV Analysis Functions
+        function analyzeCSV(operation) {
+            const input = document.getElementById('csv-input').value;
+            const output = document.getElementById('csv-output');
+            
+            const lines = input.trim().split('\n');
+            if (lines.length < 2 || lines[0].toLowerCase() !== 'value') {
+                output.innerHTML = '<div class="text-red-300">Error: CSV must have "value" header and numeric data</div>';
+                return;
+            }
+            
+            const values = lines.slice(1).map(line => parseFloat(line.trim())).filter(n => !isNaN(n));
+            
+            if (values.length === 0) {
+                output.innerHTML = '<div class="text-red-300">Error: No valid numeric values found</div>';
+                return;
+            }
+            
+            let result = '';
+            
+            switch(operation) {
+                case 'average':
+                    const avg = values.reduce((a, b) => a + b, 0) / values.length;
+                    result = `Average: ${avg.toFixed(2)}`;
+                    break;
+                    
+                case 'median':
+                    const sorted = [...values].sort((a, b) => a - b);
+                    const median = sorted.length % 2 === 0 
+                        ? (sorted[sorted.length/2 - 1] + sorted[sorted.length/2]) / 2
+                        : sorted[Math.floor(sorted.length/2)];
+                    result = `Median: ${median.toFixed(2)}`;
+                    break;
+                    
+                case 'stats':
+                    const avg2 = values.reduce((a, b) => a + b, 0) / values.length;
+                    const sorted2 = [...values].sort((a, b) => a - b);
+                    const median2 = sorted2.length % 2 === 0 
+                        ? (sorted2[sorted2.length/2 - 1] + sorted2[sorted2.length/2]) / 2
+                        : sorted2[Math.floor(sorted2.length/2)];
+                    const min = Math.min(...values);
+                    const max = Math.max(...values);
+                    
+                    result = `📊 Full Statistics:
+Count: ${values.length}
+Average: ${avg2.toFixed(2)}
+Median: ${median2.toFixed(2)}
+Min: ${min.toFixed(2)}
+Max: ${max.toFixed(2)}
+Range: ${(max - min).toFixed(2)}`;
+                    break;
+            }
+            
+            output.innerHTML = `<div class="font-mono whitespace-pre-line">${result}</div>`;
+        }
+        
+        // Project Generator Functions
+        function showProjectCode(type) {
+            const output = document.getElementById('project-output');
+            
+            let command = '';
+            let description = '';
+            
+            switch(type) {
+                case 'csv':
+                    command = 'gpt_fusion create_csv_app my-analytics --with-api';
+                    description = '📊 Creates a FastAPI backend with CSV processing and data visualization';
+                    break;
+                case 'ui':
+                    command = 'gpt_fusion create_tailwind_ui my-webapp --dark-mode';
+                    description = '🎨 Generates a modern responsive UI with Tailwind CSS and dark mode';
+                    break;
+                case 'fullstack':
+                    command = 'gpt_fusion create_fullstack_app my-saas --auth --database';
+                    description = '🚀 Complete application with authentication, database, and deployment ready';
+                    break;
+            }
+            
+            output.innerHTML = `<div class="mb-2">${description}</div><div class="text-yellow-300 font-mono">${command}</div>`;
+        }
+        
+        // Syntax highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            Prism.highlightAll();
+        });
+    </script>
+</body>
+</html>
