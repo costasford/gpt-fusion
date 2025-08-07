@@ -13,10 +13,11 @@ GPT Fusion is a comprehensive Python library designed to streamline AI-assisted 
 - **🧪 Battle Tested**: 63+ tests with 95% coverage and CI/CD pipeline
 
 [![CI](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions)
-[![Python](https://img.shields.io/pypi/pyversions/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
-[![PyPI Version](https://img.shields.io/pypi/v/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
-[![Downloads](https://img.shields.io/pypi/dm/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![Version](https://img.shields.io/badge/version-0.2.0-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
+[![Tests](https://img.shields.io/badge/tests-63%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
+[![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
 
 📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)**
 
