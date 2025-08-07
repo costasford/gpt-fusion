@@ -12,10 +12,11 @@ GPT Fusion is a comprehensive Python library designed to streamline AI-assisted 
 - **📚 Rich Examples**: Complete demo projects including Unity 3D games and auth systems
 - **🧪 Battle Tested**: 63+ tests with 95% coverage and CI/CD pipeline
 
-[![CI](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
-[![Coverage](https://codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg)](https://codecov.io/gh/costasford/gpt-fusion)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
-[![License](https://img.shields.io/github/license/costasford/gpt-fusion)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
+[![CI](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions)
+[![Python](https://img.shields.io/pypi/pyversions/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
+[![PyPI Version](https://img.shields.io/pypi/v/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
+[![Downloads](https://img.shields.io/pypi/dm/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
 
 📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)**
 
