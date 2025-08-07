@@ -9,9 +9,14 @@ import {
   signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
+// Demo Firebase config - replace with your own for production
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  apiKey: "AIzaSyDemo_Replace_With_Your_Real_API_Key_12345",
+  authDomain: "gpt-fusion-demo.firebaseapp.com",
+  projectId: "gpt-fusion-demo",
+  storageBucket: "gpt-fusion-demo.appspot.com",
+  messagingSenderId: "123456789012",
+  appId: "1:123456789012:web:abcdef123456789012345"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -38,13 +43,50 @@ async function withLoading(btnId, fn) {
   }
 }
 
-// Pre-fill email if saved
+// Dark mode functionality
+function initTheme() {
+  const theme = localStorage.getItem('theme') || 
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.getElementById('theme-toggle-light-icon').classList.add('hidden');
+    document.getElementById('theme-toggle-dark-icon').classList.remove('hidden');
+  } else {
+    document.documentElement.classList.remove('dark');
+    document.getElementById('theme-toggle-light-icon').classList.remove('hidden');
+    document.getElementById('theme-toggle-dark-icon').classList.add('hidden');
+  }
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.classList.contains('dark');
+  
+  if (isDark) {
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+    document.getElementById('theme-toggle-light-icon').classList.remove('hidden');
+    document.getElementById('theme-toggle-dark-icon').classList.add('hidden');
+  } else {
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+    document.getElementById('theme-toggle-light-icon').classList.add('hidden');
+    document.getElementById('theme-toggle-dark-icon').classList.remove('hidden');
+  }
+}
+
+// Pre-fill email if saved and initialize theme
 document.addEventListener("DOMContentLoaded", () => {
   const savedEmail = localStorage.getItem("savedEmail");
   if (savedEmail) {
     document.getElementById("email").value = savedEmail;
     document.getElementById("remember").checked = true;
   }
+  
+  initTheme();
+  
+  // Add theme toggle event listener
+  document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
 });
 
 document.getElementById("login").addEventListener("click", async () => {
@@ -76,9 +118,20 @@ document.getElementById("google-login").addEventListener("click", async () => {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      showMessage("message", "Logged in with Google!");
+      showMessage("message", "✅ Logged in with Google!");
     } catch (err) {
-      showMessage("message", err.message);
+      // Show helpful error messages for demo setup
+      if (err.code === 'auth/invalid-api-key' || err.code === 'auth/project-not-found') {
+        showMessage("message", "🔧 Demo config detected. See FIREBASE_SETUP.md to configure real credentials.");
+      } else if (err.code === 'auth/unauthorized-domain') {
+        showMessage("message", "🌐 Domain not authorized. Add your domain in Firebase Console → Authentication → Settings.");
+      } else if (err.code === 'auth/popup-blocked') {
+        showMessage("message", "🚫 Popup blocked. Please allow popups and try again.");
+      } else if (err.code === 'auth/popup-closed-by-user') {
+        showMessage("message", "❌ Login cancelled by user.");
+      } else {
+        showMessage("message", `❌ ${err.message}`);
+      }
     }
   });
 });
