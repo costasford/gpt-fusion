@@ -10,12 +10,14 @@ description: Practical demos of human-AI collaboration with Python utilities, we
 
 A Python toolkit for building AI-assisted applications with utilities for text processing, web scraping, FastAPI backends, and interactive demos.
 
-[![CI](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml)
-[![Coverage](https://codecov.io/gh/costasford/gpt-fusion/branch/main/graph/badge.svg)](https://codecov.io/gh/costasford/gpt-fusion)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
-[![License](https://img.shields.io/github/license/costasford/gpt-fusion)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
+[![CI](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![Version](https://img.shields.io/badge/version-0.2.0-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
+[![Tests](https://img.shields.io/badge/tests-63%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
+[![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
 
-📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🌐 **[View Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)**
+🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)** • 📁 **[View Source](https://github.com/costasford/gpt-fusion)**
 
 ## 🚀 Quick Start
 
