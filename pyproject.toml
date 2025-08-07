@@ -3,27 +3,40 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-# Plan: publish an alpha build so users can `pip install gpt-fusion`.
 name = "gpt-fusion"
-version = "0.0.1a0"
-description = "Experimenting with human-AI collaboration"
+version = "0.2.0"
+description = "Python toolkit for AI-assisted applications with text processing, web scraping, and interactive demos"
 authors = [{name="Costas Ford", email="costasford@yahoo.com"}]
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+keywords = ["ai", "automation", "web-scraping", "fastapi", "text-processing", "data-analysis"]
 dependencies = []
 
 [project.optional-dependencies]
 backend = [
-    "fastapi",
-    "httpx<0.25",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "httpx>=0.25.0,<1.0",
 ]
 twitter = [
-    "tweepy",
+    "tweepy>=4.14.0",
 ]
 web = [
-    "requests",
-    "beautifulsoup4",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
 ]
 build = [
     "minify-html>=0.15.0",
@@ -31,10 +44,50 @@ build = [
     "jsmin>=3.0.0",
     "brotli>=1.0.0",
 ]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.9.0",
+    "flake8>=6.1.0",
+    "pre-commit>=3.4.0",
+]
+all = [
+    "gpt-fusion[backend,twitter,web,build]",
+]
+
+[project.urls]
+Homepage = "https://costasford.github.io/gpt-fusion/"
+Repository = "https://github.com/costasford/gpt-fusion"
+Documentation = "https://costasford.github.io/gpt-fusion/"
+Issues = "https://github.com/costasford/gpt-fusion/issues"
+Changelog = "https://github.com/costasford/gpt-fusion/releases"
+
+[project.scripts]
+gpt-fusion = "gpt_fusion.__main__:main"
 
 [tool.pytest.ini_options]
-minversion = "6.0"
-addopts = "-ra"
+minversion = "7.0"
+addopts = "-ra -v --cov=src/gpt_fusion --cov-report=term-missing"
+testpaths = ["tests"]
 
 [tool.black]
 line-length = 88
+target-version = ['py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+max-complexity = 10
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/test_*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
