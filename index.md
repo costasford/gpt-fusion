@@ -203,7 +203,7 @@ examples/           # Usage examples
 ```
 
 ### Links
-📖 [GitHub Repository](https://github.com/costasford/gpt-fusion) • 📦 [PyPI Package](https://pypi.org/project/gpt-fusion/) • 🐛 [Report Issues](https://github.com/costasford/gpt-fusion/issues) • 📄 [MIT License](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
+📖 [GitHub Repository](https://github.com/costasford/gpt-fusion) • 🐛 [Report Issues](https://github.com/costasford/gpt-fusion/issues) • 📄 [MIT License](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
 
 ---
 
