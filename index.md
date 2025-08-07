@@ -15,7 +15,7 @@ A Python toolkit for building AI-assisted applications with utilities for text p
 [![PyPI Downloads](https://img.shields.io/pypi/dm/gpt-fusion.svg)](https://pypi.org/project/gpt-fusion/)
 [![License](https://img.shields.io/github/license/costasford/gpt-fusion)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
 
-📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🌐 **[View Documentation](https://costasford.github.io/gpt-fusion/)**
+📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🌐 **[View Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)**
 
 ## 🚀 Quick Start
 
