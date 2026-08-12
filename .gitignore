@@ -20,3 +20,8 @@ docs/
 .jekyll-cache/
 node_modules/
 src/gpt_fusion.egg-info/
+
+# Python packaging build output
+dist/
+build/
+*.egg-info/
