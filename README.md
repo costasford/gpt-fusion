@@ -98,15 +98,17 @@ reply = client.chat([
 client.close()
 ```
 
-Points `base_url` anywhere that speaks the OpenAI chat completions API - swap in Groq, a local Ollama server, or any other compatible endpoint without changing your code:
+Points `base_url` anywhere that speaks the OpenAI chat completions API without changing your code. Verified working against [Groq](https://console.groq.com/)'s free tier:
 
 ```python
 client = LLMClient(
-    base_url="http://localhost:11434/v1",
-    model="llama3",
-    api_key="ollama",  # most local servers ignore this but still require *something*
+    base_url="https://api.groq.com/openai/v1",
+    model="llama-3.1-8b-instant",
+    api_key=os.environ["GROQ_API_KEY"],
 )
 ```
+
+The same pattern works for a local Ollama server (`base_url="http://localhost:11434/v1"`) or any other OpenAI-compatible endpoint.
 
 ### 🎛️ Optional Feature Sets
 
