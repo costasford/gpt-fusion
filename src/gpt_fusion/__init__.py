@@ -17,7 +17,7 @@ from .exceptions import (
     ValidationError,
 )
 
-from .starter_kits import create_csv_app, create_tailwind_ui
+from .starter_kits import create_csv_app, create_fullstack_app, create_tailwind_ui
 from .utils import (
     ChatHistory,
     add_numbers,
@@ -64,6 +64,7 @@ __all__ = [
     "greet",
     "create_csv_app",
     "create_tailwind_ui",
+    "create_fullstack_app",
     "ChatHistory",
     "add_numbers",
     "divide_numbers",

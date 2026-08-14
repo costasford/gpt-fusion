@@ -60,9 +60,9 @@ print(f"Average: {gpt_fusion.average_from_csv('data/sales.csv', use_streaming=Tr
 headlines = gpt_fusion.scrape("https://news.ycombinator.com", "a.storylink")
 print(f"Found {len(headlines)} headlines")
 
-# 🚀 Generate complete projects in seconds
-gpt_fusion.create_csv_app('my-analytics-dashboard')
-gpt_fusion.create_tailwind_ui('my-modern-webapp')
+# 🚀 Generate small, real starter projects in seconds
+print(gpt_fusion.create_csv_app('my-analytics-dashboard', with_api=True))
+print(gpt_fusion.create_tailwind_ui('my-modern-webapp', dark_mode=True))
 ```
 
 **Output:**
@@ -72,8 +72,8 @@ Reversed: dog lazy the over jumps fox brown quick The
 Is palindrome: True
 Average: 1247.83
 Found 30 headlines
-✅ Created my-analytics-dashboard/ with FastAPI backend
-✅ Created my-modern-webapp/ with Tailwind CSS
+my-analytics-dashboard
+my-modern-webapp
 ```
 
 ### 🤖 LLM Integration
@@ -239,24 +239,33 @@ $ python examples/tutorial.py
 **Try:** [Tutorial Script](https://github.com/costasford/gpt-fusion/blob/main/examples/tutorial.py) | [Sample Data](https://github.com/costasford/gpt-fusion/tree/main/data)
 
 ### 🛠️ Project Generator
-**Instant project scaffolding** with production-ready templates:
+**Small, real starter kits** - not empty stubs, each command below actually
+runs and produces working code:
 
 ```bash
-# 📊 Data analysis dashboard with FastAPI
-gpt_fusion create_csv_app my-analytics --with-api
+# 📊 CSV demo script, plus a FastAPI wrapper over the same data
+gpt-fusion create_csv_app my-analytics --with-api
+# -> my-analytics/{app.py, numbers.csv, api.py}
 
-# 🎨 Modern web UI with Tailwind CSS
-gpt_fusion create_tailwind_ui my-webapp --dark-mode
+# 🎨 Tailwind + Firebase auth UI (--dark-mode for the glass-effect variant)
+gpt-fusion create_tailwind_ui my-webapp --dark-mode
+# -> my-webapp/{index.html, app.js}
 
-# 🚀 Full-stack app with auth
-gpt_fusion create_fullstack_app my-saas --auth --database
+# 🚀 Both combined: a frontend/ + backend/ FastAPI app
+gpt-fusion create_fullstack_app my-saas --auth --database
+# -> my-saas/frontend/{index.html, app.js}
+# -> my-saas/backend/{app.py, numbers.csv}
 ```
 
-**Generated projects include:**
-- 📝 Complete documentation
-- 🧪 Pre-configured testing
-- 🚀 Deployment scripts
-- 🔧 Development tooling
+`--auth` adds a minimal HMAC-signed-token login flow (`POST /login` with
+`demo`/`demo123`, then a bearer token on every other route) and
+`--database` swaps reading the CSV live for a small SQLite-backed store -
+both demo-grade and clearly commented as such in the generated code, not
+production-hardened. Neither flag adds a new dependency beyond what
+`gpt-fusion[backend]` already needs.
+
+(`python -m gpt_fusion <command> ...` works the same way as `gpt-fusion
+<command> ...` if you'd rather not rely on the installed console script.)
 
 ## 🚀 API & Deployment
 
@@ -281,6 +290,7 @@ uvicorn gpt_fusion.backend:app --reload --port 8000
 | GET | `/greet/{name}` | Personalized greeting | `/greet/Alice` → `{"message": "Hello, Alice! Welcome to gpt-fusion."}` |
 | GET | `/profile/{uid}` | Basic user profile | `{"uid": "42", "display_name": "User 42"}` |
 | GET | `/projects` | Available demo projects | List with GitHub links |
+| GET | `/health` | Liveness/version check | `{"status": "healthy", "version": "0.3.0"}` |
 
 ### 🌐 Cloud Deployment
 
