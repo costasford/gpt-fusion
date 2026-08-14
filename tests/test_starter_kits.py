@@ -1,9 +1,12 @@
+import filecmp
 import importlib.util
 import sys
+from pathlib import Path
 
 import pytest
 
 from gpt_fusion.starter_kits import (
+    _ASSETS_ROOT,
     create_csv_app,
     create_fullstack_app,
     create_tailwind_ui,
@@ -12,6 +15,8 @@ from gpt_fusion.starter_kits import (
 fastapi = pytest.importorskip("fastapi")
 from fastapi.testclient import TestClient  # noqa: E402
 
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+
 
 def _load_module(path, name):
     spec = importlib.util.spec_from_file_location(name, path)
@@ -19,6 +24,43 @@ def _load_module(path, name):
     sys.modules[name] = module
     spec.loader.exec_module(module)
     return module
+
+
+@pytest.mark.parametrize(
+    "repo_root_path,bundled_path",
+    [
+        ("examples/tutorial.py", "examples/tutorial.py"),
+        ("data/numbers.csv", "data/numbers.csv"),
+    ],
+)
+def test_bundled_assets_match_repo_root_originals(repo_root_path, bundled_path):
+    """The starter-kit generators copy from src/gpt_fusion/_assets/, not the
+    repo-root examples/, data/, auth-ui-kit/ (those aren't part of the wheel
+    - see starter_kits.py's module docstring). Catch the two copies
+    drifting apart before it ships silently broken again.
+    """
+    original = _REPO_ROOT / repo_root_path
+    bundled = _ASSETS_ROOT / bundled_path
+    assert bundled.is_file(), f"{bundled} is missing from _assets/"
+    assert filecmp.cmp(original, bundled, shallow=False), (
+        f"{bundled} has drifted from {original} - copy the change into " "_assets/ too"
+    )
+
+
+def test_bundled_auth_ui_kit_matches_repo_root_original():
+    original = _REPO_ROOT / "auth-ui-kit"
+    bundled = _ASSETS_ROOT / "auth-ui-kit"
+    comparison = filecmp.dircmp(original, bundled)
+    assert not comparison.left_only, f"only in repo-root: {comparison.left_only}"
+    assert not comparison.right_only, f"only in _assets/: {comparison.right_only}"
+    _, mismatch, errors = filecmp.cmpfiles(
+        original,
+        bundled,
+        comparison.common_files,
+        shallow=False,
+    )
+    assert not mismatch, f"drifted from repo-root original: {mismatch}"
+    assert not errors, f"could not compare: {errors}"
 
 
 def test_create_csv_app(tmp_path):

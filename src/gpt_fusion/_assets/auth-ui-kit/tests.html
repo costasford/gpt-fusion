@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auth UI Kit Tests</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .test-pass { color: #10b981; }
+    .test-fail { color: #ef4444; }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-8">
+  
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8 text-center">Auth UI Kit Tests</h1>
+    
+    <div class="grid gap-6 md:grid-cols-2">
+      
+      <!-- Email Validation Tests -->
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Email Validation Tests</h2>
+        <div id="email-tests" class="space-y-2 text-sm font-mono"></div>
+      </div>
+      
+      <!-- Password Validation Tests -->
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Password Validation Tests</h2>
+        <div id="password-tests" class="space-y-2 text-sm font-mono"></div>
+      </div>
+      
+      <!-- Input Sanitization Tests -->
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Input Sanitization Tests</h2>
+        <div id="sanitization-tests" class="space-y-2 text-sm font-mono"></div>
+      </div>
+      
+      <!-- Test Summary -->
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Test Summary</h2>
+        <div id="test-summary" class="space-y-2"></div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <script type="module">
+    // Import the validation functions (simulate the import)
+    // In a real scenario, you'd import from the actual module
+    function isValidEmail(email) {
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+      return emailRegex.test(email) && email.length <= 254;
+    }
+    
+    function validatePassword(password) {
+      const errors = [];
+      
+      if (password.length < 8) {
+        errors.push("Password must be at least 8 characters long");
+      }
+      
+      if (!/[A-Z]/.test(password)) {
+        errors.push("Password must contain at least one uppercase letter");
+      }
+      
+      if (!/[a-z]/.test(password)) {
+        errors.push("Password must contain at least one lowercase letter");
+      }
+      
+      if (!/\d/.test(password)) {
+        errors.push("Password must contain at least one number");
+      }
+      
+      if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+        errors.push("Password must contain at least one special character");
+      }
+      
+      return {
+        isValid: errors.length === 0,
+        errors: errors
+      };
+    }
+    
+    function sanitizeInput(input) {
+      return input.trim().replace(/[<>]/g, '');
+    }
+    
+    // Test runner
+    let totalTests = 0;
+    let passedTests = 0;
+    
+    function runTest(description, testFn) {
+      totalTests++;
+      try {
+        const result = testFn();
+        if (result) {
+          passedTests++;
+          return `<div class="test-pass">✓ ${description}</div>`;
+        } else {
+          return `<div class="test-fail">✗ ${description}</div>`;
+        }
+      } catch (error) {
+        return `<div class="test-fail">✗ ${description} (Error: ${error.message})</div>`;
+      }
+    }
+    
+    // Email validation tests
+    const emailTests = [
+      () => runTest("Valid email: test@example.com", () => isValidEmail("test@example.com")),
+      () => runTest("Valid email with subdomain: test@mail.example.com", () => isValidEmail("test@mail.example.com")),
+      () => runTest("Valid email with plus: test+label@example.com", () => isValidEmail("test+label@example.com")),
+      () => runTest("Invalid email: no @ symbol", () => !isValidEmail("testexample.com")),
+      () => runTest("Invalid email: no domain", () => !isValidEmail("test@")),
+      () => runTest("Invalid email: no local part", () => !isValidEmail("@example.com")),
+      () => runTest("Invalid email: spaces", () => !isValidEmail("test @example.com")),
+      () => runTest("Invalid email: empty string", () => !isValidEmail("")),
+      () => runTest("Invalid email: too long", () => !isValidEmail("a".repeat(250) + "@example.com")),
+    ];
+    
+    // Password validation tests
+    const passwordTests = [
+      () => runTest("Strong password: MyPass123!", () => validatePassword("MyPass123!").isValid),
+      () => runTest("Strong password: SecureP@ss1", () => validatePassword("SecureP@ss1").isValid),
+      () => runTest("Weak password: too short", () => !validatePassword("Pass1!").isValid),
+      () => runTest("Weak password: no uppercase", () => !validatePassword("password123!").isValid),
+      () => runTest("Weak password: no lowercase", () => !validatePassword("PASSWORD123!").isValid),
+      () => runTest("Weak password: no numbers", () => !validatePassword("Password!").isValid),
+      () => runTest("Weak password: no special chars", () => !validatePassword("Password123").isValid),
+      () => runTest("Empty password", () => !validatePassword("").isValid),
+    ];
+    
+    // Input sanitization tests
+    const sanitizationTests = [
+      () => runTest("Remove < and >", () => sanitizeInput("hello<script>alert('xss')</script>") === "helloscriptalert('xss')/script"),
+      () => runTest("Trim whitespace", () => sanitizeInput("  hello world  ") === "hello world"),
+      () => runTest("Handle empty string", () => sanitizeInput("") === ""),
+      () => runTest("Handle normal text", () => sanitizeInput("normal text") === "normal text"),
+      () => runTest("Remove only < and >", () => sanitizeInput("test<>test") === "testtest"),
+    ];
+    
+    // Run all tests
+    document.getElementById('email-tests').innerHTML = emailTests.map(test => test()).join('');
+    document.getElementById('password-tests').innerHTML = passwordTests.map(test => test()).join('');
+    document.getElementById('sanitization-tests').innerHTML = sanitizationTests.map(test => test()).join('');
+    
+    // Display summary
+    const passRate = ((passedTests / totalTests) * 100).toFixed(1);
+    const summaryColor = passRate === '100.0' ? 'text-green-600' : passRate >= '80.0' ? 'text-yellow-600' : 'text-red-600';
+    
+    document.getElementById('test-summary').innerHTML = `
+      <div class="text-lg font-semibold">
+        <span class="${summaryColor}">${passedTests}/${totalTests} tests passed (${passRate}%)</span>
+      </div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        ${passRate === '100.0' ? '🎉 All tests passed!' : passRate >= '80.0' ? '⚠️ Most tests passed' : '❌ Some tests failed'}
+      </div>
+      <div class="mt-4 text-xs text-gray-500 dark:text-gray-400">
+        These tests validate the core security and validation functions of the enhanced auth UI kit.
+      </div>
+    `;
+  </script>
+  
+</body>
+</html>

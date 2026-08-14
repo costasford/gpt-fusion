@@ -68,6 +68,13 @@ Changelog = "https://github.com/costasford/gpt-fusion/releases"
 [project.scripts]
 gpt-fusion = "gpt_fusion.__main__:main"
 
+[tool.setuptools.package-data]
+# Non-.py files the starter-kit generators copy at runtime (see
+# src/gpt_fusion/starter_kits.py). setuptools only bundles .py files by
+# default, so without this the generators work in an editable install
+# but silently break for anyone who does a real `pip install`.
+gpt_fusion = ["_assets/**/*"]
+
 [tool.pytest.ini_options]
 minversion = "7.0"
 addopts = "-ra -v --cov=src/gpt_fusion --cov-report=term-missing"
