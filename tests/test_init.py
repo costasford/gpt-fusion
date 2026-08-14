@@ -12,9 +12,19 @@ def test_optional_modules_lazy_loaded():
 
     assert "scrape" not in gpt_fusion.__dict__
     assert "TwitterBot" not in gpt_fusion.__dict__
+    assert "LLMClient" not in gpt_fusion.__dict__
 
     _ = gpt_fusion.scrape
     _ = gpt_fusion.TwitterBot
+    _ = gpt_fusion.LLMClient
 
     assert "scrape" in gpt_fusion.__dict__
     assert "TwitterBot" in gpt_fusion.__dict__
+    assert "LLMClient" in gpt_fusion.__dict__
+
+
+def test_unknown_attribute_raises():
+    import gpt_fusion
+
+    with pytest.raises(AttributeError):
+        gpt_fusion.definitely_not_a_real_attribute

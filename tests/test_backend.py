@@ -37,3 +37,11 @@ def test_greet_user():
     response = client.get("/greet/Fusion")
     assert response.status_code == 200
     assert response.json() == {"message": "Hello, Fusion! Welcome to gpt-fusion."}
+
+
+def test_health():
+    response = client.get("/health")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "healthy"
+    assert "version" in data

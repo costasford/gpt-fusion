@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from importlib.metadata import PackageNotFoundError, version
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -9,6 +11,12 @@ from .projects import PROJECTS, Project
 from .core import greet
 
 app = FastAPI()
+
+try:
+    _VERSION = version("gpt-fusion")
+except PackageNotFoundError:
+    # Running from a source checkout without an installed distribution.
+    _VERSION = "0.0.0"
 
 
 class Profile(BaseModel):
@@ -38,3 +46,9 @@ def list_projects() -> list[Project]:
 def greet_user(name: str) -> dict[str, str]:
     """Return a greeting for *name* using :func:`greet`."""
     return {"message": greet(name)}
+
+
+@app.get("/health")
+def health() -> dict[str, str]:
+    """Return a basic liveness/version check for deployment monitoring."""
+    return {"status": "healthy", "version": _VERSION}

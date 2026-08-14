@@ -31,3 +31,9 @@ class DataError(GPTFusionError):
     """Raised when data processing fails."""
 
     pass
+
+
+class APIError(GPTFusionError):
+    """Raised when an external API request fails or returns an unexpected response."""
+
+    pass

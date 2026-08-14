@@ -9,6 +9,7 @@ from .analysis import average_from_csv, load_numbers_from_csv, median_from_csv
 from .config import config, get_config, update_config
 from .core import greet
 from .exceptions import (
+    APIError,
     ConfigurationError,
     DataError,
     GPTFusionError,
@@ -43,6 +44,8 @@ _OPTIONAL_ATTRS: dict[str, tuple[str, str]] = {
     "Project": ("projects", "Project"),
     "PROJECTS": ("projects", "PROJECTS"),
     "minify_dir": ("build_utils", "minify_dir"),
+    "LLMClient": ("llm", "LLMClient"),
+    "ask": ("llm", "ask"),
 }
 
 
@@ -84,6 +87,8 @@ __all__ = [
     "backend_app",
     "Project",
     "PROJECTS",
+    "LLMClient",
+    "ask",
     # Configuration
     "config",
     "get_config",
@@ -94,4 +99,5 @@ __all__ = [
     "DataError",
     "SecurityError",
     "ConfigurationError",
+    "APIError",
 ]

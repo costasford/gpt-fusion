@@ -2,22 +2,23 @@
 
 **The Python toolkit that makes AI integration effortless**
 
-GPT Fusion is a comprehensive Python library designed to streamline AI-assisted application development. Whether you're building web scrapers, data analysis tools, or interactive demos, GPT Fusion provides the essential utilities and patterns to get you up and running quickly.
+GPT Fusion is a comprehensive Python library designed to streamline AI-assisted application development. It ships a real LLM client for OpenAI-compatible chat completions (OpenAI, Groq, a local Ollama server, anything speaking the same API), plus the text processing, web scraping, and interactive demo tooling it's had all along.
 
 ## 🎯 Why Choose GPT Fusion?
 
+- **🤖 Real LLM Client**: OpenAI-compatible chat completions, works with OpenAI, Groq, local Ollama, or anything else on that API shape
 - **⚡ Zero Setup Friction**: Install and start coding in seconds
 - **🛡️ Production Ready**: Built-in security, performance optimizations, and error handling
 - **🔌 Modular Design**: Use only what you need with optional dependencies
 - **📚 Rich Examples**: Complete demo projects including Unity 3D games and auth systems
-- **🧪 Battle Tested**: 63+ tests with 95% coverage and CI/CD pipeline
+- **🧪 Battle Tested**: 80+ tests with 89%+ coverage and CI/CD pipeline
 
 [![CI](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![Version](https://img.shields.io/badge/version-0.2.0-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
+[![Version](https://img.shields.io/badge/version-0.3.0-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
-[![Tests](https://img.shields.io/badge/tests-63%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
-[![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
+[![Tests](https://img.shields.io/badge/tests-80%2B%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
+[![Coverage](https://img.shields.io/badge/coverage-89%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
 
 📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)**
 
@@ -75,11 +76,46 @@ Found 30 headlines
 ✅ Created my-modern-webapp/ with Tailwind CSS
 ```
 
+### 🤖 LLM Integration
+
+```bash
+pip install "gpt-fusion[llm]"
+export OPENAI_API_KEY=sk-...
+```
+
+```python
+from gpt_fusion import ask, LLMClient
+
+# One-liner for a single question
+reply = ask("Explain recursion in one sentence.")
+
+# Or reuse a client across a multi-turn conversation
+client = LLMClient(model="gpt-4o-mini")
+reply = client.chat([
+    {"role": "system", "content": "Answer in a single sentence."},
+    {"role": "user", "content": "What's a closure?"},
+])
+client.close()
+```
+
+Points `base_url` anywhere that speaks the OpenAI chat completions API - swap in Groq, a local Ollama server, or any other compatible endpoint without changing your code:
+
+```python
+client = LLMClient(
+    base_url="http://localhost:11434/v1",
+    model="llama3",
+    api_key="ollama",  # most local servers ignore this but still require *something*
+)
+```
+
 ### 🎛️ Optional Feature Sets
 
 Choose the components you need:
 
 ```bash
+# 🤖 LLM chat completions client
+pip install "gpt-fusion[llm]"
+
 # 🌐 Web scraping & HTTP clients
 pip install "gpt-fusion[web]"
 
@@ -100,6 +136,19 @@ pip install "gpt-fusion[all]"
 ```
 
 ## ✨ Features
+
+### 🤖 LLM Client
+Chat completions for OpenAI-compatible APIs - real requests, real error handling, no vendor lock-in.
+```python
+# Install: pip install "gpt-fusion[llm]"
+from gpt_fusion import ask, LLMClient
+
+ask("Summarize the plot of Hamlet in two sentences.")
+
+client = LLMClient()  # reads OPENAI_API_KEY from the environment
+client.chat("Hello!", temperature=0.2)
+```
+Raises `ConfigurationError` if no API key is available, and `APIError` if the request fails or the response comes back in an unexpected shape - both importable from `gpt_fusion`.
 
 ### 🐍 Python Utilities
 Core text processing, math helpers, and CSV analysis tools.
@@ -226,10 +275,10 @@ uvicorn gpt_fusion.backend:app --reload --port 8000
 
 | Method | Endpoint | Description | Example |
 |--------|----------|-------------|---------|
-| GET | `/` | Welcome message | `{"message": "GPT Fusion API v0.2.0"}` |
-| GET | `/greet/{name}` | Personalized greeting | `/greet/Alice` → `"Hello, Alice!"` |
+| GET | `/` | Welcome message | `{"message": "gpt-fusion backend"}` |
+| GET | `/greet/{name}` | Personalized greeting | `/greet/Alice` → `{"message": "Hello, Alice! Welcome to gpt-fusion."}` |
+| GET | `/profile/{uid}` | Basic user profile | `{"uid": "42", "display_name": "User 42"}` |
 | GET | `/projects` | Available demo projects | List with GitHub links |
-| GET | `/health` | System health status | `{"status": "healthy", "version": "0.2.0"}` |
 
 ### 🌐 Cloud Deployment
 
@@ -299,10 +348,10 @@ pre-commit install  # Git hooks for quality
 
 ### 🧪 Testing & Quality
 ```bash
-# Run the full test suite (63 tests)
+# Run the full test suite (80+ tests)
 pytest
 
-# Check coverage (currently 95%+)
+# Check coverage (currently 89%+)
 pytest --cov=src/gpt_fusion --cov-report=html
 
 # Code formatting and linting
@@ -317,6 +366,7 @@ python scripts/run_checks.py
 ```
 src/gpt_fusion/     # Main package
 ├── core.py         # Basic utilities  
+├── llm.py          # LLM chat completions client (optional)
 ├── text_utils.py   # Text processing
 ├── analysis.py     # CSV/data tools
 ├── web_scraper.py  # Web scraping (optional)
