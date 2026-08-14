@@ -15,7 +15,7 @@ GPT Fusion is a comprehensive Python library designed to streamline AI-assisted 
 
 [![CI](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![Version](https://img.shields.io/badge/version-0.4.0-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
+[![Version](https://img.shields.io/badge/version-0.4.1-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
 [![Tests](https://img.shields.io/badge/tests-80%2B%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
 [![Coverage](https://img.shields.io/badge/coverage-89%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
@@ -290,7 +290,7 @@ uvicorn gpt_fusion.backend:app --reload --port 8000
 | GET | `/greet/{name}` | Personalized greeting | `/greet/Alice` → `{"message": "Hello, Alice! Welcome to gpt-fusion."}` |
 | GET | `/profile/{uid}` | Basic user profile | `{"uid": "42", "display_name": "User 42"}` |
 | GET | `/projects` | Available demo projects | List with GitHub links |
-| GET | `/health` | Liveness/version check | `{"status": "healthy", "version": "0.4.0"}` |
+| GET | `/health` | Liveness/version check | `{"status": "healthy", "version": "0.4.1"}` |
 
 ### 🌐 Cloud Deployment
 
