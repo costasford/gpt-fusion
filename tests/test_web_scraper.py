@@ -30,8 +30,11 @@ def test_scrape_parses_text():
         "</body></html>"
     )
 
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
-        "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch(
+            "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+        ),
     ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
@@ -48,8 +51,11 @@ def test_scrape_parses_text():
 
 
 def test_scrape_connection_error_raises_exception():
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
-        "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch(
+            "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+        ),
     ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
@@ -77,8 +83,9 @@ def test_scrape_connection_error_raises_exception():
     ],
 )
 def test_scrape_blocks_non_public_targets(address):
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
-        "gpt_fusion.web_scraper._resolve_addresses", return_value=[address]
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch("gpt_fusion.web_scraper._resolve_addresses", return_value=[address]),
     ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
@@ -93,9 +100,10 @@ def test_scrape_blocks_redirect_to_internal_address():
     """A URL that resolves publicly must not be followed if it redirects
     somewhere internal - requests' default allow_redirects=True would do
     exactly that."""
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
-        "gpt_fusion.web_scraper._resolve_addresses"
-    ) as mock_resolve:
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch("gpt_fusion.web_scraper._resolve_addresses") as mock_resolve,
+    ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
         mock_session.get.return_value = _mock_response(
@@ -115,8 +123,11 @@ def test_scrape_blocks_redirect_to_internal_address():
 
 def test_scrape_follows_redirect_to_public_address():
     html = "<p class='msg'>Hello</p>"
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
-        "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch(
+            "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+        ),
     ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
@@ -132,8 +143,11 @@ def test_scrape_follows_redirect_to_public_address():
 
 
 def test_scrape_too_many_redirects_raises():
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
-        "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch(
+            "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+        ),
     ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
@@ -146,9 +160,12 @@ def test_scrape_too_many_redirects_raises():
 
 
 def test_scrape_unresolvable_host_raises_validation_error():
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
-        "gpt_fusion.web_scraper._resolve_addresses",
-        side_effect=ValidationError("Could not resolve host: nope.invalid"),
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch(
+            "gpt_fusion.web_scraper._resolve_addresses",
+            side_effect=ValidationError("Could not resolve host: nope.invalid"),
+        ),
     ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
