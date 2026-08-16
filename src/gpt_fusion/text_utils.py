@@ -72,15 +72,24 @@ def most_common_word(text: str, case_sensitive: bool = True) -> str:
     return most_common[0][0]
 
 
+_WORD_RE = re.compile(r"[^\W\d_]+(?:'[^\W\d_]+)*", re.UNICODE)
+
+
 def to_title_case(text: str) -> str:
-    """Return *text* in title case."""
-    return text.title()
+    """Return *text* in title case.
+
+    Unlike str.title(), an apostrophe inside a word is not treated as a
+    new word boundary, so contractions capitalize correctly
+    ("don't stop" -> "Don't Stop", not "Don'T Stop").
+    """
+    return _WORD_RE.sub(lambda m: m.group(0).capitalize(), text)
 
 
 def is_palindrome(text: str) -> bool:
     """Return ``True`` if *text* is a palindrome.
 
-    Comparison ignores case and punctuation.
+    Comparison ignores case and punctuation (Unicode-aware: accented and
+    non-Latin letters count as letters, not punctuation to strip).
     """
-    cleaned = re.sub(r"[^A-Za-z0-9]", "", text).lower()
+    cleaned = "".join(ch for ch in text if ch.isalnum()).lower()
     return cleaned == cleaned[::-1]

@@ -38,5 +38,22 @@ def test_to_title_case():
     assert to_title_case("hello world") == "Hello World"
 
 
+def test_to_title_case_preserves_contractions():
+    """Regression test: str.title() capitalizes after an apostrophe too,
+    turning "don't" into "Don'T"."""
+    assert to_title_case("don't stop") == "Don't Stop"
+
+
 def test_is_palindrome():
     assert is_palindrome("A man, a plan, a canal: Panama")
+
+
+def test_is_palindrome_unicode_letters_are_not_stripped():
+    """Regression test: stripping non-ASCII characters as "punctuation"
+    made any string with a single accented letter left over trivially
+    "palindrome" (a lone character always equals its own reverse)."""
+    assert not is_palindrome("Ét")
+
+
+def test_is_palindrome_true_for_unicode_palindrome():
+    assert is_palindrome("Á racecar á")
