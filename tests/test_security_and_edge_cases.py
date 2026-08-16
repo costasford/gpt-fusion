@@ -125,14 +125,17 @@ class TestEdgeCases:
         finally:
             Path(temp_path).unlink()
 
+    @patch("gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"])
     @patch("gpt_fusion.web_scraper._get_session")
-    def test_web_scraper_with_valid_url(self, mock_get_session):
+    def test_web_scraper_with_valid_url(self, mock_get_session, mock_resolve):
         """Test web scraper with valid URL and proper headers."""
         # Mock session and response
         mock_session = Mock()
         mock_get_session.return_value = mock_session
 
         mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.headers = {}
         mock_response.raise_for_status.return_value = None
         mock_response.text = "<html><body><p>Test content</p></body></html>"
         mock_session.get.return_value = mock_response
@@ -143,6 +146,7 @@ class TestEdgeCases:
         mock_session.get.assert_called_once_with(
             "https://example.com",
             timeout=10,
+            allow_redirects=False,
         )
 
     def test_palindrome_edge_cases(self):

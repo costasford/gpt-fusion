@@ -9,7 +9,17 @@ pytest.importorskip("bs4")
 
 import requests  # noqa: E402
 
+from gpt_fusion.exceptions import ValidationError  # noqa: E402
 from gpt_fusion.web_scraper import scrape  # noqa: E402
+
+
+def _mock_response(status_code=200, text="", location=None):
+    response = Mock()
+    response.status_code = status_code
+    response.headers = {"Location": location} if location else {}
+    response.text = text
+    response.raise_for_status = Mock()
+    return response
 
 
 def test_scrape_parses_text():
@@ -20,26 +30,27 @@ def test_scrape_parses_text():
         "</body></html>"
     )
 
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session:
+    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
+        "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+    ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
-
-        mock_response = Mock()
-        mock_response.text = html
-        mock_response.raise_for_status = Mock()
-        mock_session.get.return_value = mock_response
+        mock_session.get.return_value = _mock_response(text=html)
 
         result = scrape("http://example.com", "p.msg")
         mock_session.get.assert_called_once_with(
             "http://example.com",
             timeout=10,
+            allow_redirects=False,
         )
 
     assert result == ["Hello", "World"]
 
 
 def test_scrape_connection_error_raises_exception():
-    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session:
+    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
+        "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+    ):
         mock_session = Mock()
         mock_get_session.return_value = mock_session
         mock_session.get.side_effect = requests.exceptions.RequestException
@@ -49,4 +60,100 @@ def test_scrape_connection_error_raises_exception():
         mock_session.get.assert_called_once_with(
             "http://example.com",
             timeout=10,
+            allow_redirects=False,
         )
+
+
+@pytest.mark.parametrize(
+    "address",
+    [
+        "127.0.0.1",  # loopback
+        "169.254.169.254",  # link-local / cloud metadata endpoint
+        "10.0.0.5",  # RFC1918 private
+        "172.16.0.5",  # RFC1918 private
+        "192.168.1.5",  # RFC1918 private
+        "0.0.0.0",  # unspecified
+        "::1",  # IPv6 loopback
+    ],
+)
+def test_scrape_blocks_non_public_targets(address):
+    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
+        "gpt_fusion.web_scraper._resolve_addresses", return_value=[address]
+    ):
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+
+        with pytest.raises(ValidationError):
+            scrape("http://internal.example", "p")
+
+        mock_session.get.assert_not_called()
+
+
+def test_scrape_blocks_redirect_to_internal_address():
+    """A URL that resolves publicly must not be followed if it redirects
+    somewhere internal - requests' default allow_redirects=True would do
+    exactly that."""
+    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
+        "gpt_fusion.web_scraper._resolve_addresses"
+    ) as mock_resolve:
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+        mock_session.get.return_value = _mock_response(
+            status_code=302, location="http://internal.example/secret"
+        )
+
+        def resolve(hostname):
+            return ["10.0.0.5"] if hostname == "internal.example" else ["93.184.216.34"]
+
+        mock_resolve.side_effect = resolve
+
+        with pytest.raises(ValidationError):
+            scrape("http://public.example", "p")
+
+        mock_session.get.assert_called_once()
+
+
+def test_scrape_follows_redirect_to_public_address():
+    html = "<p class='msg'>Hello</p>"
+    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
+        "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+    ):
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+        mock_session.get.side_effect = [
+            _mock_response(status_code=301, location="http://public.example/new"),
+            _mock_response(text=html),
+        ]
+
+        result = scrape("http://public.example", "p.msg")
+
+        assert result == ["Hello"]
+        assert mock_session.get.call_count == 2
+
+
+def test_scrape_too_many_redirects_raises():
+    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
+        "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+    ):
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+        mock_session.get.return_value = _mock_response(
+            status_code=302, location="http://public.example/loop"
+        )
+
+        with pytest.raises(ValidationError):
+            scrape("http://public.example", "p")
+
+
+def test_scrape_unresolvable_host_raises_validation_error():
+    with patch("gpt_fusion.web_scraper._get_session") as mock_get_session, patch(
+        "gpt_fusion.web_scraper._resolve_addresses",
+        side_effect=ValidationError("Could not resolve host: nope.invalid"),
+    ):
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+
+        with pytest.raises(ValidationError):
+            scrape("http://nope.invalid", "p")
+
+        mock_session.get.assert_not_called()
