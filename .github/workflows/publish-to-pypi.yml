@@ -22,8 +22,33 @@ jobs:
           name: python-package-distributions
           path: dist/
 
-  publish:
+  test-wheel:
+    # Installs the exact wheel about to be published into a clean venv and
+    # runs the suite against it, so a release can't ship the class of bug
+    # that shipped in 0.4.0/0.4.1/0.4.2 (worked under `-e .`, broke for real
+    # installs) even if it's cut from a commit CI never ran on.
     needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Install the built wheel into a clean venv and test it
+        run: |
+          python -m venv wheel-venv
+          wheel-venv/bin/pip install --upgrade pip
+          wheel-venv/bin/pip install dist/*.whl
+          wheel-venv/bin/pip install -r requirements-dev.txt
+          wheel-venv/bin/pytest tests -q --no-cov
+
+  publish:
+    needs: [build, test-wheel]
     runs-on: ubuntu-latest
     environment:
       name: pypi

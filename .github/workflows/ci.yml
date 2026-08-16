@@ -47,3 +47,29 @@ jobs:
         run: JEKYLL_ENV=production bundle exec jekyll build
         if: matrix.python-version == '3.12'
 
+  wheel-install-test:
+    # Editable installs (`pip install -e .`) resolve imports straight to
+    # src/, masking packaging bugs like missing package-data or an entry
+    # point that only works from a checkout. This job builds the real wheel,
+    # installs it into a venv with no source tree relationship to the repo,
+    # and runs the suite against that - the same class of bug that shipped
+    # in 0.4.0, 0.4.1, and 0.4.2 despite the `build` job above being green.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build wheel
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build --wheel
+      - name: Install the built wheel into a clean venv
+        run: |
+          python -m venv wheel-venv
+          wheel-venv/bin/pip install --upgrade pip
+          wheel-venv/bin/pip install dist/*.whl
+          wheel-venv/bin/pip install -r requirements-dev.txt
+      - name: Test against the installed wheel
+        run: wheel-venv/bin/pytest tests -q --no-cov
+
