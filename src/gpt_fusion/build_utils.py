@@ -6,10 +6,15 @@ from pathlib import Path
 import gzip
 import shutil
 
-import brotli
-import minify_html
-from csscompressor import compress
-from jsmin import jsmin
+try:
+    import brotli
+    import minify_html
+    from csscompressor import compress
+    from jsmin import jsmin
+except ImportError as e:
+    raise ImportError(
+        "build_utils requires the 'build' extra: " 'pip install "gpt-fusion[build]"'
+    ) from e
 
 
 def _compress_file(path: Path) -> None:
