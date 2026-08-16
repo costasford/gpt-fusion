@@ -70,6 +70,23 @@ def test_create_csv_app(tmp_path):
     assert not (dst / "api.py").exists()
 
 
+def test_create_csv_app_generated_script_actually_runs(tmp_path):
+    """Regression test: app.py must find numbers.csv when actually executed,
+    not just exist on disk (see the parents[1]/data path bug in 0.4.1)."""
+    import subprocess
+    import sys
+
+    dst = create_csv_app(tmp_path)
+    result = subprocess.run(
+        [sys.executable, str(dst / "app.py")],
+        capture_output=True,
+        text=True,
+        cwd=dst,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "Average: 3.0" in result.stdout
+
+
 def test_create_csv_app_with_api_generates_working_endpoints(tmp_path):
     dst = create_csv_app(tmp_path, with_api=True)
     assert (dst / "api.py").is_file()
