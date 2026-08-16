@@ -166,17 +166,22 @@ class TestPerformanceOptimizations:
 
             minify_dir(src_dir, dst_dir)
 
-            # Verify files were processed
+            # Verify each file was actually minified/copied correctly, not
+            # just that a same-named file exists at the destination.
             dst_path = Path(dst_dir)
-            assert (dst_path / "test1.html").exists()
-            assert (dst_path / "test2.css").exists()
-            assert (dst_path / "test3.js").exists()
-            assert (dst_path / "test4.txt").exists()
 
-            # Verify minification occurred
             minified_html = (dst_path / "test1.html").read_text()
             assert "<h1>Test 1</h1>" in minified_html
             assert len(minified_html) < len("<html><body><h1>Test 1</h1></body></html>")
+
+            assert (dst_path / "test2.css").read_text() == "body{margin:0;padding:0}"
+            assert (dst_path / "test3.js").read_text() == "console.log('hello world');"
+
+            # .txt has no minifier registered, so it's copied through as-is
+            # and does not get compressed companions.
+            assert (dst_path / "test4.txt").read_text() == "Plain text file"
+            assert not (dst_path / "test4.txt.gz").exists()
+            assert not (dst_path / "test4.txt.br").exists()
 
     def test_config_from_environment(self):
         """Test configuration can be loaded from environment variables."""

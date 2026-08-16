@@ -11,9 +11,19 @@ def test_main_module(tmp_path):
         capture_output=True,
         text=True,
     )
-    assert result.returncode == 0
-    assert (tmp_path / "app.py").is_file()
-    assert (tmp_path / "numbers.csv").is_file()
+    assert result.returncode == 0, result.stderr
+
+    # Also confirm the generated app actually runs, not just that it exists
+    # on disk - see the 0.4.1 bug where this exact gap let a broken
+    # generated app.py ship undetected.
+    run_result = subprocess.run(
+        [sys.executable, str(tmp_path / "app.py")],
+        capture_output=True,
+        text=True,
+        cwd=tmp_path,
+    )
+    assert run_result.returncode == 0, run_result.stderr
+    assert "Average: 3.0" in run_result.stdout
 
 
 def test_console_script_entry_point_is_importable():

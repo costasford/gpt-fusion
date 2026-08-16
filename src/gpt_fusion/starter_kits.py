@@ -225,19 +225,26 @@ def create_csv_app(dst: str | Path, with_api: bool = False) -> Path:
     return dst_path
 
 
+_PLAIN_TAILWIND_UI_FILES = ("index.html", "app.js", "README.md", "FIREBASE_SETUP.md")
+
+
 def create_tailwind_ui(dst: str | Path, dark_mode: bool = False) -> Path:
     """Create a Tailwind auth demo in *dst* and return the path.
 
-    By default, copies the whole auth-ui-kit/ directory as-is (which
-    already includes Tailwind dark: classes and a theme toggle). Pass
-    dark_mode=True to instead generate just index.html + app.js from the
-    visually richer "enhanced" variant (glass-effect UI, stronger dark
-    theme), renamed to plain filenames.
+    By default, copies just the plain variant's files (index.html, app.js,
+    README.md, FIREBASE_SETUP.md) - which already includes Tailwind dark:
+    classes and a theme toggle - not auth-ui-kit/'s enhanced-* files (the
+    other variant) or its internal tests.html. Pass dark_mode=True to
+    instead generate just index.html + app.js from the visually richer
+    "enhanced" variant (glass-effect UI, stronger dark theme), renamed to
+    plain filenames.
     """
     dst_path = Path(dst)
     src = _ASSETS_ROOT / "auth-ui-kit"
     if not dark_mode:
-        shutil.copytree(src, dst_path, dirs_exist_ok=True)
+        dst_path.mkdir(parents=True, exist_ok=True)
+        for name in _PLAIN_TAILWIND_UI_FILES:
+            shutil.copy2(src / name, dst_path / name)
         return dst_path
 
     dst_path.mkdir(parents=True, exist_ok=True)

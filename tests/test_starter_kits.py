@@ -101,8 +101,22 @@ def test_create_csv_app_with_api_generates_working_endpoints(tmp_path):
 
 def test_create_tailwind_ui(tmp_path):
     dst = create_tailwind_ui(tmp_path)
-    assert (dst / "index.html").is_file()
-    assert (dst / "app.js").is_file()
+
+    # Only the plain variant's own files - not the enhanced-* files that
+    # belong to the dark_mode=True variant, and not the auth-ui-kit repo's
+    # internal tests.html.
+    assert {p.name for p in dst.iterdir()} == {
+        "index.html",
+        "app.js",
+        "README.md",
+        "FIREBASE_SETUP.md",
+    }
+
+    html = (dst / "index.html").read_text(encoding="utf-8")
+    assert 'src="app.js"' in html
+
+    js = (dst / "app.js").read_text(encoding="utf-8")
+    assert "signInWithEmailAndPassword" in js
 
 
 def test_create_tailwind_ui_dark_mode_uses_enhanced_variant(tmp_path):
@@ -167,18 +181,27 @@ def test_create_fullstack_app(tmp_path, auth, database):
 
 
 def test_main_csv_app(tmp_path, monkeypatch):
-    """Test the CLI interface for create_csv_app."""
+    """Test the CLI interface for create_csv_app - regenerates the
+    subprocess-execution check from test_create_csv_app_generated_script_
+    actually_runs, but through the CLI entry point specifically, since
+    that's a separate code path (_main -> create_csv_app) that could
+    regress independently of the direct function call."""
+    import subprocess
     import sys
     from gpt_fusion.starter_kits import _main
 
-    # Mock sys.argv
     monkeypatch.setattr(sys, "argv", ["starter_kits", "create_csv_app", str(tmp_path)])
 
-    # Call the main function directly
     _main()
 
-    assert (tmp_path / "app.py").is_file()
-    assert (tmp_path / "numbers.csv").is_file()
+    result = subprocess.run(
+        [sys.executable, str(tmp_path / "app.py")],
+        capture_output=True,
+        text=True,
+        cwd=tmp_path,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "Average: 3.0" in result.stdout
 
 
 def test_main_tailwind_ui(tmp_path, monkeypatch):
@@ -186,16 +209,16 @@ def test_main_tailwind_ui(tmp_path, monkeypatch):
     import sys
     from gpt_fusion.starter_kits import _main
 
-    # Mock sys.argv
     monkeypatch.setattr(
         sys, "argv", ["starter_kits", "create_tailwind_ui", str(tmp_path)]
     )
 
-    # Call the main function directly
     _main()
 
-    assert (tmp_path / "index.html").is_file()
-    assert (tmp_path / "app.js").is_file()
+    html = (tmp_path / "index.html").read_text(encoding="utf-8")
+    assert 'src="app.js"' in html
+    js = (tmp_path / "app.js").read_text(encoding="utf-8")
+    assert "signInWithEmailAndPassword" in js
 
 
 def test_main_csv_app_with_api_flag(tmp_path, monkeypatch):
@@ -207,7 +230,11 @@ def test_main_csv_app_with_api_flag(tmp_path, monkeypatch):
         ["starter_kits", "create_csv_app", str(tmp_path), "--with-api"],
     )
     _main()
-    assert (tmp_path / "api.py").is_file()
+
+    module = _load_module(tmp_path / "api.py", "gen_csv_api_cli")
+    client = TestClient(module.app)
+    assert client.get("/average").json() == {"average": 3.0}
+    assert client.get("/median").json() == {"median": 3.0}
 
 
 def test_main_tailwind_ui_dark_mode_flag(tmp_path, monkeypatch):
@@ -238,7 +265,18 @@ def test_main_create_fullstack_app(tmp_path, monkeypatch):
     )
     _main()
     assert (tmp_path / "frontend" / "index.html").is_file()
-    assert (tmp_path / "backend" / "app.py").is_file()
-    backend_source = (tmp_path / "backend" / "app.py").read_text(encoding="utf-8")
-    assert "_require_auth" in backend_source
-    assert "sqlite3" in backend_source
+
+    # Actually run the generated backend through its real login -> token ->
+    # protected-route flow, not just grep its source for expected strings.
+    module = _load_module(tmp_path / "backend" / "app.py", "gen_fullstack_cli")
+    client = TestClient(module.app)
+
+    assert client.get("/average").status_code == 401
+
+    login = client.post("/login", json={"username": "demo", "password": "demo123"})
+    assert login.status_code == 200
+    token = login.json()["access_token"]
+
+    assert client.get(
+        "/average", headers={"Authorization": f"Bearer {token}"}
+    ).json() == {"average": 3.0}
