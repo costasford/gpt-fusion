@@ -41,13 +41,15 @@ class TwitchClient:
         if self._token:
             return
         url = "https://id.twitch.tv/oauth2/token"
-        params = {
+        # Sent as form data, not URL query params - query strings are far
+        # more likely to end up captured in proxy/CDN/access logs.
+        data = {
             "client_id": self.client_id,
             "client_secret": self.client_secret,
             "grant_type": "client_credentials",
         }
         session = self._get_session()
-        response = session.post(url, params=params, timeout=10)
+        response = session.post(url, data=data, timeout=10)
         response.raise_for_status()
         self._token = response.json()["access_token"]
 

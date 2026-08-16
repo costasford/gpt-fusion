@@ -46,3 +46,20 @@ def test_get_top_games_returns_data():
 def test_missing_credentials_raise_error():
     with pytest.raises(ValueError):
         TwitchClient(client_id=None, client_secret=None)
+
+
+def test_authenticate_sends_secret_as_form_data_not_url_params():
+    """client_secret must not appear in the request URL/params - query
+    strings are far more likely to be captured in proxy/CDN/access logs
+    than a POST body."""
+    with patch("gpt_fusion.twitch.TwitchClient._get_session") as mock_get_session:
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+        mock_auth(mock_session.post)
+
+        client = TwitchClient("id", "secret")
+        client._authenticate()
+
+        _, kwargs = mock_session.post.call_args
+        assert "params" not in kwargs
+        assert kwargs["data"]["client_secret"] == "secret"
