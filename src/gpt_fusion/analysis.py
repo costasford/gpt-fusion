@@ -21,8 +21,11 @@ def _validate_csv_path(path: str | Path) -> Path:
         SecurityError: If path attempts directory traversal
         FileNotFoundError: If file doesn't exist
     """
-    # Prevent path traversal attacks - check before resolving
-    if ".." in str(path):
+    # Prevent path traversal attacks - check before resolving. Checked as a
+    # path *component* (Path.parts), not a raw substring: a filename that
+    # merely contains ".." (e.g. "report..v2.csv") is not traversal and
+    # shouldn't be rejected.
+    if ".." in Path(path).parts:
         raise SecurityError(f"Path traversal detected: {path}")
 
     path = Path(path).resolve()
