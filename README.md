@@ -53,11 +53,11 @@ print(f"Reversed: {gpt_fusion.reverse_words(text)}")
 print(f"Is palindrome: {gpt_fusion.is_palindrome('racecar')}")
 
 # 📊 Powerful data analysis
-data = gpt_fusion.load_numbers_from_csv('data/sales.csv')
-print(f"Average: {gpt_fusion.average_from_csv('data/sales.csv', use_streaming=True)}")
+data = gpt_fusion.load_numbers_from_csv('data/numbers.csv')
+print(f"Average: {gpt_fusion.average_from_csv('data/numbers.csv', use_streaming=True)}")
 
 # 🌐 Easy web scraping (with built-in security)
-headlines = gpt_fusion.scrape("https://news.ycombinator.com", "a.storylink")
+headlines = gpt_fusion.scrape("https://news.ycombinator.com", ".titleline > a")
 print(f"Found {len(headlines)} headlines")
 
 # 🚀 Generate small, real starter projects in seconds
@@ -70,7 +70,7 @@ print(gpt_fusion.create_tailwind_ui('my-modern-webapp', dark_mode=True))
 Words: 9
 Reversed: dog lazy the over jumps fox brown quick The
 Is palindrome: True
-Average: 1247.83
+Average: 3.0
 Found 30 headlines
 my-analytics-dashboard
 my-modern-webapp
@@ -192,10 +192,12 @@ uvicorn.run(gpt_fusion.backend_app, port=8000)
 Twitter bot utilities with OAuth support.
 ```python
 # Install: pip install "gpt-fusion[twitter]"
+# Reads TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, and
+# TWITTER_ACCESS_SECRET from the environment if not passed explicitly.
 from gpt_fusion import TwitterBot
 
-bot = TwitterBot(api_key, api_secret)
-bot.tweet("Hello from GPT Fusion!")
+bot = TwitterBot()
+bot.post_tweet("Hello from GPT Fusion!")
 ```
 
 ## 🎮 Interactive Demos
@@ -229,11 +231,9 @@ bot.tweet("Hello from GPT Fusion!")
 
 ```bash
 $ python examples/tutorial.py
-🔍 Loading data/numbers.csv...
-📊 Values: [1.0, 2.0, 3.0, 4.0, 5.0]
-📈 Average: 3.0 | Median: 3.0
-⚡ Processing 1M rows in 2.3s (streaming mode)
-✅ Analysis complete!
+Values: [1.0, 2.0, 3.0, 4.0, 5.0]
+Average: 3.0
+Median: 3.0
 ```
 
 **Try:** [Tutorial Script](https://github.com/costasford/gpt-fusion/blob/main/examples/tutorial.py) | [Sample Data](https://github.com/costasford/gpt-fusion/tree/main/data)
@@ -290,7 +290,7 @@ uvicorn gpt_fusion.backend:app --reload --port 8000
 | GET | `/greet/{name}` | Personalized greeting | `/greet/Alice` → `{"message": "Hello, Alice! Welcome to gpt-fusion."}` |
 | GET | `/profile/{uid}` | Basic user profile | `{"uid": "42", "display_name": "User 42"}` |
 | GET | `/projects` | Available demo projects | List with GitHub links |
-| GET | `/health` | Liveness/version check | `{"status": "healthy", "version": "0.4.1"}` |
+| GET | `/health` | Liveness/version check | `{"status": "healthy", "version": "<installed gpt-fusion version>"}` |
 
 ### 🌐 Cloud Deployment
 
