@@ -123,21 +123,24 @@ def _get_numbers() -> list[float]:
 
 _AUTH_TEMPLATE = """
 # --- Auth: minimal HMAC-signed token, demo-grade only ---
-# Not production auth: no refresh, no revocation, and the secret below
-# must be replaced (e.g. via an environment variable) before shipping
-# anywhere real. Shown as a self-contained example of the shape a real
-# implementation would take, using only the standard library.
+# Not production auth: no refresh, no revocation. SECRET defaults to a
+# fresh random value generated on every process start (so tokens don't
+# survive a restart, and no shared secret ships baked into this file -
+# every gpt-fusion project would otherwise get the literal same string).
+# Set the APP_SECRET env var for a stable secret that survives restarts.
 import base64
 import hashlib
 import hmac
 import json
+import os
+import secrets
 import time
 from typing import Optional
 
 from fastapi import Header, HTTPException
 from pydantic import BaseModel
 
-SECRET = "change-me-before-deploying-anywhere-real"
+SECRET = os.environ.get("APP_SECRET") or secrets.token_hex(32)
 DEMO_USERNAME = "demo"
 DEMO_PASSWORD = "demo123"
 TOKEN_TTL_SECONDS = 3600
