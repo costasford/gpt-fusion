@@ -105,6 +105,34 @@ def test_unexpected_response_shape_raises_api_error():
             client.chat("Hi!")
 
 
+def test_non_json_response_raises_api_error():
+    """Regression test: a 200 response with a non-JSON body (a proxy error
+    page, an empty body from a flaky local server) used to raise a raw
+    ValueError/JSONDecodeError instead of the documented APIError."""
+    with patch("gpt_fusion.llm.LLMClient._get_session") as mock_get_session:
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+        response = Mock()
+        response.json.side_effect = ValueError("Expecting value: line 1 column 1")
+        response.raise_for_status = Mock()
+        mock_session.post.return_value = response
+
+        client = LLMClient(api_key="sk-test")
+        with pytest.raises(APIError):
+            client.chat("Hi!")
+
+
+def test_session_retries_post_on_transient_errors():
+    """Regression test: max_retries=2 was passed as a bare int, which
+    urllib3 turns into a Retry whose default allowed_methods excludes
+    POST - this client only ever POSTs, so retries were silently a
+    no-op."""
+    client = LLMClient(api_key="sk-test")
+    adapter = client._get_session().get_adapter("https://api.openai.com/v1")
+    assert "POST" in adapter.max_retries.allowed_methods
+    client.close()
+
+
 def test_custom_model_and_base_url_are_used():
     with patch("gpt_fusion.llm.LLMClient._get_session") as mock_get_session:
         mock_session = Mock()

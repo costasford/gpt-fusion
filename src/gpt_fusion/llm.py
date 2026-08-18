@@ -10,6 +10,7 @@ import os
 from typing import Any, Optional, Union
 
 import requests
+from urllib3.util.retry import Retry
 
 from .exceptions import APIError, ConfigurationError, ValidationError
 
@@ -66,8 +67,19 @@ class LLMClient:
         """Get or create a requests session with connection pooling."""
         if self._session is None:
             self._session = requests.Session()
+            # urllib3's Retry excludes POST from its allowed_methods by
+            # default (it isn't idempotent in general) - this client only
+            # ever POSTs to /chat/completions, so a bare max_retries=2
+            # silently never retried anything. Add POST explicitly so
+            # transient connection errors/429/5xx actually get retried.
+            retry = Retry(
+                total=2,
+                backoff_factor=0.5,
+                status_forcelist=(429, 500, 502, 503, 504),
+                allowed_methods=Retry.DEFAULT_ALLOWED_METHODS | frozenset({"POST"}),
+            )
             adapter = requests.adapters.HTTPAdapter(
-                pool_connections=5, pool_maxsize=10, max_retries=2, pool_block=False
+                pool_connections=5, pool_maxsize=10, max_retries=retry, pool_block=False
             )
             self._session.mount("http://", adapter)
             self._session.mount("https://", adapter)
@@ -128,7 +140,11 @@ class LLMClient:
         except requests.exceptions.RequestException as e:
             raise APIError(f"LLM API request failed: {e}") from e
 
-        data = response.json()
+        try:
+            data = response.json()
+        except ValueError as e:
+            raise APIError(f"LLM API returned a non-JSON response: {e}") from e
+
         try:
             return data["choices"][0]["message"]["content"]
         except (KeyError, IndexError, TypeError) as e:
