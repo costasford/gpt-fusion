@@ -1,10 +1,21 @@
 from __future__ import annotations
 
+import sys
+
 from gpt_fusion.twitch import TwitchClient
 
 
 def main() -> None:
-    client = TwitchClient()
+    try:
+        client = TwitchClient()
+    except ValueError:
+        print(
+            "Missing Twitch credentials. Set TWITCH_CLIENT_ID and "
+            "TWITCH_CLIENT_SECRET (see top-viewer-games/README.md).",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
+
     games = client.get_top_games()
     streams = client.get_top_streams()
     print("Top Games:")
