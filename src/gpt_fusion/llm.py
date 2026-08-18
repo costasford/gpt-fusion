@@ -108,7 +108,10 @@ class LLMClient:
             model: Overrides the client's default model for this call.
             temperature: Sampling temperature passed through to the API.
             max_tokens: Optional cap on the completion length.
-            timeout: Request timeout in seconds.
+            timeout: Per-attempt request timeout in seconds, not a total
+                budget - the session retries up to twice on connection
+                errors/429/5xx, so worst-case wall time is roughly
+                3 * timeout plus a short backoff.
 
         Returns:
             The assistant's reply text.

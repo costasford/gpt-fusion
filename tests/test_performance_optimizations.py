@@ -135,13 +135,15 @@ class TestPerformanceOptimizations:
 
         # Test updating config
         original_timeout = config.HTTP_TIMEOUT
-        update_config(http_timeout=30)
+        try:
+            update_config(http_timeout=30)
 
-        updated_config = get_config()
-        assert updated_config.HTTP_TIMEOUT == 30
-
-        # Restore original
-        update_config(http_timeout=original_timeout)
+            updated_config = get_config()
+            assert updated_config.HTTP_TIMEOUT == 30
+        finally:
+            # Restore original - in a finally so a failed assertion above
+            # can't leave every later test running with HTTP_TIMEOUT=30.
+            update_config(http_timeout=original_timeout)
 
     def test_build_utils_batch_processing(self):
         """Test that build utils processes files in batches."""
