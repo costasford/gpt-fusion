@@ -61,27 +61,44 @@ public class ObjectPool : MonoBehaviour
             return null;
         }
         
-        GameObject objectToSpawn = _poolDictionary[tag].Dequeue();
+        Queue<GameObject> queue = _poolDictionary[tag];
+        if (queue.Count == 0)
+        {
+            // Every object for this tag is still active/in-flight (spawned
+            // but not yet returned via ReturnToPool). Previously this
+            // couldn't happen because Spawn immediately re-enqueued the
+            // object it had just handed out, so a fast-enough caller could
+            // dequeue the *same* still-in-flight object again, teleporting
+            // it mid-use. Fail loudly instead of corrupting an active object.
+            Debug.LogWarning($"Pool '{tag}' exhausted - all objects in use.");
+            return null;
+        }
+
+        GameObject objectToSpawn = queue.Dequeue();
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-        
-        // Re-add to queue for reuse
-        _poolDictionary[tag].Enqueue(objectToSpawn);
-        
+
         // Notify the object it was spawned
         IPooledObject pooledObj = objectToSpawn.GetComponent<IPooledObject>();
         pooledObj?.OnObjectSpawn();
-        
+
         return objectToSpawn;
     }
-    
+
     public void ReturnToPool(string tag, GameObject obj)
     {
-        if (obj != null)
+        if (obj == null)
+            return;
+
+        obj.SetActive(false);
+        obj.transform.SetParent(transform);
+
+        // Only re-enqueued here, once the caller is actually done with it -
+        // not immediately on spawn (see the comment in SpawnFromPool).
+        if (_poolDictionary != null && _poolDictionary.TryGetValue(tag, out Queue<GameObject> queue))
         {
-            obj.SetActive(false);
-            obj.transform.SetParent(transform);
+            queue.Enqueue(obj);
         }
     }
     

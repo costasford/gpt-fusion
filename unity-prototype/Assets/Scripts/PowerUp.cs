@@ -29,7 +29,12 @@ public class PowerUp : MonoBehaviour
             PlayerController pc = other.GetComponent<PlayerController>();
             if (pc != null)
             {
-                StartCoroutine(ApplySpeed(pc));
+                // Started on the player, not on this PowerUp - the
+                // GameObject below is destroyed this same frame, which
+                // would kill a coroutine running on it before
+                // WaitForSeconds(duration) ever completes, leaving the
+                // speed boost permanent.
+                pc.StartCoroutine(ApplySpeed(pc));
             }
         }
 

@@ -89,6 +89,17 @@ public class AchievementSystem : MonoBehaviour
             new Achievement("achievement_hunter", "Achievement Hunter", "Unlock 10 achievements", AchievementType.Meta, 10),
             new Achievement("completionist", "Completionist", "Unlock all achievements", AchievementType.Meta, 25),
             new Achievement("first_save", "Progress Saver", "Save your game for the first time", AchievementType.Tutorial, 1),
+
+            // Quirky office demo achievements (DemoController / QuirkyCollectible)
+            new Achievement("first_caffeine_fix", "First Fix", "Drink your first coffee", AchievementType.Funny, 1),
+            new Achievement("caffeine_addict", "Caffeine Addict", "Drink 10 coffees", AchievementType.Funny, 10),
+            new Achievement("boss_encounter", "Act Busy!", "Run into the boss", AchievementType.Special, 1),
+            new Achievement("stapler_victim", "Stapler Victim", "Get hit by a rogue stapler", AchievementType.Funny, 1),
+            new Achievement("golden_donut", "Legendary Donut", "Find the Golden Donut", AchievementType.Special, 1),
+            new Achievement("crazy_mode", "Losing It", "Trigger crazy mode", AchievementType.Special, 1),
+            new Achievement("fish_survivor", "Nose Blind", "Survive the mystery fish smell", AchievementType.Funny, 1),
+            new Achievement("office_survivor", "Office Survivor", "Complete the demo", AchievementType.Special, 1),
+            new Achievement("tps_report", "Cover Sheet Included", "Collect a TPS Report", AchievementType.Collection, 1),
         };
         
         Debug.Log($"Initialized {achievements.Count} achievements");
@@ -192,7 +203,12 @@ public class AchievementSystem : MonoBehaviour
     
     private void OnScoreChanged(int score)
     {
-        TrackProgress("enemy_slayer");
+        // Not wired to "enemy_slayer" - OnScoreChanged fires for every
+        // score change (item pickups, the golden donut bonus, restoring
+        // score from a save), not specifically enemy kills, so this used
+        // to progress "Defeat 50 enemies" just from collecting items. No
+        // enemy-kill event exists yet in this demo (EnemyAI.cs has no
+        // health/death hook) to track it correctly.
     }
     
     private void OnGamePaused()

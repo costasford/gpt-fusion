@@ -14,7 +14,9 @@ public class UIController : MonoBehaviour
         if (GameManager.Instance == null)
             return;
 
-        scoreText.text = "Score: " + GameManager.Instance.score;
-        healthSlider.value = GameManager.Instance.playerHealth;
+        if (scoreText != null)
+            scoreText.text = "Score: " + GameManager.Instance.score;
+        if (healthSlider != null)
+            healthSlider.value = GameManager.Instance.playerHealth;
     }
 }

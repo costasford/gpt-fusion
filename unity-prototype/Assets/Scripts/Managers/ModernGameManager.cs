@@ -97,9 +97,18 @@ public class ModernGameManager : MonoBehaviour
     public void Heal(int amount)
     {
         if (_currentState != GameState.Playing) return;
-        
-        _playerHealth = Mathf.Min(gameConfig.playerMaxHealth, _playerHealth + amount);
+
+        // Callers (e.g. SaveSystem.ApplySaveDataToGame, which derives amount
+        // as a delta between saved and current health) can pass a negative
+        // amount, so this needs the same floor/game-over handling as
+        // TakeDamage - it's effectively damage when amount is negative.
+        _playerHealth = Mathf.Clamp(_playerHealth + amount, 0, gameConfig.playerMaxHealth);
         OnHealthChanged?.Invoke(_playerHealth);
+
+        if (_playerHealth <= 0)
+        {
+            GameOver();
+        }
     }
     
     public void TogglePause()

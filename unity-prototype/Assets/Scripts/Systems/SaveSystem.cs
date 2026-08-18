@@ -16,6 +16,7 @@ public class SaveSystem : MonoBehaviour
     private SaveData _currentSave;
     private int _currentSlot = 0;
     private float _autoSaveTimer;
+    private float _lastPlayTimeUpdate;
     private string _saveFolderPath;
     
     // Events
@@ -38,7 +39,8 @@ public class SaveSystem : MonoBehaviour
         
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        
+
+        _lastPlayTimeUpdate = Time.unscaledTime;
         InitializeSaveSystem();
     }
     
@@ -259,8 +261,14 @@ public class SaveSystem : MonoBehaviour
             _currentSave.lastSaveDate = DateTime.Now.ToBinary();
         }
         
-        // Update play time
-        _currentSave.playTime += Time.unscaledTime;
+        // Update play time by the delta since the last update, not the
+        // total elapsed session time - adding Time.unscaledTime directly
+        // here summed the running total on every single save (e.g. with
+        // the default 60s autosave interval, playTime after 5 minutes of
+        // play would report 60+120+180+240+300=900s, not 300s).
+        float now = Time.unscaledTime;
+        _currentSave.playTime += now - _lastPlayTimeUpdate;
+        _lastPlayTimeUpdate = now;
         
         // Add more game state data as needed
         _currentSave.hasCompletedTutorial = true; // Example

@@ -96,14 +96,19 @@ public class ModernPlayerController : MonoBehaviour
             targetVelocity = (cameraForward * _moveInput.z + cameraRight * _moveInput.x) * maxSpeed;
         }
         
-        // Smooth velocity change
-        float smoothTime = _moveInput.magnitude > 0.1f ? 
-            1f / acceleration : 1f / deceleration;
-            
-        _velocity.x = Mathf.MoveTowards(_velocity.x, targetVelocity.x, 
-            (1f / smoothTime) * maxSpeed * Time.deltaTime);
-        _velocity.z = Mathf.MoveTowards(_velocity.z, targetVelocity.z, 
-            (1f / smoothTime) * maxSpeed * Time.deltaTime);
+        // Smooth velocity change. maxDelta is the rate (units/sec^2) times
+        // deltaTime; the previous version routed this through
+        // `1f/acceleration` then immediately `1f/that`, which cancels out
+        // to just `acceleration` again while also multiplying by maxSpeed -
+        // an extra factor that isn't part of a rate calculation and made
+        // the configured acceleration/deceleration reach full speed in
+        // essentially one frame regardless of their value (e.g. defaults
+        // acceleration=10, maxSpeed=8 => ~80 units/sec^2, full speed in
+        // ~6 frames - vs. ~10 units/sec^2 and ~48 frames without it).
+        float rate = _moveInput.magnitude > 0.1f ? acceleration : deceleration;
+
+        _velocity.x = Mathf.MoveTowards(_velocity.x, targetVelocity.x, rate * Time.deltaTime);
+        _velocity.z = Mathf.MoveTowards(_velocity.z, targetVelocity.z, rate * Time.deltaTime);
         
         // Apply gravity
         if (!_isGrounded)
