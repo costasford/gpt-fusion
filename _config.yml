@@ -8,9 +8,4 @@ plugins:
   - jekyll-sitemap
 github:
   is_project_page: false
-# DocSearch credentials are placeholders
-docsearch:
-  appId: "REPLACE_WITH_APP_ID"
-  apiKey: "REPLACE_WITH_API_KEY"
-  indexName: "gpt-fusion"
 
