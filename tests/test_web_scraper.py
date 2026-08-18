@@ -1,3 +1,4 @@
+import socket
 from unittest.mock import Mock, patch
 
 """Web scraper tests requiring requests and BeautifulSoup."""
@@ -174,3 +175,53 @@ def test_scrape_unresolvable_host_raises_validation_error():
             scrape("http://nope.invalid", "p")
 
         mock_session.get.assert_not_called()
+
+
+def test_scrape_raises_on_redirect_with_no_location_header():
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch(
+            "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+        ),
+    ):
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+        mock_session.get.return_value = _mock_response(status_code=302)
+
+        with pytest.raises(ValidationError, match="no Location header"):
+            scrape("http://public.example", "p")
+
+
+def test_scrape_pins_dns_during_request_and_restores_afterward():
+    """Regression test for the DNS-rebinding TOCTOU gap: _ensure_public_url
+    validates a hostname's addresses, but requests/urllib3 re-resolve the
+    same hostname independently when actually connecting - an attacker
+    controlling DNS for the target could answer the two lookups
+    differently. The connection must be pinned to the addresses that were
+    actually validated."""
+    seen_during_request = {}
+    real_getaddrinfo = socket.getaddrinfo
+
+    def fake_get(*args, **kwargs):
+        # Simulate what happens during the real connection: something
+        # calls socket.getaddrinfo for the target host while the request
+        # is "in flight". It must resolve to the pinned address, not
+        # whatever the real resolver would say.
+        seen_during_request["result"] = socket.getaddrinfo("public.example", 443)
+        return _mock_response(text="<p>hi</p>")
+
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch(
+            "gpt_fusion.web_scraper._resolve_addresses", return_value=["93.184.216.34"]
+        ),
+    ):
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+        mock_session.get.side_effect = fake_get
+
+        scrape("http://public.example", "p")
+
+    assert seen_during_request["result"][0][4][0] == "93.184.216.34"
+    # The patch must not leak past the request.
+    assert socket.getaddrinfo is real_getaddrinfo

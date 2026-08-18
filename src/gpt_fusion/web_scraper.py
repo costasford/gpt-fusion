@@ -3,8 +3,9 @@ from __future__ import annotations
 import ipaddress
 import logging
 import socket
+from contextlib import contextmanager
 from urllib.parse import urljoin, urlparse
-from typing import Optional
+from typing import Iterator, Optional
 
 import requests
 from requests.exceptions import RequestException
@@ -75,9 +76,9 @@ def _resolve_addresses(hostname: str) -> list[str]:
         raise ValidationError(f"Could not resolve host: {hostname}") from e
 
 
-def _ensure_public_url(url: str) -> None:
+def _ensure_public_url(url: str) -> tuple[str, list[str]]:
     """Raise ValidationError unless *url* is http(s) and resolves only to
-    public addresses.
+    public addresses. Returns (hostname, resolved_addresses) on success.
 
     Blocks SSRF against cloud metadata endpoints (e.g. 169.254.169.254),
     loopback, and other internal/reserved network ranges.
@@ -90,7 +91,8 @@ def _ensure_public_url(url: str) -> None:
     if not hostname:
         raise ValidationError(f"Invalid URL format: {url}")
 
-    for addr in _resolve_addresses(hostname):
+    addresses = _resolve_addresses(hostname)
+    for addr in addresses:
         ip = ipaddress.ip_address(addr)
         if (
             ip.is_private
@@ -105,23 +107,67 @@ def _ensure_public_url(url: str) -> None:
                 f"address {ip}"
             )
 
+    return hostname, addresses
+
+
+@contextmanager
+def _pinned_dns(hostname: str, addresses: list[str]) -> Iterator[None]:
+    """Force socket.getaddrinfo(hostname, ...) to return *addresses* for the
+    duration of one connection.
+
+    Without this, _ensure_public_url's resolution and the connection
+    requests actually makes moments later are two independent DNS lookups -
+    an attacker controlling DNS for the target domain could answer the
+    first with a public IP and the second with an internal one (DNS
+    rebinding), bypassing the validation entirely. Pinning makes them the
+    same lookup. Only intercepts queries for *hostname*; anything else
+    (redirects to a different host, unrelated concurrent requests) passes
+    through to the real resolver untouched.
+    """
+    real_getaddrinfo = socket.getaddrinfo
+
+    def _patched(host, port=0, family=0, type=0, proto=0, flags=0):
+        if host != hostname:
+            return real_getaddrinfo(host, port, family, type, proto, flags)
+        results = []
+        for addr in addresses:
+            ip = ipaddress.ip_address(addr)
+            if ip.version == 6:
+                af, sockaddr = socket.AF_INET6, (addr, port, 0, 0)
+            else:
+                af, sockaddr = socket.AF_INET, (addr, port)
+            results.append((af, socket.SOCK_STREAM, socket.IPPROTO_TCP, "", sockaddr))
+        return results
+
+    socket.getaddrinfo = _patched
+    try:
+        yield
+    finally:
+        socket.getaddrinfo = real_getaddrinfo
+
 
 def _get_with_safe_redirects(
     session: requests.Session, url: str, timeout: Optional[int]
 ) -> requests.Response:
-    """GET *url*, following redirects manually so each hop is re-validated."""
+    """GET *url*, following redirects manually so each hop is re-validated
+    and pinned to the address it was actually validated against."""
     for _ in range(_MAX_REDIRECTS + 1):
+        hostname, addresses = _ensure_public_url(url)
+
         logger.info(f"Scraping URL: {url}")
-        response = session.get(url, timeout=timeout, allow_redirects=False)
+        with _pinned_dns(hostname, addresses):
+            response = session.get(url, timeout=timeout, allow_redirects=False)
+
         if response.status_code not in _REDIRECT_STATUS_CODES:
             return response
 
         location = response.headers.get("Location")
         if not location:
-            return response
+            raise ValidationError(
+                f"Received a {response.status_code} redirect with no " "Location header"
+            )
 
         url = urljoin(url, location)
-        _ensure_public_url(url)
 
     raise ValidationError(f"Too many redirects while scraping (max {_MAX_REDIRECTS})")
 
@@ -158,8 +204,6 @@ def scrape(
 
     if not parsed.netloc:
         raise ValidationError(f"Invalid URL format: {url}")
-
-    _ensure_public_url(url)
 
     # Use session with connection pooling
     session = _get_session()
