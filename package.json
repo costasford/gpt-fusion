@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "echo \"No JavaScript tests configured\"",
-    "lint": "eslint auth-ui-kit/app.js"
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",

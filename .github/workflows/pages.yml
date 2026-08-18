@@ -39,8 +39,10 @@ jobs:
           bundler-cache: true
           
       - name: Build with Jekyll
+        # JEKYLL_ENV=production matches ci.yml's docs-build check, so the
+        # real deploy and the PR-time verification build the same way.
         run: |
-          bundle exec jekyll build --verbose
+          JEKYLL_ENV=production bundle exec jekyll build --verbose
           echo "Built site contents:"
           ls -la _site/
         

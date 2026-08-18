@@ -1,0 +1,6 @@
+# Used by Heroku's default Python buildpack (see Procfile / README's
+# "Deploy to Heroku" section) to install the backend extra needed for
+# `uvicorn gpt_fusion.backend:app` to actually import - the buildpack has
+# no way to know about extras on its own, and `pip install .` alone
+# wouldn't pull in fastapi/uvicorn.
+.[backend]

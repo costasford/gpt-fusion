@@ -3,6 +3,10 @@ services:
     name: gpt-fusion-api
     env: python
     plan: free
-    buildCommand: pip install "gpt-fusion[backend]"
+    # ".[backend]" installs the checked-out repo (this deploy's actual
+    # commit) with the backend extra - "gpt-fusion[backend]" would install
+    # the published PyPI package instead, silently ignoring whatever was
+    # just pushed and deploying only whatever's currently released.
+    buildCommand: pip install ".[backend]"
     startCommand: uvicorn gpt_fusion.backend:app --host 0.0.0.0 --port $PORT --root-path /api
     healthCheckPath: /health

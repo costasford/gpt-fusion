@@ -85,10 +85,11 @@ line-length = 88
 target-version = ['py310', 'py311', 'py312']
 include = '\.pyi?$'
 
-[tool.flake8]
-max-line-length = 88
-extend-ignore = ["E203", "W503"]
-max-complexity = 10
+# flake8 doesn't read pyproject.toml without the separate Flake8-pyproject
+# plugin, which isn't installed here - .flake8 (repo root) is the config
+# that's actually in effect. Removed this section rather than adding it as
+# a dependency, since it also set max-complexity=10, unenforced until now,
+# which existing code has never been checked against.
 
 [tool.coverage.run]
 source = ["src"]
