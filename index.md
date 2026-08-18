@@ -12,10 +12,10 @@ A Python toolkit for building AI-assisted applications with utilities for text p
 
 [![CI](https://github.com/costasford/gpt-fusion/actions/workflows/ci.yml/badge.svg)](https://github.com/costasford/gpt-fusion/actions)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![Version](https://img.shields.io/badge/version-0.2.0-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
+[![Version](https://img.shields.io/badge/version-0.4.3-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
-[![Tests](https://img.shields.io/badge/tests-63%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
-[![Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
+[![Tests](https://img.shields.io/badge/tests-80%2B%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
+[![Coverage](https://img.shields.io/badge/coverage-89%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
 
 🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)** • 📁 **[View Source](https://github.com/costasford/gpt-fusion)**
 
@@ -92,10 +92,12 @@ uvicorn.run(gpt_fusion.backend_app, port=8000)
 Twitter bot utilities with OAuth support.
 ```python
 # Install: pip install "gpt-fusion[twitter]"
+# Reads TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, and
+# TWITTER_ACCESS_SECRET from the environment if not passed explicitly.
 from gpt_fusion import TwitterBot
 
-bot = TwitterBot(api_key, api_secret)
-bot.tweet("Hello from GPT Fusion!")
+bot = TwitterBot()
+bot.post_tweet("Hello from GPT Fusion!")
 ```
 
 ## 🎮 Demo Projects
@@ -114,7 +116,6 @@ Interactive 3D game prototype with movement, items, and basic gameplay mechanics
 Data processing and analysis examples with built-in sample datasets.
 ```bash
 $ python examples/tutorial.py
-Loading data/numbers.csv...
 Values: [1.0, 2.0, 3.0, 4.0, 5.0]
 Average: 3.0
 Median: 3.0

@@ -4,6 +4,13 @@ on:
   release:
     types: [published]
 
+# Default for jobs that don't set their own permissions block (build,
+# test-wheel - both just check out the repo and build/test). The publish
+# job below sets its own narrower block (id-token only, no contents
+# access needed since it only downloads an artifact).
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
