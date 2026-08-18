@@ -54,7 +54,13 @@ export function validatePassword(password) {
   };
 }
 
-// Rate limiting
+// Client-side-only rate limiting - NOT real protection. State lives in an
+// in-memory Map scoped to this page load: a hard refresh, a private
+// window, or calling signInWithEmailAndPassword directly resets or
+// bypasses it entirely. This only improves the UX for accidental repeated
+// clicks; it does nothing against a deliberate brute-force attempt. Real
+// throttling has to be enforced server-side (Firebase App Check, or rate
+// limiting in front of the Auth API) - this demo has no backend to do that.
 class RateLimiter {
   constructor(maxAttempts = 3, windowMs = 900000) { // 15 minutes
     this.maxAttempts = maxAttempts;
@@ -164,7 +170,11 @@ async function withLoading(btnId, fn) {
   }
 }
 
-// Enhanced security functions
+// Light input normalization for the email fields below - NOT a general
+// XSS sanitizer (it strips `<`/`>` and nothing else). It's safe here only
+// because these values are passed straight to the Firebase Auth SDK, never
+// inserted into the page via innerHTML. Don't reuse this function as a
+// security control before rendering untrusted input into the DOM.
 function sanitizeInput(input) {
   return input.trim().replace(/[<>]/g, '');
 }
@@ -186,12 +196,18 @@ onAuthStateChanged(auth, (user) => {
 function updateUI(user) {
   const loginSection = document.querySelector('.login-section');
   const dashboardSection = document.querySelector('.dashboard-section');
-  
+
   if (user) {
     if (loginSection) loginSection.style.display = 'none';
     if (dashboardSection) {
       dashboardSection.style.display = 'block';
       document.getElementById('user-email').textContent = user.email;
+      // Informational only - the dashboard is shown to any signed-in user
+      // regardless of this value. Gating real content on verification has
+      // to happen server-side (e.g. Firebase Security Rules checking
+      // request.auth.token.email_verified), since a client-side-only check
+      // here would just be a UI label an attacker can ignore by calling
+      // the API directly.
       document.getElementById('user-verified').textContent = user.emailVerified ? 'Verified' : 'Unverified';
     }
   } else {
@@ -381,16 +397,14 @@ document.getElementById("reset-btn")?.addEventListener("click", async () => {
   await withLoading("reset-btn", async () => {
     try {
       await sendPasswordResetEmail(auth, email);
-      showMessage("reset-message", "Password reset email sent! Check your inbox.", "success");
     } catch (err) {
-      let errorMessage = "Failed to send reset email";
-      
-      if (err.code === 'auth/user-not-found') {
-        errorMessage = "No account found with this email address";
-      }
-      
-      showMessage("reset-message", errorMessage);
+      // Deliberately not distinguishing "no such account" from any other
+      // failure here (same reasoning as the login handler above): doing so
+      // lets an attacker enumerate which emails have accounts by watching
+      // which ones get a different reset-flow response.
     }
+    // Always show success, regardless of whether the account exists.
+    showMessage("reset-message", "If an account exists for that email, a password reset link has been sent.", "success");
   });
 });
 

@@ -106,8 +106,11 @@ document.getElementById("login").addEventListener("click", async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       showMessage("message", "Logged in!");
-    } catch (err) {
-      showMessage("message", err.message);
+    } catch {
+      // Collapsed to one generic message regardless of cause (wrong
+      // password vs. no such account) - showing which one it was lets an
+      // attacker enumerate valid emails by trying logins against them.
+      showMessage("message", "Invalid email or password");
     }
   });
 });
@@ -130,7 +133,7 @@ document.getElementById("google-login").addEventListener("click", async () => {
       } else if (err.code === 'auth/popup-closed-by-user') {
         showMessage("message", "❌ Login cancelled by user.");
       } else {
-        showMessage("message", `❌ ${err.message}`);
+        showMessage("message", "❌ Google login failed. Please try again.");
       }
     }
   });
@@ -178,7 +181,13 @@ document.getElementById("signup-btn").addEventListener("click", async () => {
         "Account created. Check your email to verify."
       );
     } catch (err) {
-      showMessage("signup-message", err.message);
+      let errorMessage = "Failed to create account. Please try again.";
+      if (err.code === "auth/email-already-in-use") {
+        errorMessage = "An account with this email already exists";
+      } else if (err.code === "auth/weak-password") {
+        errorMessage = "Password is too weak";
+      }
+      showMessage("signup-message", errorMessage);
     }
   });
 });
@@ -193,9 +202,11 @@ document.getElementById("reset-btn").addEventListener("click", async () => {
   await withLoading("reset-btn", async () => {
     try {
       await sendPasswordResetEmail(auth, email);
-      showMessage("reset-message", "Reset email sent!");
-    } catch (err) {
-      showMessage("reset-message", err.message);
+    } catch {
+      // Ignored deliberately: showing whether the send failed because
+      // there's no account with this email (vs. any other error) would
+      // let an attacker enumerate valid emails via the reset flow.
     }
+    showMessage("reset-message", "If an account exists for that email, a reset link has been sent.");
   });
 });
