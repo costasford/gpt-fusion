@@ -149,7 +149,7 @@ gpt_fusion.is_palindrome(text)</code></pre>
                 
                 <div>
                     <label class="block text-sm font-medium mb-2">Analysis Results:</label>
-                    <div id="csv-output" class="code-output text-white p-4 rounded-lg min-h-32 font-mono">
+                    <div id="csv-output" class="code-output text-white p-4 rounded-lg min-h-32 font-mono whitespace-pre-line">
                         Upload CSV data to see analysis! 📈
                     </div>
                     <div class="mt-4">
@@ -408,14 +408,19 @@ print(f"Median: {med}")</code></pre>
             let result = '';
             let code = '';
             
+            // Matches gpt_fusion.word_count()'s handling of empty/
+            // whitespace-only input: 0 words, not 1 (a bare .split(/\s+/)
+            // on an empty string returns [""], length 1).
+            const wordCount = input.trim() === '' ? 0 : input.trim().split(/\s+/).length;
+
             switch(operation) {
                 case 'word_count':
-                    result = `Word Count: ${input.trim().split(/\s+/).length}`;
+                    result = `Word Count: ${wordCount}`;
                     code = `import gpt_fusion
 
 text = "${input}"
 count = gpt_fusion.word_count(text)
-print(f"Word Count: {count}")  # ${input.trim().split(/\s+/).length}`;
+print(f"Word Count: {count}")  # ${wordCount}`;
                     break;
                     
                 case 'reverse_words':
@@ -440,7 +445,11 @@ print(f"Is Palindrome: {is_palindrome}")  # ${isPalindrome}`;
                     break;
             }
             
-            output.innerHTML = `<div class="font-mono">${result}</div>`;
+            // textContent, not innerHTML: `result` embeds the raw user
+            // input verbatim (e.g. the reversed-words case) - injecting it
+            // via innerHTML would execute any HTML/script pasted into the
+            // text box.
+            output.textContent = result;
             codeElement.textContent = code;
         }
         
@@ -449,19 +458,23 @@ print(f"Is Palindrome: {is_palindrome}")  # ${isPalindrome}`;
             const input = document.getElementById('csv-input').value;
             const output = document.getElementById('csv-output');
             
+            output.classList.remove('text-red-300');
+
             const lines = input.trim().split('\n');
             if (lines.length < 2 || lines[0].toLowerCase() !== 'value') {
-                output.innerHTML = '<div class="text-red-300">Error: CSV must have "value" header and numeric data</div>';
+                output.classList.add('text-red-300');
+                output.textContent = 'Error: CSV must have "value" header and numeric data';
                 return;
             }
-            
+
             const values = lines.slice(1).map(line => parseFloat(line.trim())).filter(n => !isNaN(n));
-            
+
             if (values.length === 0) {
-                output.innerHTML = '<div class="text-red-300">Error: No valid numeric values found</div>';
+                output.classList.add('text-red-300');
+                output.textContent = 'Error: No valid numeric values found';
                 return;
             }
-            
+
             let result = '';
             
             switch(operation) {
@@ -497,7 +510,7 @@ Range: ${(max - min).toFixed(2)}`;
                     break;
             }
             
-            output.innerHTML = `<div class="font-mono whitespace-pre-line">${result}</div>`;
+            output.textContent = result;
         }
         
         // Project Generator Functions
@@ -509,15 +522,15 @@ Range: ${(max - min).toFixed(2)}`;
             
             switch(type) {
                 case 'csv':
-                    command = 'gpt_fusion create_csv_app my-analytics --with-api';
+                    command = 'gpt-fusion create_csv_app my-analytics --with-api';
                     description = '📊 Creates a FastAPI backend with CSV processing and data visualization';
                     break;
                 case 'ui':
-                    command = 'gpt_fusion create_tailwind_ui my-webapp --dark-mode';
+                    command = 'gpt-fusion create_tailwind_ui my-webapp --dark-mode';
                     description = '🎨 Generates a modern responsive UI with Tailwind CSS and dark mode';
                     break;
                 case 'fullstack':
-                    command = 'gpt_fusion create_fullstack_app my-saas --auth --database';
+                    command = 'gpt-fusion create_fullstack_app my-saas --auth --database';
                     description = '🚀 Complete application with authentication, database, and deployment ready';
                     break;
             }
