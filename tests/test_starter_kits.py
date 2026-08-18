@@ -22,7 +22,15 @@ def _load_module(path, name):
     spec = importlib.util.spec_from_file_location(name, path)
     module = importlib.util.module_from_spec(spec)
     sys.modules[name] = module
-    spec.loader.exec_module(module)
+    try:
+        spec.loader.exec_module(module)
+    except BaseException:
+        # Don't leave a half-initialized module registered under this name
+        # in the real global sys.modules - a later `import <name>` (or a
+        # differently-parametrized test reusing the name) would silently
+        # get the broken module instead of a fresh one or an ImportError.
+        sys.modules.pop(name, None)
+        raise
     return module
 
 
@@ -97,6 +105,20 @@ def test_create_csv_app_with_api_generates_working_endpoints(tmp_path):
     assert client.get("/average").json() == {"average": 3.0}
     assert client.get("/median").json() == {"median": 3.0}
     assert client.get("/data").json() == {"values": [1.0, 2.0, 3.0, 4.0, 5.0]}
+
+
+def test_create_csv_app_with_api_returns_null_for_empty_csv(tmp_path):
+    """Regression test: /average and /median used to raise an uncaught
+    DataError (a bare 500) for zero valid rows, inconsistent with
+    create_fullstack_app's equivalent routes, which return None cleanly."""
+    dst = create_csv_app(tmp_path, with_api=True)
+    (dst / "numbers.csv").write_text("value\n", encoding="utf-8")
+
+    module = _load_module(dst / "api.py", "gen_csv_api_empty")
+    client = TestClient(module.app)
+
+    assert client.get("/average").json() == {"average": None}
+    assert client.get("/median").json() == {"median": None}
 
 
 def test_create_tailwind_ui(tmp_path):
@@ -178,6 +200,23 @@ def test_create_fullstack_app(tmp_path, auth, database):
         ).status_code
         == 401
     )
+
+
+def test_create_fullstack_app_database_skips_invalid_csv_rows(tmp_path):
+    """Regression test: _init_db() used to do float(row["value"]) with no
+    error handling, so a single malformed row crashed the whole app at
+    import time (uncaught ValueError) instead of skipping it, the way
+    gpt_fusion.analysis.load_numbers_from_csv (used by the CSV-only mode)
+    already does."""
+    dst = create_fullstack_app(tmp_path, database=True)
+    (dst / "backend" / "numbers.csv").write_text(
+        "value\n1\nnot-a-number\n2\n\n3\n", encoding="utf-8"
+    )
+
+    module = _load_module(dst / "backend" / "app.py", "gen_fullstack_bad_row")
+    client = TestClient(module.app)
+
+    assert client.get("/average").json() == {"average": 2.0}
 
 
 def test_main_csv_app(tmp_path, monkeypatch):
