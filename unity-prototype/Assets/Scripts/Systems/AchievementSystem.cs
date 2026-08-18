@@ -168,7 +168,14 @@ public class AchievementSystem : MonoBehaviour
             TrackProgress("achievement_hunter");
             if (_unlockedAchievements.Count >= achievements.Count - 1) // -1 for completionist itself
             {
-                TrackProgress("completionist");
+                // Directly unlocked, not TrackProgress("completionist"): this
+                // branch is only even reached once nearly everything is
+                // already unlocked, so it could fire at most a handful of
+                // times total - nowhere near completionist's targetValue of
+                // 25 increments, making it unreachable through the counter
+                // path. "Unlocked everything else" is a one-shot condition,
+                // not a repeated counter.
+                UnlockAchievement("completionist");
             }
         }
     }

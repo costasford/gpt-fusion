@@ -95,10 +95,19 @@ public class ObjectPool : MonoBehaviour
         obj.transform.SetParent(transform);
 
         // Only re-enqueued here, once the caller is actually done with it -
-        // not immediately on spawn (see the comment in SpawnFromPool).
+        // not immediately on spawn (see the comment in SpawnFromPool). If
+        // *tag* doesn't match a real pool (e.g. a caller's serialized tag
+        // field was edited after the object was originally spawned under a
+        // different tag), the object is deactivated but never re-enters any
+        // pool - log it instead of leaking it silently.
         if (_poolDictionary != null && _poolDictionary.TryGetValue(tag, out Queue<GameObject> queue))
         {
             queue.Enqueue(obj);
+        }
+        else
+        {
+            Debug.LogWarning(
+                $"ReturnToPool: no pool for tag '{tag}' - {obj.name} deactivated but not requeued.");
         }
     }
     
