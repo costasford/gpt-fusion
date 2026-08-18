@@ -1,5 +1,6 @@
 import pytest
 
+from gpt_fusion.exceptions import ValidationError
 from gpt_fusion.utils import (
     ChatHistory,
     add_numbers,
@@ -28,6 +29,18 @@ def test_divide_numbers():
 def test_divide_by_zero():
     with pytest.raises(ZeroDivisionError):
         divide_numbers(1, 0)
+
+
+@pytest.mark.parametrize(
+    "func",
+    [add_numbers, subtract_numbers, multiply_numbers, divide_numbers],
+)
+def test_arithmetic_rejects_non_numeric_input(func):
+    """Regression test: these silently did Python's operator overloading
+    on wrong-typed input instead of raising - multiply_numbers("ab", 3)
+    returned "ababab", add_numbers("2", "3") returned "23"."""
+    with pytest.raises(ValidationError):
+        func("2", 3)
 
 
 def test_chat_history():
