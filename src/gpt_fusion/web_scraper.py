@@ -3,6 +3,7 @@ from __future__ import annotations
 import ipaddress
 import logging
 import socket
+import threading
 from contextlib import contextmanager
 from urllib.parse import urljoin, urlparse
 from typing import Iterator, Optional
@@ -110,6 +111,18 @@ def _ensure_public_url(url: str) -> tuple[str, list[str]]:
     return hostname, addresses
 
 
+# socket.getaddrinfo is a process-global, not thread-local, so two
+# concurrent _pinned_dns blocks would race: whichever exits first restores
+# the *true* original resolver, silently clobbering the other's still-active
+# patch and downgrading it to an unpinned (rebinding-vulnerable) lookup with
+# no error. The lock fully serializes the pinned portion of each request -
+# this library doesn't support high-concurrency scraping elsewhere anyway
+# (the shared module-level _session isn't designed for that either), so
+# trading a little parallelism for a guarantee that never silently
+# degrades is the right tradeoff here.
+_dns_pin_lock = threading.Lock()
+
+
 @contextmanager
 def _pinned_dns(hostname: str, addresses: list[str]) -> Iterator[None]:
     """Force socket.getaddrinfo(hostname, ...) to return *addresses* for the
@@ -121,29 +134,32 @@ def _pinned_dns(hostname: str, addresses: list[str]) -> Iterator[None]:
     first with a public IP and the second with an internal one (DNS
     rebinding), bypassing the validation entirely. Pinning makes them the
     same lookup. Only intercepts queries for *hostname*; anything else
-    (redirects to a different host, unrelated concurrent requests) passes
-    through to the real resolver untouched.
+    (redirects to a different host) passes through to the real resolver
+    untouched.
     """
-    real_getaddrinfo = socket.getaddrinfo
+    with _dns_pin_lock:
+        real_getaddrinfo = socket.getaddrinfo
 
-    def _patched(host, port=0, family=0, type=0, proto=0, flags=0):
-        if host != hostname:
-            return real_getaddrinfo(host, port, family, type, proto, flags)
-        results = []
-        for addr in addresses:
-            ip = ipaddress.ip_address(addr)
-            if ip.version == 6:
-                af, sockaddr = socket.AF_INET6, (addr, port, 0, 0)
-            else:
-                af, sockaddr = socket.AF_INET, (addr, port)
-            results.append((af, socket.SOCK_STREAM, socket.IPPROTO_TCP, "", sockaddr))
-        return results
+        def _patched(host, port=0, family=0, type=0, proto=0, flags=0):
+            if host != hostname:
+                return real_getaddrinfo(host, port, family, type, proto, flags)
+            results = []
+            for addr in addresses:
+                ip = ipaddress.ip_address(addr)
+                if ip.version == 6:
+                    af, sockaddr = socket.AF_INET6, (addr, port, 0, 0)
+                else:
+                    af, sockaddr = socket.AF_INET, (addr, port)
+                results.append(
+                    (af, socket.SOCK_STREAM, socket.IPPROTO_TCP, "", sockaddr)
+                )
+            return results
 
-    socket.getaddrinfo = _patched
-    try:
-        yield
-    finally:
-        socket.getaddrinfo = real_getaddrinfo
+        socket.getaddrinfo = _patched
+        try:
+            yield
+        finally:
+            socket.getaddrinfo = real_getaddrinfo
 
 
 def _get_with_safe_redirects(

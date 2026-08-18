@@ -1,4 +1,5 @@
 import socket
+import threading
 from unittest.mock import Mock, patch
 
 """Web scraper tests requiring requests and BeautifulSoup."""
@@ -225,3 +226,86 @@ def test_scrape_pins_dns_during_request_and_restores_afterward():
     assert seen_during_request["result"][0][4][0] == "93.184.216.34"
     # The patch must not leak past the request.
     assert socket.getaddrinfo is real_getaddrinfo
+
+
+def test_pinned_dns_lock_prevents_concurrent_patches():
+    """Regression test: socket.getaddrinfo is a process-global function, so
+    without serialization, two overlapping _pinned_dns blocks could race -
+    whichever exits first restores the *true* original resolver, silently
+    clobbering the other's still-active patch and downgrading it to an
+    unpinned (rebinding-vulnerable) lookup with no error, not a crash.
+
+    A timing-based repro of that race is inherently unreliable (thread
+    scheduling isn't controllable enough to guarantee the exact interleave
+    needed). Instead this tests the actual mechanism directly: while one
+    _pinned_dns block is open, the module-level lock it uses must be held,
+    so a second caller is forced to wait rather than race.
+    """
+    from gpt_fusion.web_scraper import _dns_pin_lock, _pinned_dns
+
+    entered = threading.Event()
+    release = threading.Event()
+
+    def hold():
+        with _pinned_dns("host-a.example", ["93.184.216.34"]):
+            entered.set()
+            release.wait(timeout=5)
+
+    t = threading.Thread(target=hold)
+    t.start()
+    assert entered.wait(timeout=5), "first _pinned_dns block never entered"
+
+    # A second, concurrent attempt must find the lock held - not free to
+    # race in and clobber the first block's patch.
+    acquired = _dns_pin_lock.acquire(blocking=False)
+    if acquired:
+        _dns_pin_lock.release()
+    assert not acquired, "lock must be held while a _pinned_dns block is open"
+
+    release.set()
+    t.join(timeout=5)
+
+    # Once released, a new caller can proceed.
+    assert _dns_pin_lock.acquire(blocking=False)
+    _dns_pin_lock.release()
+
+
+def test_scrape_from_multiple_threads_each_get_their_own_pinned_address():
+    """Sanity check that real scrape() calls from different threads still
+    resolve correctly end-to-end with the lock in place (not just the raw
+    lock mechanism tested above)."""
+    seen = {}
+    errors = {}
+    addresses = {"host-a.example": "93.184.216.34", "host-b.example": "104.16.132.229"}
+
+    def fake_get(url, **kwargs):
+        hostname = url.split("//", 1)[1].split("/", 1)[0]
+        seen[hostname] = socket.getaddrinfo(hostname, 443)
+        return _mock_response(text="<p>hi</p>")
+
+    def run(hostname):
+        try:
+            scrape(f"http://{hostname}", "p")
+        except Exception as e:  # noqa: BLE001 - surfaced via `errors` below
+            errors[hostname] = e
+
+    with (
+        patch("gpt_fusion.web_scraper._get_session") as mock_get_session,
+        patch(
+            "gpt_fusion.web_scraper._resolve_addresses",
+            side_effect=lambda hostname: [addresses[hostname]],
+        ),
+    ):
+        mock_session = Mock()
+        mock_get_session.return_value = mock_session
+        mock_session.get.side_effect = fake_get
+
+        threads = [threading.Thread(target=run, args=(h,)) for h in addresses]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join(timeout=5)
+
+    assert not errors, errors
+    assert seen["host-a.example"][0][4][0] == "93.184.216.34"
+    assert seen["host-b.example"][0][4][0] == "104.16.132.229"
