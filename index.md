@@ -21,84 +21,102 @@ A Python toolkit for building AI-assisted applications with utilities for text p
 
 ## 🚀 Quick Start
 
-### Install
-```bash
-pip install gpt-fusion
-```
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <h3 class="text-lg font-bold mb-1">📦 Quick Install</h3>
+    <p class="text-sm text-gray-600 mb-4">Core text, math &amp; CSV utilities</p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto mb-4"><code>pip install gpt-fusion</code></pre>
+    <ul class="text-sm space-y-1">
+      <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Text processing</li>
+      <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> CSV data analysis</li>
+      <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Project generators</li>
+    </ul>
+  </div>
 
-### Basic Usage
-```python
-import gpt_fusion
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <h3 class="text-lg font-bold mb-1">🎯 Full Install</h3>
+    <p class="text-sm text-gray-600 mb-4">Everything, including optional extras</p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto mb-4"><code>pip install "gpt-fusion[web,twitter,backend,build]"</code></pre>
+    <ul class="text-sm space-y-1">
+      <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Web scraping (BeautifulSoup)</li>
+      <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> FastAPI backend server</li>
+      <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Twitter integration</li>
+    </ul>
+  </div>
+</div>
+
+<div class="demo-card bg-white rounded-xl shadow-lg p-6 mb-6">
+  <h3 class="text-lg font-bold mb-4">Basic Usage</h3>
+  <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>import gpt_fusion
 
 # Text utilities
 print(gpt_fusion.greet('World'))
 print(gpt_fusion.word_count('Hello world'))
 print(gpt_fusion.reverse_words('Hello world'))
 
-# Math helpers  
+# Math helpers
 numbers = gpt_fusion.load_numbers_from_csv('data/numbers.csv')
 print(f"Average: {gpt_fusion.average_from_csv('data/numbers.csv')}")
 
 # Generate starter projects
 gpt_fusion.create_csv_app('my-csv-demo')
-gpt_fusion.create_tailwind_ui('my-ui-demo')
-```
-
-### Advanced Features
-Install with optional extras for full functionality:
-```bash
-pip install "gpt-fusion[web,twitter,backend,build]"
-```
+gpt_fusion.create_tailwind_ui('my-ui-demo')</code></pre>
+</div>
 
 ## ✨ Features
 
-### 🐍 Python Utilities
-Core text processing, math helpers, and CSV analysis tools.
-```python
-import gpt_fusion
-
-# Text processing
-gpt_fusion.word_count("Hello world")  # 2
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center mb-3">
+      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+        <span class="text-white text-xl">🐍</span>
+      </div>
+      <h3 class="text-lg font-bold">Python Utilities</h3>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">Core text processing, math helpers, and CSV analysis tools.</p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>gpt_fusion.word_count("Hello world")  # 2
 gpt_fusion.reverse_words("Hello world")  # "world Hello"
 gpt_fusion.is_palindrome("racecar")  # True
+gpt_fusion.average_from_csv("data.csv")</code></pre>
+  </div>
 
-# Math & CSV
-gpt_fusion.average_from_csv("data.csv")
-gpt_fusion.median_from_csv("data.csv")
-```
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center mb-3">
+      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+        <span class="text-white text-xl">🌐</span>
+      </div>
+      <h3 class="text-lg font-bold">Web Scraping</h3>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">Simple scraping utilities with BeautifulSoup. Install: <code class="text-xs">pip install "gpt-fusion[web]"</code></p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>html = gpt_fusion.scrape("https://example.com")
+# Returns clean text content</code></pre>
+  </div>
 
-### 🌐 Web Scraping
-Simple web scraping utilities with BeautifulSoup integration.
-```python
-# Install: pip install "gpt-fusion[web]"
-import gpt_fusion
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center mb-3">
+      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+        <span class="text-white text-xl">🚀</span>
+      </div>
+      <h3 class="text-lg font-bold">FastAPI Backend</h3>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">Ready-to-deploy API server with auto-generated docs. Install: <code class="text-xs">pip install "gpt-fusion[backend]"</code></p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>import uvicorn
+uvicorn.run(gpt_fusion.backend_app, port=8000)</code></pre>
+  </div>
 
-html = gpt_fusion.scrape("https://example.com")
-# Returns clean text content
-```
-
-### 🚀 FastAPI Backend
-Ready-to-deploy API server with auto-generated docs.
-```python
-# Install: pip install "gpt-fusion[backend]"
-import uvicorn
-import gpt_fusion
-
-# Start server
-uvicorn.run(gpt_fusion.backend_app, port=8000)
-```
-
-### 🐦 Twitter Integration
-Twitter bot utilities with OAuth support.
-```python
-# Install: pip install "gpt-fusion[twitter]"
-# Reads TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, and
-# TWITTER_ACCESS_SECRET from the environment if not passed explicitly.
-from gpt_fusion import TwitterBot
-
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center mb-3">
+      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+        <span class="text-white text-xl">🐦</span>
+      </div>
+      <h3 class="text-lg font-bold">Twitter Integration</h3>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">Twitter bot utilities with OAuth support. Install: <code class="text-xs">pip install "gpt-fusion[twitter]"</code></p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>from gpt_fusion import TwitterBot
 bot = TwitterBot()
-bot.post_tweet("Hello from GPT Fusion!")
-```
+bot.post_tweet("Hello from GPT Fusion!")</code></pre>
+  </div>
+</div>
 
 ## 🎮 Interactive Demos {#interactive-demos}
 
@@ -229,15 +247,43 @@ print(f"Median: {med}")</code></pre>
 
 ## 🔗 More Demos
 
-### 🔐 Auth UI Kit
-Beautiful Tailwind CSS login form with Firebase authentication. Includes email/password and Google OAuth flows.
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6 text-center">
+    <div class="text-4xl mb-2">🔐</div>
+    <h3 class="font-bold text-lg mb-1">Auth UI Kit</h3>
+    <p class="text-sm text-gray-600 mb-4">Tailwind CSS login form with Firebase auth: email/password and Google OAuth flows.</p>
+    <div class="space-y-1 text-sm text-left mb-4">
+      <div class="flex items-center"><span class="text-green-500 mr-2">✓</span> Accessible modal focus management</div>
+      <div class="flex items-center"><span class="text-green-500 mr-2">✓</span> Field-level validation &amp; error messages</div>
+      <div class="flex items-center"><span class="text-green-500 mr-2">✓</span> Hardened CSP, no inline scripts</div>
+    </div>
+    <div class="flex gap-2">
+      <a href="https://costasford.github.io/gpt-fusion/auth-ui-kit/enhanced-index.html" class="flex-1 bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition">Try it Live</a>
+      <a href="https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit" class="flex-1 bg-gray-600 text-white text-center py-2 rounded-lg hover:bg-gray-700 transition">Source</a>
+    </div>
+  </div>
 
-[→ View Source](https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit) • [→ Try it live](https://costasford.github.io/gpt-fusion/auth-ui-kit/enhanced-index.html)
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6 text-left">
+    <div class="text-center">
+      <div class="text-4xl mb-2">🎯</div>
+      <h3 class="font-bold text-lg mb-1">Unity 3D Demo</h3>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">C# gameplay systems (movement, items, achievements). Script-only reference - no packaged scenes to play yet, so here's the real object-pooling code instead of a screenshot:</p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-xs overflow-x-auto mb-4"><code>Queue&lt;GameObject&gt; queue = _poolDictionary[tag];
+if (queue.Count == 0)
+{
+    // Every object for this tag is still active/in-flight.
+    // Fail loudly instead of corrupting an active object.
+    Debug.LogWarning($"Pool '{tag}' exhausted - all objects in use.");
+    return null;
+}
 
-### 🎯 Unity 3D Demo
-Interactive 3D game prototype with movement, items, and basic gameplay mechanics.
-
-[→ View Unity Scripts](https://github.com/costasford/gpt-fusion/tree/main/unity-prototype)
+GameObject objectToSpawn = queue.Dequeue();
+objectToSpawn.SetActive(true);
+objectToSpawn.transform.position = position;</code></pre>
+    <a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype" class="block bg-purple-600 text-white text-center py-2 rounded-lg hover:bg-purple-700 transition">View All Scripts</a>
+  </div>
+</div>
 
 ## 🔌 API & Deployment
 
