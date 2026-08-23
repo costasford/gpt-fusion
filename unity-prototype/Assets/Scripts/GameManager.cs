@@ -4,6 +4,14 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Maintains overall game state such as score and player health.
 /// Handles restarting levels and basic scene transitions.
+///
+/// This is a simpler, standalone system (paired with PauseMenu,
+/// UIController, PlayerController, Health, Projectile, PowerUp) that
+/// exists alongside the more feature-rich Modern* system
+/// (ModernGameManager, ModernPlayerController, ModernHealth, ...) - not
+/// dead code left over from a rewrite. Each system is internally
+/// consistent and neither depends on the other; pick one per scene rather
+/// than mixing components from both.
 /// </summary>
 public class GameManager : MonoBehaviour
 {
