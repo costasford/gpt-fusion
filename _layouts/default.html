@@ -24,6 +24,17 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: cache_bust | relative_url }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      /* Tailwind's Preflight reset sets img { display: block }, which
+         breaks the badges row at the top of index.md: markdown renders
+         each ![]() badge as its own <a><img></a> separated only by a
+         single newline (i.e. meant to flow inline, wrapping like text),
+         but block-level images force one per line instead. */
+      .main-content p img {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 2px 4px 2px 0;
+      }
+
       /* jekyll-theme-cayman caps .main-content at 64rem (1024px) with 6rem
          side padding - fine for a README-style single column, but it left
          huge empty margins on real screens and made the card grids below
