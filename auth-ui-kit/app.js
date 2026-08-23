@@ -34,11 +34,13 @@ async function withLoading(btnId, fn) {
   const btn = document.getElementById(btnId);
   const original = btn.textContent;
   btn.disabled = true;
+  btn.setAttribute("aria-busy", "true");
   btn.textContent = "Loading...";
   try {
     await fn();
   } finally {
     btn.disabled = false;
+    btn.removeAttribute("aria-busy");
     btn.textContent = original;
   }
 }
@@ -139,20 +141,89 @@ document.getElementById("google-login").addEventListener("click", async () => {
   });
 });
 
+// Modal focus management: move focus into the modal on open, trap Tab
+// within it while open, and restore focus to whatever opened it on close -
+// without this, a keyboard/screen-reader user's focus stayed on the
+// trigger link while the modal appeared on screen.
+const MODAL_IDS = ["signup-modal", "reset-modal"];
+let modalTriggerElement = null;
+
+function getFocusableElements(container) {
+  return Array.from(
+    container.querySelectorAll(
+      'input, button, a[href], select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((el) => !el.disabled && el.offsetParent !== null);
+}
+
+function openModal(modal, trigger) {
+  modalTriggerElement = trigger || document.activeElement;
+  modal.classList.remove("hidden");
+  const focusable = getFocusableElements(modal);
+  if (focusable.length > 0) focusable[0].focus();
+}
+
+function closeModal(modal) {
+  modal.classList.add("hidden");
+  if (modalTriggerElement) {
+    modalTriggerElement.focus();
+    modalTriggerElement = null;
+  }
+}
+
 // Show/Hide modals
-document.getElementById("show-signup").addEventListener("click", () => {
-  document.getElementById("signup-modal").classList.remove("hidden");
+document.getElementById("show-signup").addEventListener("click", (e) => {
+  e.preventDefault();
+  openModal(document.getElementById("signup-modal"), e.currentTarget);
 });
 document.getElementById("signup-close").addEventListener("click", () => {
-  document.getElementById("signup-modal").classList.add("hidden");
+  closeModal(document.getElementById("signup-modal"));
   showMessage("signup-message", "");
 });
-document.getElementById("forgot").addEventListener("click", () => {
-  document.getElementById("reset-modal").classList.remove("hidden");
+document.getElementById("forgot").addEventListener("click", (e) => {
+  e.preventDefault();
+  openModal(document.getElementById("reset-modal"), e.currentTarget);
 });
 document.getElementById("reset-close").addEventListener("click", () => {
-  document.getElementById("reset-modal").classList.add("hidden");
+  closeModal(document.getElementById("reset-modal"));
   showMessage("reset-message", "");
+});
+
+// Close modals when clicking outside, or on Escape (also traps Tab inside
+// whichever modal is open).
+document.addEventListener("click", (e) => {
+  MODAL_IDS.forEach((modalId) => {
+    const modal = document.getElementById(modalId);
+    if (modal && e.target === modal) closeModal(modal);
+  });
+});
+
+document.addEventListener("keydown", (e) => {
+  const openModalId = MODAL_IDS.find((modalId) => {
+    const modal = document.getElementById(modalId);
+    return modal && !modal.classList.contains("hidden");
+  });
+  if (!openModalId) return;
+  const modal = document.getElementById(openModalId);
+
+  if (e.key === "Escape") {
+    closeModal(modal);
+    return;
+  }
+
+  if (e.key === "Tab") {
+    const focusable = getFocusableElements(modal);
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 });
 
 // Sign up handler
