@@ -17,7 +17,7 @@ A Python toolkit for building AI-assisted applications with utilities for text p
 [![Tests](https://img.shields.io/badge/tests-135%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
 [![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
 
-🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Interactive Demos](#interactive-demos)** • 📁 **[View Source](https://github.com/costasford/gpt-fusion)**
+📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🎮 **[Try Interactive Demos](#interactive-demos)** • 📁 **[View Source](https://github.com/costasford/gpt-fusion)**
 
 ## 🚀 Quick Start
 
@@ -180,9 +180,11 @@ print(f"Median: {med}")</code></pre>
       </div>
       <h3 class="text-lg font-bold">Web Scraping</h3>
     </div>
-    <p class="text-sm text-gray-600 mb-3">Simple scraping utilities with BeautifulSoup. Install: <code class="text-xs">pip install "gpt-fusion[web]"</code></p>
-    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>html = gpt_fusion.scrape("https://example.com")
-# Returns clean text content</code></pre>
+    <p class="text-sm text-gray-600 mb-3">Simple scraping utilities with BeautifulSoup, blocked from hitting private/internal addresses. Install: <code class="text-xs">pip install "gpt-fusion[web]"</code></p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>gpt_fusion.scrape("https://example.com", "p")
+# ['This domain is for use in documentation
+#   examples without needing permission. Avoid
+#   use in operations.', 'Learn more']</code></pre>
   </div>
 
   <div class="demo-card bg-white rounded-xl shadow-lg p-6">
@@ -193,8 +195,10 @@ print(f"Median: {med}")</code></pre>
       <h3 class="text-lg font-bold">FastAPI Backend</h3>
     </div>
     <p class="text-sm text-gray-600 mb-3">Ready-to-deploy API server with auto-generated docs. Install: <code class="text-xs">pip install "gpt-fusion[backend]"</code></p>
-    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>import uvicorn
-uvicorn.run(gpt_fusion.backend_app, port=8000)</code></pre>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>GET /greet/Alice
+
+{"message": "Hello, Alice! Welcome
+  to gpt-fusion."}</code></pre>
   </div>
 
   <div class="demo-card bg-white rounded-xl shadow-lg p-6">
@@ -204,10 +208,9 @@ uvicorn.run(gpt_fusion.backend_app, port=8000)</code></pre>
       </div>
       <h3 class="text-lg font-bold">Twitter Integration</h3>
     </div>
-    <p class="text-sm text-gray-600 mb-3">Twitter bot utilities with OAuth support. Install: <code class="text-xs">pip install "gpt-fusion[twitter]"</code></p>
-    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>from gpt_fusion import TwitterBot
-bot = TwitterBot()
-bot.post_tweet("Hello from GPT Fusion!")</code></pre>
+    <p class="text-sm text-gray-600 mb-3">Twitter bot utilities with OAuth support, reading credentials straight from the environment. Install: <code class="text-xs">pip install "gpt-fusion[twitter]"</code></p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>bot.post_tweet("x" * 300)
+# ValueError: Tweet exceeds 280 characters</code></pre>
   </div>
 </div>
 
