@@ -1,36 +1,30 @@
+# Categories/labels below match this repo's actual label set (see
+# `gh label list`) - the previous version was an unmodified template
+# copy-paste referencing feat/fix/docs/chore/dependencies/breaking/
+# security, none of which exist here, so every PR would have fallen into
+# "uncategorized" regardless of how it was labeled.
 name-template: v$RESOLVED_VERSION
 tag-template: v$RESOLVED_VERSION
 change-template: '- $TITLE (#$NUMBER)'
 categories:
-  - title: "🚀 Features"
+  - title: "🚀 Enhancements"
     labels:
-      - feat
+      - enhancement
   - title: "🐛 Fixes"
     labels:
-      - fix
+      - bug
   - title: "📝 Docs"
     labels:
-      - docs
-  - title: "🧹 Chores"
-    labels:
-      - chore
-  - title: "⬆️ Dependencies"
-    labels:
-      - dependencies
+      - documentation
 version-resolver:
-  major:
-    labels:
-      - breaking
   minor:
     labels:
-      - feat
+      - enhancement
   patch:
     labels:
-      - fix
-      - docs
-      - chore
-      - dependencies
-      - security
+      - bug
+      - documentation
+  default: patch
 template: |
   ## Changes
   $CHANGES
