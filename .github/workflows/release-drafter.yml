@@ -1,0 +1,27 @@
+name: Release Drafter
+
+# Keeps a draft release's changelog up to date from merged PR titles/
+# labels (per .github/release-drafter.yml) as pull requests land on main.
+# Never publishes anything on its own - it only maintains a draft for a
+# maintainer to review and publish manually when cutting a real release.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  update_release_draft:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
