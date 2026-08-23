@@ -17,7 +17,7 @@ A Python toolkit for building AI-assisted applications with utilities for text p
 [![Tests](https://img.shields.io/badge/tests-135%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
 [![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
 
-🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)** • 📁 **[View Source](https://github.com/costasford/gpt-fusion)**
+🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Interactive Demos](#interactive-demos)** • 📁 **[View Source](https://github.com/costasford/gpt-fusion)**
 
 ## 🚀 Quick Start
 
@@ -100,36 +100,144 @@ bot = TwitterBot()
 bot.post_tweet("Hello from GPT Fusion!")
 ```
 
-## 🎮 Demo Projects
+## 🎮 Interactive Demos {#interactive-demos}
+
+Try the core utilities right here, no install required.
+
+<div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+  <h3 class="text-xl font-bold mb-1">🔤 Text Processing</h3>
+  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Smart text utilities with instant results</p>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <label for="text-input" class="block text-sm font-medium mb-2">Enter text to process:</label>
+      <textarea id="text-input"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                rows="4"
+                placeholder="Type something here...">The quick brown fox jumps over the lazy dog</textarea>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <button type="button" onclick="processText('word_count')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Count Words</button>
+        <button type="button" onclick="processText('reverse_words')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Reverse Words</button>
+        <button type="button" onclick="processText('palindrome')" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Check Palindrome</button>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-2">Output:</label>
+      <div id="text-output" class="bg-gray-900 text-white p-4 rounded-lg min-h-32 font-mono">
+        Click a button to see the magic! ✨
+      </div>
+      <div class="mt-4">
+        <label class="block text-sm font-medium mb-2">Python Code:</label>
+        <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code id="text-code">import gpt_fusion
+
+# Try the functions above!
+text = "Your input here"
+gpt_fusion.word_count(text)
+gpt_fusion.reverse_words(text)
+gpt_fusion.is_palindrome(text)</code></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+  <h3 class="text-xl font-bold mb-1">📊 CSV Data Analysis</h3>
+  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Powerful data processing with streaming support</p>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <label for="csv-input" class="block text-sm font-medium mb-2">Enter CSV data (comma-separated values):</label>
+      <textarea id="csv-input"
+                class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                rows="6"
+                placeholder="value&#10;1.5&#10;2.8&#10;3.2&#10;4.1&#10;5.7">value
+1.5
+2.8
+3.2
+4.1
+5.7</textarea>
+      <div class="flex flex-wrap gap-2 mt-4">
+        <button type="button" onclick="analyzeCSV('average')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Calculate Average</button>
+        <button type="button" onclick="analyzeCSV('median')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Find Median</button>
+        <button type="button" onclick="analyzeCSV('stats')" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Full Stats</button>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-2">Analysis Results:</label>
+      <div id="csv-output" class="bg-gray-900 text-white p-4 rounded-lg min-h-32 font-mono whitespace-pre-line">
+        Enter CSV data to see analysis! 📈
+      </div>
+      <div class="mt-4">
+        <label class="block text-sm font-medium mb-2">Python Code:</label>
+        <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>import gpt_fusion
+
+# Load data from CSV file
+data = gpt_fusion.load_numbers_from_csv('data.csv')
+
+# Fast streaming for large files
+avg = gpt_fusion.average_from_csv('data.csv', use_streaming=True)
+med = gpt_fusion.median_from_csv('data.csv')
+
+print(f"Average: {avg}")
+print(f"Median: {med}")</code></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+  <h3 class="text-xl font-bold mb-1">🛠️ Project Generator</h3>
+  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Generate production-ready projects instantly</p>
+
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('csv')">
+      <div class="text-center">
+        <div class="text-3xl mb-2">📊</div>
+        <h4 class="font-semibold">CSV Analytics App</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">FastAPI backend with data visualization</p>
+      </div>
+    </div>
+
+    <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('ui')">
+      <div class="text-center">
+        <div class="text-3xl mb-2">🎨</div>
+        <h4 class="font-semibold">Tailwind UI Kit</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Modern responsive web interface</p>
+      </div>
+    </div>
+
+    <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('fullstack')">
+      <div class="text-center">
+        <div class="text-3xl mb-2">🚀</div>
+        <h4 class="font-semibold">Full-Stack App</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Complete app with auth &amp; database</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <label class="block text-sm font-medium mb-2">Generated Command:</label>
+    <div id="project-output" class="bg-gray-900 text-white p-4 rounded-lg font-mono">
+      Click a project type above to see the generation command! 🎯
+    </div>
+  </div>
+</div>
+
+<script src="{{ '/assets/js/demo.js' | relative_url }}"></script>
+
+## 🔗 More Demos
 
 ### 🔐 Auth UI Kit
 Beautiful Tailwind CSS login form with Firebase authentication. Includes email/password and Google OAuth flows.
 
-[→ View Source](https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit)
+[→ View Source](https://github.com/costasford/gpt-fusion/tree/main/auth-ui-kit) • [→ Try it live](https://costasford.github.io/gpt-fusion/auth-ui-kit/enhanced-index.html)
 
 ### 🎯 Unity 3D Demo
 Interactive 3D game prototype with movement, items, and basic gameplay mechanics.
 
 [→ View Unity Scripts](https://github.com/costasford/gpt-fusion/tree/main/unity-prototype)
-
-### 📊 CSV Analysis
-Data processing and analysis examples with built-in sample datasets.
-```bash
-$ python examples/tutorial.py
-Values: [1.0, 2.0, 3.0, 4.0, 5.0]
-Average: 3.0
-Median: 3.0
-```
-
-### 🛠️ Starter Kit Generator
-Generate new projects with pre-configured templates.
-```bash
-# Create a CSV analysis app
-python -m gpt_fusion.starter_kits create_csv_app my-app
-
-# Create a Tailwind UI demo  
-python -m gpt_fusion.starter_kits create_tailwind_ui my-ui
-```
 
 ## 🔌 API & Deployment
 

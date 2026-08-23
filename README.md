@@ -20,7 +20,7 @@ GPT Fusion is a comprehensive Python library designed to streamline AI-assisted 
 [![Tests](https://img.shields.io/badge/tests-135%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
 [![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
 
-📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)**
+📦 **[Install from PyPI](https://pypi.org/project/gpt-fusion/)** • 🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Interactive Demos](https://costasford.github.io/gpt-fusion/#interactive-demos)**
 
 ## 🚀 Quick Start
 
