@@ -104,15 +104,15 @@ bot.post_tweet("Hello from GPT Fusion!")
 
 Try the core utilities right here, no install required.
 
-<div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+<div class="demo-card bg-white rounded-xl shadow-lg p-6 mb-6">
   <h3 class="text-xl font-bold mb-1">🔤 Text Processing</h3>
-  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Smart text utilities with instant results</p>
+  <p class="text-sm text-gray-600 mb-4">Smart text utilities with instant results</p>
 
   <div class="grid md:grid-cols-2 gap-6">
     <div>
       <label for="text-input" class="block text-sm font-medium mb-2">Enter text to process:</label>
       <textarea id="text-input"
-                class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 rows="4"
                 placeholder="Type something here...">The quick brown fox jumps over the lazy dog</textarea>
       <div class="flex flex-wrap gap-2 mt-4">
@@ -141,15 +141,15 @@ gpt_fusion.is_palindrome(text)</code></pre>
   </div>
 </div>
 
-<div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+<div class="demo-card bg-white rounded-xl shadow-lg p-6 mb-6">
   <h3 class="text-xl font-bold mb-1">📊 CSV Data Analysis</h3>
-  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Powerful data processing with streaming support</p>
+  <p class="text-sm text-gray-600 mb-4">Powerful data processing with streaming support</p>
 
   <div class="grid md:grid-cols-2 gap-6">
     <div>
       <label for="csv-input" class="block text-sm font-medium mb-2">Enter CSV data (comma-separated values):</label>
       <textarea id="csv-input"
-                class="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 rows="6"
                 placeholder="value&#10;1.5&#10;2.8&#10;3.2&#10;4.1&#10;5.7">value
 1.5
@@ -187,32 +187,32 @@ print(f"Median: {med}")</code></pre>
   </div>
 </div>
 
-<div class="demo-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
+<div class="demo-card bg-white rounded-xl shadow-lg p-6 mb-6">
   <h3 class="text-xl font-bold mb-1">🛠️ Project Generator</h3>
-  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Generate production-ready projects instantly</p>
+  <p class="text-sm text-gray-600 mb-4">Generate production-ready projects instantly</p>
 
   <div class="grid md:grid-cols-3 gap-4">
-    <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('csv')">
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('csv')">
       <div class="text-center">
         <div class="text-3xl mb-2">📊</div>
         <h4 class="font-semibold">CSV Analytics App</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">FastAPI backend with data visualization</p>
+        <p class="text-sm text-gray-600 mt-2">FastAPI backend with data visualization</p>
       </div>
     </div>
 
-    <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('ui')">
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('ui')">
       <div class="text-center">
         <div class="text-3xl mb-2">🎨</div>
         <h4 class="font-semibold">Tailwind UI Kit</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Modern responsive web interface</p>
+        <p class="text-sm text-gray-600 mt-2">Modern responsive web interface</p>
       </div>
     </div>
 
-    <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('fullstack')">
+    <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('fullstack')">
       <div class="text-center">
         <div class="text-3xl mb-2">🚀</div>
         <h4 class="font-semibold">Full-Stack App</h4>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Complete app with auth &amp; database</p>
+        <p class="text-sm text-gray-600 mt-2">Complete app with auth &amp; database</p>
       </div>
     </div>
   </div>

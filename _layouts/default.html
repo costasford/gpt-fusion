@@ -13,13 +13,6 @@
     {% assign cache_bust = site.time | date: '%s' %}
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: cache_bust | relative_url }}">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // Tailwind CDN defaults to media-query-based dark mode. The toggle
-      // below flips a `dark` class on <body>, so dark: utility classes
-      // (used by the embedded interactive demos) need the class strategy
-      // to actually respond to it.
-      tailwind.config = { darkMode: "class" };
-    </script>
     <style>
       /* Dark mode styles */
       .dark {
@@ -74,7 +67,31 @@
         border-color: #4b5563 !important;
       }
 
-      /* Interactive demo cards (embedded in index.md) */
+      /* Interactive demo cards (embedded in index.md). Hand-rolled rather
+         than Tailwind's dark: variant, to match every other dark-mode rule
+         on this page - Tailwind CDN's generated .dark\:bg-gray-800:is(.dark
+         *) rule loses to the plain .bg-white rule here despite having
+         higher CSS specificity on paper, for reasons that didn't reproduce
+         in isolation; !important sidesteps it entirely. */
+      .dark .demo-card {
+        background-color: #1f2937 !important;
+      }
+
+      .dark .demo-card p,
+      .dark .demo-card label {
+        color: #9ca3af !important;
+      }
+
+      .dark .demo-card textarea {
+        background-color: #374151 !important;
+        border-color: #4b5563 !important;
+        color: #e5e7eb !important;
+      }
+
+      .dark .demo-card .border {
+        border-color: #4b5563 !important;
+      }
+
       .demo-card {
         transition: all 0.3s ease;
       }
