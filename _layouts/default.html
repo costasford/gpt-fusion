@@ -14,6 +14,27 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: cache_bust | relative_url }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      /* jekyll-theme-cayman caps .main-content at 64rem (1024px) with 6rem
+         side padding - fine for a README-style single column, but it left
+         huge empty margins on real screens and made the card grids below
+         feel cramped. Widen it and reclaim most of that side padding,
+         matching cayman's own breakpoints so it still degrades cleanly. */
+      @media screen and (min-width: 64em) {
+        .main-content {
+          max-width: 72rem;
+          padding: 2rem 3rem;
+        }
+        .page-header {
+          padding-left: 3rem;
+          padding-right: 3rem;
+        }
+      }
+      @media screen and (min-width: 42em) and (max-width: 64em) {
+        .main-content {
+          padding: 2rem 2rem;
+        }
+      }
+
       /* Dark mode styles */
       .dark {
         --bg-color: #1a1a1a;
