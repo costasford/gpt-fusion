@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gpt-fusion"
-version = "0.4.3"
+version = "0.4.4"
 description = "Python toolkit for AI-assisted applications - an OpenAI-compatible LLM client, text processing, web scraping, and interactive demos"
 authors = [{name="Costas Ford", email="costasford@yahoo.com"}]
 readme = "README.md"
