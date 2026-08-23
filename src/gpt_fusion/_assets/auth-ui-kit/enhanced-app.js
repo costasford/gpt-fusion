@@ -155,17 +155,19 @@ function calculatePasswordStrength(password) {
 async function withLoading(btnId, fn) {
   const btn = document.getElementById(btnId);
   if (!btn) return;
-  
+
   const original = btn.textContent;
   const originalDisabled = btn.disabled;
-  
+
   btn.disabled = true;
+  btn.setAttribute("aria-busy", "true");
   btn.textContent = "Loading...";
-  
+
   try {
     await fn();
   } finally {
     btn.disabled = originalDisabled;
+    btn.removeAttribute("aria-busy");
     btn.textContent = original;
   }
 }
@@ -179,12 +181,6 @@ function sanitizeInput(input) {
   return input.trim().replace(/[<>]/g, '');
 }
 
-function generateCSRFToken() {
-  return crypto.getRandomValues(new Uint32Array(4)).join('-');
-}
-
-// Session management
-let csrfToken = generateCSRFToken();
 let isAuthenticated = false;
 
 // Auth state management
@@ -209,10 +205,34 @@ function updateUI(user) {
       // here would just be a UI label an attacker can ignore by calling
       // the API directly.
       document.getElementById('user-verified').textContent = user.emailVerified ? 'Verified' : 'Unverified';
+      document.getElementById('resend-verification-btn')?.classList.toggle('hidden', user.emailVerified);
+      document.getElementById('verification-message').textContent = '';
     }
   } else {
     if (loginSection) loginSection.style.display = 'block';
     if (dashboardSection) dashboardSection.style.display = 'none';
+  }
+}
+
+// Eye / eye-slash icon paths for the password-visibility toggle buttons.
+const EYE_ICON =
+  '<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M10 12a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>';
+const EYE_SLASH_ICON =
+  '<path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd"></path><path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z"></path>';
+
+function togglePasswordVisibility(inputId, button) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const svg = button.querySelector("svg");
+
+  if (input.type === "password") {
+    input.type = "text";
+    svg.innerHTML = EYE_ICON;
+    button.setAttribute("aria-label", "Hide password");
+  } else {
+    input.type = "password";
+    svg.innerHTML = EYE_SLASH_ICON;
+    button.setAttribute("aria-label", "Show password");
   }
 }
 
@@ -223,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("email").value = savedEmail;
     document.getElementById("remember").checked = true;
   }
-  
+
   // Add password strength indicator
   const signupPassword = document.getElementById("signup-password");
   if (signupPassword) {
@@ -231,15 +251,27 @@ document.addEventListener("DOMContentLoaded", () => {
       showPasswordStrength(e.target.value);
     });
   }
-  
+
   // Add real-time email validation
   const emailInputs = document.querySelectorAll('input[type="email"]');
   emailInputs.forEach(input => {
     input.addEventListener('blur', (e) => {
       const email = e.target.value;
-      if (email && !isValidEmail(email)) {
+      const invalid = email && !isValidEmail(email);
+      if (e.target.id === 'email') {
+        // The login field has its own dedicated error slot.
+        showFieldError('email-error', invalid ? 'Please enter a valid email address' : '');
+      } else if (invalid) {
         showMessage(getMessageId(e.target), 'Please enter a valid email address');
       }
+    });
+  });
+
+  // Password visibility toggles (replaces the old inline onclick= handlers,
+  // which required 'unsafe-inline' in the script-src CSP directive).
+  document.querySelectorAll("[data-toggle-password]").forEach((button) => {
+    button.addEventListener("click", () => {
+      togglePasswordVisibility(button.dataset.togglePassword, button);
     });
   });
 });
@@ -251,34 +283,45 @@ function getMessageId(inputElement) {
   return 'message';
 }
 
+// Writes into the small per-field error text below the login form's email/
+// password inputs (referenced by their aria-describedby), rather than the
+// shared banner - only those two fields have a dedicated slot for this.
+function showFieldError(elementId, msg) {
+  const el = document.getElementById(elementId);
+  if (el) el.textContent = msg;
+}
+
 // Enhanced login handler
 document.getElementById("login")?.addEventListener("click", async () => {
   const email = sanitizeInput(document.getElementById("email").value);
   const password = document.getElementById("password").value;
   const remember = document.getElementById("remember").checked;
-  
+
+  showFieldError('email-error', '');
+  showFieldError('password-error', '');
+
   // Rate limiting check
   if (!rateLimiter.canAttempt(email)) {
     const remainingTime = Math.ceil(rateLimiter.getRemainingTime(email) / 60000);
     showMessage("message", `Too many failed attempts. Try again in ${remainingTime} minutes.`);
     return;
   }
-  
+
   // Validation
   if (!isValidEmail(email)) {
-    showMessage("message", "Please enter a valid email address");
+    showFieldError('email-error', 'Please enter a valid email address');
     return;
   }
-  
+
   if (!password) {
-    showMessage("message", "Password is required");
+    showFieldError('password-error', 'Password is required');
     return;
   }
-  
+
   await withLoading("login", async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      
+
       // Save email if remember is checked
       if (remember) {
         localStorage.setItem("savedEmail", email);
@@ -408,24 +451,58 @@ document.getElementById("reset-btn")?.addEventListener("click", async () => {
   });
 });
 
+// Modal focus management: move focus into the modal on open (so keyboard/
+// screen-reader users land somewhere sensible instead of a dialog that
+// visually appeared but left focus behind on the trigger link), trap Tab
+// within it while open, and restore focus to whatever opened it on close.
+const MODAL_IDS = ["signup-modal", "reset-modal"];
+let modalTriggerElement = null;
+
+function getFocusableElements(container) {
+  return Array.from(
+    container.querySelectorAll(
+      'input, button, a[href], select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((el) => !el.disabled && el.offsetParent !== null);
+}
+
+function openModal(modal, trigger) {
+  modalTriggerElement = trigger || document.activeElement;
+  modal.classList.remove("hidden");
+  const focusable = getFocusableElements(modal);
+  if (focusable.length > 0) focusable[0].focus();
+}
+
+function closeModal(modal) {
+  modal.classList.add("hidden");
+  if (modalTriggerElement) {
+    modalTriggerElement.focus();
+    modalTriggerElement = null;
+  }
+}
+
 // Modal handlers
 document.getElementById("show-signup")?.addEventListener("click", (e) => {
   e.preventDefault();
-  document.getElementById("signup-modal")?.classList.remove("hidden");
+  const modal = document.getElementById("signup-modal");
+  if (modal) openModal(modal, e.currentTarget);
 });
 
 document.getElementById("signup-close")?.addEventListener("click", () => {
-  document.getElementById("signup-modal")?.classList.add("hidden");
+  const modal = document.getElementById("signup-modal");
+  if (modal) closeModal(modal);
   showMessage("signup-message", "");
 });
 
 document.getElementById("forgot")?.addEventListener("click", (e) => {
   e.preventDefault();
-  document.getElementById("reset-modal")?.classList.remove("hidden");
+  const modal = document.getElementById("reset-modal");
+  if (modal) openModal(modal, e.currentTarget);
 });
 
 document.getElementById("reset-close")?.addEventListener("click", () => {
-  document.getElementById("reset-modal")?.classList.add("hidden");
+  const modal = document.getElementById("reset-modal");
+  if (modal) closeModal(modal);
   showMessage("reset-message", "");
 });
 
@@ -440,27 +517,63 @@ document.getElementById("logout-btn")?.addEventListener("click", async () => {
   }
 });
 
-// Close modals when clicking outside
-document.addEventListener('click', (e) => {
-  const modals = ['signup-modal', 'reset-modal'];
-  modals.forEach(modalId => {
-    const modal = document.getElementById(modalId);
-    if (modal && e.target === modal) {
-      modal.classList.add('hidden');
+// Resend verification email - the one actionable thing an unverified user
+// can actually do, unlike the "Unverified" label above it (which is purely
+// informational and doesn't gate anything on its own).
+document.getElementById("resend-verification-btn")?.addEventListener("click", async () => {
+  if (!auth.currentUser) return;
+  await withLoading("resend-verification-btn", async () => {
+    try {
+      await sendEmailVerification(auth.currentUser);
+      document.getElementById("verification-message").textContent =
+        "Verification email sent. Check your inbox.";
+    } catch (err) {
+      document.getElementById("verification-message").textContent =
+        err.code === "auth/too-many-requests"
+          ? "Too many requests. Please wait before trying again."
+          : "Failed to send verification email. Please try again.";
     }
   });
 });
 
-// Keyboard navigation
+// Close modals when clicking outside
+document.addEventListener('click', (e) => {
+  MODAL_IDS.forEach(modalId => {
+    const modal = document.getElementById(modalId);
+    if (modal && e.target === modal) {
+      closeModal(modal);
+    }
+  });
+});
+
+// Keyboard navigation: Escape closes the open modal (restoring focus to
+// its trigger), Tab is trapped inside it so keyboard focus can't silently
+// leave a dialog that's still visually open.
 document.addEventListener('keydown', (e) => {
+  const openModalId = MODAL_IDS.find((modalId) => {
+    const modal = document.getElementById(modalId);
+    return modal && !modal.classList.contains('hidden');
+  });
+  if (!openModalId) return;
+  const modal = document.getElementById(openModalId);
+
   if (e.key === 'Escape') {
-    const modals = ['signup-modal', 'reset-modal'];
-    modals.forEach(modalId => {
-      const modal = document.getElementById(modalId);
-      if (modal && !modal.classList.contains('hidden')) {
-        modal.classList.add('hidden');
-      }
-    });
+    closeModal(modal);
+    return;
+  }
+
+  if (e.key === 'Tab') {
+    const focusable = getFocusableElements(modal);
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 });
 
