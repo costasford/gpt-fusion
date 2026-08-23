@@ -131,7 +131,7 @@
     
     // Input sanitization tests
     const sanitizationTests = [
-      () => runTest("Remove < and >", () => sanitizeInput("hello<script>alert('xss')</script>") === "helloscriptalert('xss')/script"),
+      () => runTest("Remove < and >", () => sanitizeInput("hello<script>alert('xss')<\/script>") === "helloscriptalert('xss')/script"),
       () => runTest("Trim whitespace", () => sanitizeInput("  hello world  ") === "hello world"),
       () => runTest("Handle empty string", () => sanitizeInput("") === ""),
       () => runTest("Handle normal text", () => sanitizeInput("normal text") === "normal text"),
