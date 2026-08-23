@@ -14,8 +14,8 @@ A Python toolkit for building AI-assisted applications with utilities for text p
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![Version](https://img.shields.io/badge/version-0.4.4-brightgreen.svg)](https://github.com/costasford/gpt-fusion/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/costasford/gpt-fusion/blob/main/LICENSE)
-[![Tests](https://img.shields.io/badge/tests-80%2B%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
-[![Coverage](https://img.shields.io/badge/coverage-89%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
+[![Tests](https://img.shields.io/badge/tests-135%20passed-brightgreen.svg)](https://github.com/costasford/gpt-fusion/actions)
+[![Coverage](https://img.shields.io/badge/coverage-92%25-brightgreen.svg)](https://github.com/costasford/gpt-fusion)
 
 🌐 **[Live Documentation](https://costasford.github.io/gpt-fusion/)** • 🎮 **[Try Live Demo](https://costasford.github.io/gpt-fusion/demo.html)** • 📁 **[View Source](https://github.com/costasford/gpt-fusion)**
 
@@ -161,8 +161,7 @@ Create a `Procfile`:
 web: uvicorn gpt_fusion.backend:app --host 0.0.0.0 --port $PORT
 ```
 
-##
- 🤝 Contributing
+## 🤝 Contributing
 
 ### Development Setup
 ```bash

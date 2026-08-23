@@ -9,6 +9,11 @@ import {
   signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
+// Tailwind CDN defaults to media-query-based dark mode; without this, the
+// theme toggle below flips a `dark` class that no dark: utility class
+// actually responds to.
+window.tailwind.config = { darkMode: "class" };
+
 // Demo Firebase config - replace with your own for production
 const firebaseConfig = {
   apiKey: "AIzaSyDemo_Replace_With_Your_Real_API_Key_12345",

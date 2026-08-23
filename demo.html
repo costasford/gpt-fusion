@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPT Fusion - Live Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Tailwind CDN defaults to media-query-based dark mode; without this,
+      // the toggle button below flips a `dark` class that no dark: utility
+      // class actually responds to.
+      tailwind.config = { darkMode: "class" };
+    </script>
     <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
     <script src="https://unpkg.com/prismjs@1.29.0/components/prism-python.min.js"></script>
     <script src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>

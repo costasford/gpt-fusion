@@ -11,6 +11,12 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
+// Tailwind CDN defaults to media-query-based dark mode; without this, the
+// theme toggle below flips a `dark` class that no dark: utility class
+// actually responds to. Set here (rather than an inline <script>) because
+// the page's CSP has no 'unsafe-inline' in script-src.
+window.tailwind.config = { darkMode: "class" };
+
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
