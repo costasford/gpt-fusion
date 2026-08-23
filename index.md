@@ -210,29 +210,29 @@ print(f"Median: {med}")</code></pre>
   <p class="text-sm text-gray-600 mb-4">Generate production-ready projects instantly</p>
 
   <div class="grid md:grid-cols-3 gap-4">
-    <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('csv')">
+    <button type="button" class="w-full text-left bg-transparent border border-gray-200 rounded-lg p-4 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition cursor-pointer" onclick="showProjectCode('csv')">
       <div class="text-center">
         <div class="text-3xl mb-2">📊</div>
         <h4 class="font-semibold">CSV Analytics App</h4>
         <p class="text-sm text-gray-600 mt-2">FastAPI backend with data visualization</p>
       </div>
-    </div>
+    </button>
 
-    <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('ui')">
+    <button type="button" class="w-full text-left bg-transparent border border-gray-200 rounded-lg p-4 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition cursor-pointer" onclick="showProjectCode('ui')">
       <div class="text-center">
         <div class="text-3xl mb-2">🎨</div>
         <h4 class="font-semibold">Tailwind UI Kit</h4>
         <p class="text-sm text-gray-600 mt-2">Modern responsive web interface</p>
       </div>
-    </div>
+    </button>
 
-    <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-500 transition cursor-pointer" onclick="showProjectCode('fullstack')">
+    <button type="button" class="w-full text-left bg-transparent border border-gray-200 rounded-lg p-4 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition cursor-pointer" onclick="showProjectCode('fullstack')">
       <div class="text-center">
         <div class="text-3xl mb-2">🚀</div>
         <h4 class="font-semibold">Full-Stack App</h4>
         <p class="text-sm text-gray-600 mt-2">Complete app with auth &amp; database</p>
       </div>
-    </div>
+    </button>
   </div>
 
   <div class="mt-6">
