@@ -45,82 +45,9 @@ A Python toolkit for building AI-assisted applications with utilities for text p
   </div>
 </div>
 
-<div class="demo-card bg-white rounded-xl shadow-lg p-6 mb-6">
-  <h3 class="text-lg font-bold mb-4">Basic Usage</h3>
-  <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>import gpt_fusion
+## ✨ Features {#interactive-demos}
 
-# Text utilities
-print(gpt_fusion.greet('World'))
-print(gpt_fusion.word_count('Hello world'))
-print(gpt_fusion.reverse_words('Hello world'))
-
-# Math helpers
-numbers = gpt_fusion.load_numbers_from_csv('data/numbers.csv')
-print(f"Average: {gpt_fusion.average_from_csv('data/numbers.csv')}")
-
-# Generate starter projects
-gpt_fusion.create_csv_app('my-csv-demo')
-gpt_fusion.create_tailwind_ui('my-ui-demo')</code></pre>
-</div>
-
-## ✨ Features
-
-<div class="grid md:grid-cols-2 gap-6 mb-6">
-  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
-    <div class="flex items-center mb-3">
-      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-        <span class="text-white text-xl">🐍</span>
-      </div>
-      <h3 class="text-lg font-bold">Python Utilities</h3>
-    </div>
-    <p class="text-sm text-gray-600 mb-3">Core text processing, math helpers, and CSV analysis tools.</p>
-    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>gpt_fusion.word_count("Hello world")  # 2
-gpt_fusion.reverse_words("Hello world")  # "world Hello"
-gpt_fusion.is_palindrome("racecar")  # True
-gpt_fusion.average_from_csv("data.csv")</code></pre>
-  </div>
-
-  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
-    <div class="flex items-center mb-3">
-      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-        <span class="text-white text-xl">🌐</span>
-      </div>
-      <h3 class="text-lg font-bold">Web Scraping</h3>
-    </div>
-    <p class="text-sm text-gray-600 mb-3">Simple scraping utilities with BeautifulSoup. Install: <code class="text-xs">pip install "gpt-fusion[web]"</code></p>
-    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>html = gpt_fusion.scrape("https://example.com")
-# Returns clean text content</code></pre>
-  </div>
-
-  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
-    <div class="flex items-center mb-3">
-      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-        <span class="text-white text-xl">🚀</span>
-      </div>
-      <h3 class="text-lg font-bold">FastAPI Backend</h3>
-    </div>
-    <p class="text-sm text-gray-600 mb-3">Ready-to-deploy API server with auto-generated docs. Install: <code class="text-xs">pip install "gpt-fusion[backend]"</code></p>
-    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>import uvicorn
-uvicorn.run(gpt_fusion.backend_app, port=8000)</code></pre>
-  </div>
-
-  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
-    <div class="flex items-center mb-3">
-      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
-        <span class="text-white text-xl">🐦</span>
-      </div>
-      <h3 class="text-lg font-bold">Twitter Integration</h3>
-    </div>
-    <p class="text-sm text-gray-600 mb-3">Twitter bot utilities with OAuth support. Install: <code class="text-xs">pip install "gpt-fusion[twitter]"</code></p>
-    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>from gpt_fusion import TwitterBot
-bot = TwitterBot()
-bot.post_tweet("Hello from GPT Fusion!")</code></pre>
-  </div>
-</div>
-
-## 🎮 Interactive Demos {#interactive-demos}
-
-Try the core utilities right here, no install required.
+Every feature this package ships, showcased once - the first three run live in your browser, no install required.
 
 <div class="demo-card bg-white rounded-xl shadow-lg p-6 mb-6">
   <h3 class="text-xl font-bold mb-1">🔤 Text Processing</h3>
@@ -245,7 +172,44 @@ print(f"Median: {med}")</code></pre>
 
 <script src="{{ '/assets/js/demo.js' | relative_url }}"></script>
 
-## 🔗 More Demos
+<div class="grid md:grid-cols-3 gap-6 mb-6">
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center mb-3">
+      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+        <span class="text-white text-xl">🌐</span>
+      </div>
+      <h3 class="text-lg font-bold">Web Scraping</h3>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">Simple scraping utilities with BeautifulSoup. Install: <code class="text-xs">pip install "gpt-fusion[web]"</code></p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>html = gpt_fusion.scrape("https://example.com")
+# Returns clean text content</code></pre>
+  </div>
+
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center mb-3">
+      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+        <span class="text-white text-xl">🚀</span>
+      </div>
+      <h3 class="text-lg font-bold">FastAPI Backend</h3>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">Ready-to-deploy API server with auto-generated docs. Install: <code class="text-xs">pip install "gpt-fusion[backend]"</code></p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>import uvicorn
+uvicorn.run(gpt_fusion.backend_app, port=8000)</code></pre>
+  </div>
+
+  <div class="demo-card bg-white rounded-xl shadow-lg p-6">
+    <div class="flex items-center mb-3">
+      <div class="feature-icon w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+        <span class="text-white text-xl">🐦</span>
+      </div>
+      <h3 class="text-lg font-bold">Twitter Integration</h3>
+    </div>
+    <p class="text-sm text-gray-600 mb-3">Twitter bot utilities with OAuth support. Install: <code class="text-xs">pip install "gpt-fusion[twitter]"</code></p>
+    <pre class="bg-gray-900 text-gray-100 p-3 rounded-lg text-sm overflow-x-auto"><code>from gpt_fusion import TwitterBot
+bot = TwitterBot()
+bot.post_tweet("Hello from GPT Fusion!")</code></pre>
+  </div>
+</div>
 
 <div class="grid md:grid-cols-2 gap-6 mb-6">
   <div class="demo-card bg-white rounded-xl shadow-lg p-6 text-center">
