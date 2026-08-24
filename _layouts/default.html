@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
       // Applied synchronously, before first paint, so there's no flash of
-      // the wrong theme while the rest of the page loads. Lives on <html>
-      // (not <body>) so the .dark background-color rule below paints the
-      // full page canvas, not just the width-capped .main-content column.
+      // the wrong theme while the rest of the page loads.
       if (localStorage.getItem('theme') === 'dark' ||
           (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
@@ -16,131 +14,16 @@
     </script>
 
 {% seo %}
-    <!-- site.github.build_revision requires the jekyll-github-metadata
-         plugin, which isn't in the Gemfile - site.time (Jekyll's own
-         build timestamp, no plugin needed) still cache-busts on every
-         rebuild without pulling in a new dependency. -->
-    {% assign cache_bust = site.time | date: '%s' %}
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: cache_bust | relative_url }}">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+      tailwind.config = { darkMode: 'class' };
+    </script>
     <style>
-      /* Tailwind's Preflight reset sets img { display: block }, which
-         breaks the badges row at the top of index.md: markdown renders
-         each ![]() badge as its own <a><img></a> separated only by a
-         single newline (i.e. meant to flow inline, wrapping like text),
-         but block-level images force one per line instead. */
-      .main-content p img {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 2px 4px 2px 0;
-      }
-
-      /* jekyll-theme-cayman caps .main-content at 64rem (1024px) with 6rem
-         side padding - fine for a README-style single column, but it left
-         huge empty margins on real screens and made the card grids below
-         feel cramped. Widen it and reclaim most of that side padding,
-         matching cayman's own breakpoints so it still degrades cleanly. */
-      @media screen and (min-width: 64em) {
-        .main-content {
-          max-width: 72rem;
-          padding: 2rem 3rem;
-        }
-        .page-header {
-          padding-left: 3rem;
-          padding-right: 3rem;
-        }
-      }
-      @media screen and (min-width: 42em) and (max-width: 64em) {
-        .main-content {
-          padding: 2rem 2rem;
-        }
-      }
-
-      /* Dark mode styles */
-      .dark {
-        --bg-color: #1a1a1a;
-        --text-color: #e5e5e5;
-        --header-bg: linear-gradient(120deg, #2563eb, #7c3aed);
-        background-color: var(--bg-color);
-      }
-      
-      .dark .page-header {
-        background: var(--header-bg) !important;
-      }
-      
-      .dark .main-content {
-        background-color: var(--bg-color) !important;
-        color: var(--text-color) !important;
-      }
-      
-      .dark .main-content h1, 
-      .dark .main-content h2, 
-      .dark .main-content h3, 
-      .dark .main-content h4, 
-      .dark .main-content h5, 
-      .dark .main-content h6 {
-        color: #ffffff !important;
-      }
-      
-      .dark .main-content a {
-        color: #60a5fa !important;
-      }
-      
-      .dark .main-content code {
-        background-color: #374151 !important;
-        color: #e5e7eb !important;
-      }
-      
-      .dark .main-content pre {
-        background-color: #1f2937 !important;
-        color: #e5e7eb !important;
-      }
-      
-      .dark .main-content blockquote {
-        border-left-color: #60a5fa !important;
-        background-color: #1f2937 !important;
-      }
-      
-      .dark .main-content table th {
-        background-color: #374151 !important;
-        color: #e5e7eb !important;
-      }
-      
-      .dark .main-content table td {
-        border-color: #4b5563 !important;
-      }
-
-      /* Interactive demo cards (embedded in index.md). Hand-rolled rather
-         than Tailwind's dark: variant, to match every other dark-mode rule
-         on this page - Tailwind CDN's generated .dark\:bg-gray-800:is(.dark
-         *) rule loses to the plain .bg-white rule here despite having
-         higher CSS specificity on paper, for reasons that didn't reproduce
-         in isolation; !important sidesteps it entirely. */
-      .dark .demo-card {
-        background-color: #1f2937 !important;
-      }
-
-      .dark .demo-card p,
-      .dark .demo-card label {
-        color: #9ca3af !important;
-      }
-
-      .dark .demo-card textarea {
-        background-color: #374151 !important;
-        border-color: #4b5563 !important;
-        color: #e5e7eb !important;
-      }
-
-      .dark .demo-card .border {
-        border-color: #4b5563 !important;
-      }
-
       .demo-card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       .demo-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       }
       .feature-icon {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -148,51 +31,71 @@
     </style>
   </head>
 
-  <body class="transition-colors duration-300">
-    <a id="skip-to-content" href="#content">Skip to the content.</a>
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <a id="skip-to-content" href="#content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to the content.</a>
 
-    <header class="page-header" role="banner">
-      <div class="flex flex-col items-start gap-4 sm:flex-row sm:justify-between sm:items-center max-w-6xl mx-auto px-4">
-        <div>
-          <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
-          <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
+    <nav class="sticky top-0 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur border-b border-gray-200 dark:border-gray-800">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+        <a href="{{ '/' | relative_url }}" class="flex items-center gap-2 font-bold">
+          <span class="feature-icon w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs">GF</span>
+          <span>{{ site.title }}</span>
+        </a>
+        <div class="flex items-center gap-6">
+          <a href="#interactive-demos" class="hidden sm:inline text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition">Features</a>
+          <a href="https://github.com/costasford/gpt-fusion" class="hidden sm:inline text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition">GitHub</a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 transition" aria-label="Toggle dark mode">
+            <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+            </svg>
+            <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+          </button>
         </div>
-        
-        <!-- Dark Mode Toggle -->
-        <button id="theme-toggle" class="p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 text-white transition-all duration-200" aria-label="Toggle dark mode">
-          <svg id="theme-toggle-light-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
-          </svg>
-          <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-          </svg>
-        </button>
       </div>
-      
-      {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
-      {% endif %}
-      {% if site.show_downloads %}
-        <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
-        <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
-      {% endif %}
-    </header>
+    </nav>
 
-    <main id="content" class="main-content" role="main">
+    <main id="content">
       {{ content }}
-
-      <footer class="site-footer">
-        {% if site.github.is_project_page %}
-          <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
-        {% endif %}
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
-      </footer>
     </main>
 
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="font-bold text-lg mb-4">{{ site.title }}</h3>
+            <p class="text-gray-400 text-sm">{{ site.description }}</p>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Resources</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="https://github.com/costasford/gpt-fusion" class="text-gray-400 hover:text-white transition">GitHub Repository</a></li>
+              <li><a href="https://pypi.org/project/gpt-fusion/" class="text-gray-400 hover:text-white transition">PyPI Package</a></li>
+              <li><a href="#interactive-demos" class="text-gray-400 hover:text-white transition">Interactive Demos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Demos</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="https://costasford.github.io/gpt-fusion/auth-ui-kit/enhanced-index.html" class="text-gray-400 hover:text-white transition">Auth UI Kit</a></li>
+              <li><a href="https://github.com/costasford/gpt-fusion/tree/main/unity-prototype" class="text-gray-400 hover:text-white transition">Unity 3D Scripts</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Support</h4>
+            <ul class="space-y-2 text-sm">
+              <li><a href="https://github.com/costasford/gpt-fusion/issues" class="text-gray-400 hover:text-white transition">Report Issues</a></li>
+              <li><a href="https://github.com/costasford/gpt-fusion/discussions" class="text-gray-400 hover:text-white transition">Discussions</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+          <p>Built with ❤️ and Python. <a href="https://github.com/costasford/gpt-fusion/blob/main/LICENSE" class="hover:text-white transition">MIT License</a> &middot; This page was generated by <a href="https://pages.github.com" class="hover:text-white transition">GitHub Pages</a>.</p>
+        </div>
+      </div>
+    </footer>
+
     <script>
-      // The class itself is already applied synchronously in <head> (see
-      // above) to avoid a flash of the wrong theme. This just syncs the
-      // toggle button's icon to whatever that resolved to, and wires clicks.
       function updateIcons() {
         const isDark = document.documentElement.classList.contains('dark');
         document.getElementById('theme-toggle-light-icon').classList.toggle('hidden', isDark);
